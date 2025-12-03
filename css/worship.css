@@ -1,138 +1,103 @@
+:root {
+    --primary-color: #1a3c7d;
+    --secondary-color: #e94e1b;
+    --light-bg: #f7f7f7;
+}
+
 body {
-    margin: 0;
     font-family: 'Noto Sans KR', Arial, sans-serif;
-    background: #f7f7f7;
+    background: var(--light-bg);
 }
 
-.header {
-    background: #fff;
-    border-bottom: 2px solid #e5e5e5;
-    padding: 0;
+/* Navbar Customization */
+.navbar-brand span {
+    color: var(--primary-color);
+    letter-spacing: 1px;
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 60px;
-    margin-right: 15px;
-}
-
-.logo-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #1a3c7d;
-    letter-spacing: 2px;
-}
-
-nav {
-    flex: 1;
-    margin-left: 40px;
-}
-
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-menu li {
-    position: relative;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: #1a3c7d;
-    font-size: 1.1rem;
+.nav-link {
+    color: var(--primary-color) !important;
     font-weight: 500;
-    padding: 10px 5px;
-    transition: color 0.2s;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: #e94e1b;
+.nav-link:hover,
+.nav-link.active {
+    color: var(--secondary-color) !important;
 }
 
-.login-btn {
-    background: #e94e1b;
-    color: #fff;
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+}
+
+/* Sermon Swiper */
+.sermonSwiper {
+    padding: 20px 0 60px;
+}
+
+.sermonSwiper .swiper-slide {
+    height: auto;
+}
+
+.sermonSwiper .swiper-button-next,
+.sermonSwiper .swiper-button-prev {
+    color: var(--primary-color);
+}
+
+.sermonSwiper .swiper-pagination-bullet {
+    background: var(--primary-color);
+}
+
+.sermonSwiper .swiper-pagination-bullet-active {
+    background: var(--secondary-color);
+}
+
+/* Schedule Icon */
+.schedule-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+/* Hover Card Effect */
+.hover-card {
+    transition: all 0.3s ease;
     border: none;
-    border-radius: 20px;
-    padding: 8px 22px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 20px;
-    transition: background 0.2s;
 }
 
-.login-btn:hover {
-    background: #c43d13;
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
-@media (max-width: 900px) {
-    .header-container {
-        flex-direction: column;
-        align-items: flex-start;
+/* Video Containers */
+.ratio iframe {
+    border: none;
+}
+
+/* Call to Action Button */
+.btn-light {
+    transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, var(--primary-color) 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .schedule-icon {
+        font-size: 2rem;
     }
 
-    nav {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-.worship-container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-    padding: 40px 30px;
-    text-align: center;
-}
-
-.worship-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #1a3c7d;
-    margin-bottom: 30px;
-}
-
-.youtube-video {
-    width: 100%;
-    max-width: 700px;
-    aspect-ratio: 16 / 9;
-    margin: 0 auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-@media (max-width: 700px) {
-    .worship-container {
-        padding: 20px 5px;
-    }
-
-    .youtube-video {
-        max-width: 100%;
+    .sermonSwiper {
+        padding: 10px 0 50px;
     }
 }

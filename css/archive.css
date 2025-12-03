@@ -1,0 +1,211 @@
+:root {
+    --primary-color: #1a3c7d;
+    --secondary-color: #e94e1b;
+    --light-bg: #f7f7f7;
+}
+
+body {
+    font-family: 'Noto Sans KR', Arial, sans-serif;
+    background: var(--light-bg);
+}
+
+/* Navbar Customization */
+.navbar-brand span {
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--secondary-color) !important;
+}
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+}
+
+/* File Icon */
+.file-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+/* Archive Card */
+.hover-card {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Bible Viewer Styles */
+.verse-line {
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.verse-num {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+}
+
+.verse-text {
+    color: #333;
+    letter-spacing: -0.3px;
+}
+
+#bibleBook {
+    font-size: 0.95rem;
+}
+
+#bibleBook option {
+    padding: 8px;
+}
+
+#bibleContent {
+    line-height: 1.9;
+}
+
+#bibleContent h6 {
+    font-weight: 700;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 12px;
+}
+
+mark {
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Button Customization */
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-success:hover {
+    background-color: #198754;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+}
+
+/* Search and Filter */
+.input-group-text {
+    background-color: white;
+    border-right: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(26, 60, 125, 0.25);
+}
+
+/* Pagination */
+.page-link {
+    color: var(--primary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.page-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.archive-item {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, var(--primary-color) 100%);
+}
+
+/* Bible Text Styling */
+.bible-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #333;
+}
+
+.bible-text .verse {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.bible-text sup {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: 0.3rem;
+}
+
+.form-label {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(26, 60, 125, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .file-icon {
+        font-size: 2rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .bible-text {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+}

@@ -6,37 +6,156 @@
     <meta name="description" content="복음을 영화롭게, 진리가 선포되는, 예수의 보혈이 흐르는 동서울열방교회">
     <title>교회소개 | 동서울열방교회</title>
     <link rel="website icon" type="jpg" href="/image/channels4_profile.jpg"/>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/about.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="/image/channels4_profile.jpg" alt="교회 로고">
-                <a href="/index.html" style="text-decoration: none;"><span class="logo-title">동서울열방교회</span></a>
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="about.html">교회소개</a></li>
-                    <li><a href="worship.html">예배와 말씀</a></li>
-                    <li><a href="#">교회소식</a></li>
-                    <li><a href="#">온라인헌금</a></li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                <img src="/image/channels4_profile.jpg" alt="교회 로고" class="me-2" style="height: 50px;">
+                <span class="fw-bold text-primary fs-4">동서울열방교회</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">교회소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="worship.html">예배와 말씀</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="archive.html">성경</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">교회소식</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">온라인헌금</a>
+                    </li>
                 </ul>
-            </nav>
-        </div>
-    </header>
-    <div class="about-container">
-        <div class="about-image">
-            <img src="/image/pastor.jpg" alt="담임목사 사진">
-        </div>
-        <div class="about-content">
-            <div class="pastor-name">서유웅 담임목사</div>
-            <div class="pastor-title">동서울열방교회 담임목사</div>
-            <div class="pastor-intro">
-                안녕하세요. 동서울열방교회 담임목사 서유웅입니다.<br>
-                복음을 영화롭게, 진리가 선포되는, 예수의 보혈이 흐르는 동서울열방교회
             </div>
         </div>
-    </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">교회소개</h1>
+            <p class="lead">복음을 영화롭게, 진리가 선포되는 교회</p>
+        </div>
+    </section>
+
+    <!-- Pastor Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="pastor-image-wrapper">
+                        <img src="/image/channels4_profile.jpg" alt="담임목사 사진" class="img-fluid rounded shadow-lg">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="pastor-info fade-in">
+                        <h2 class="display-5 fw-bold text-primary mb-3">서유웅 담임목사</h2>
+                        <h5 class="text-muted mb-4">동서울열방교회 담임목사</h5>
+                        <p class="lead mb-3">안녕하세요. 동서울열방교회 담임목사 서유웅입니다.</p>
+                        <p class="mb-3">복음을 영화롭게, 진리가 선포되는, 예수의 보혈이 흐르는 동서울열방교회에 오신 것을 환영합니다.</p>
+                        <p>오직 예수! 오직 복음만을 선포합니다 !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Church Vision -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center display-5 fw-bold mb-5">교회 비전</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow hover-card">
+                        <div class="card-body text-center p-4">
+                            <div class="vision-icon mb-3">📖</div>
+                            <h5 class="card-title fw-bold mb-3">말씀 중심</h5>
+                            <p class="card-text">하나님의 말씀을 바르게 선포하고 가르치는 교회</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow hover-card">
+                        <div class="card-body text-center p-4">
+                            <div class="vision-icon mb-3">🙏</div>
+                            <h5 class="card-title fw-bold mb-3">기도하는 교회</h5>
+                            <p class="card-text">성령의 능력으로 기도하며 하나님과 동행하는 교회</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow hover-card">
+                        <div class="card-body text-center p-4">
+                            <div class="vision-icon mb-3">❤️</div>
+                            <h5 class="card-title fw-bold mb-3">사랑의 공동체</h5>
+                            <p class="card-text">서로 사랑하고 섬기며 하나님의 사랑을 나누는 교회</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center display-5 fw-bold mb-5">오시는 길</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-3">주소</h5>
+                            <p class="mb-4">서울특별시 (상세 주소는 교회로 문의해주세요)</p>
+                            <h5 class="fw-bold mb-3">연락처</h5>
+                            <p class="mb-2"><strong>전화:</strong> 교회 전화번호</p>
+                            <p class="mb-2"><strong>이메일:</strong> church@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">동서울열방교회</h5>
+                    <p class="mb-1">복음을 영화롭게, 진리가 선포되는</p>
+                    <p>예수의 보혈이 흐르는 교회</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-1"><strong>문의:</strong> 교회 전화번호</p>
+                    <p class="mb-1"><strong>이메일:</strong> church@example.com</p>
+                    <p>&copy; 2025 동서울열방교회. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/main.js"></script>
 </body>
 </html>

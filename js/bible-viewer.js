@@ -79,7 +79,11 @@ $(document).ready(function() {
         $select.empty();
         $select.append('<option value="">성경책을 선택하세요</option>');
         
-        bibleBooks.forEach(book => {
+        bibleBooks.forEach((book, index) => {
+            // 신약 시작 전에 구분선 추가
+            if (index === 39) { // 말라기 다음, 마태복음 전
+                $select.append('<option disabled>━━━━━━━━━━━━━━━━━━━━</option>');
+            }
             $select.append(`<option value="${book.num}" data-name="${book.name}" data-chapters="${book.chapters}">${book.name}</option>`);
         });
     }
@@ -178,6 +182,11 @@ $(document).ready(function() {
         console.log('displayBibleContent called:', bookName, 'chapter:', chapter, 'verse:', verse);
         console.log('Data length:', data ? data.length : 0);
         
+        // 신약 여부 판단 (bookNum이 2-로 시작하면 신약)
+        const isNewTestament = currentBookInfo && currentBookInfo.num.startsWith('2-');
+        const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
+        const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
+        
         const lines = data.split(/\r?\n/).filter(line => line.trim());
         console.log('Total lines:', lines.length);
         console.log('First 3 lines:', lines.slice(0, 3));
@@ -201,14 +210,14 @@ $(document).ready(function() {
         
         console.log('Filtered lines:', filteredLines.length);
 
-        // 제목 업데이트
+        // 제목 업데이트 (헤더는 흰색 유지)
         let title = bookName;
         if (chapter && verse) {
             title = `${bookName} ${chapter}장 ${verse}절`;
         } else if (chapter) {
             title = `${bookName} ${chapter}장`;
         }
-        $('#bibleTitle').html(`<i class="bi bi-book"></i> ${title}`);
+        $('#bibleTitle').html(`<i class="bi bi-book text-white"></i> <span class="text-white">${title}</span>`);
 
         // HTML 생성
         if (filteredLines.length === 0) {
@@ -243,18 +252,18 @@ $(document).ready(function() {
                     
                     // 새 장이 시작되면 제목 추가
                     if (lastChapter !== chap && !chapter) {
-                        html += `<h5 class="text-primary mt-4 mb-3 border-bottom pb-2">${book} ${chap}장</h5>`;
+                        html += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${book} ${chap}장</h5>`;
                         lastChapter = chap;
                     }
                     
                     // 소제목이 있으면 추가
                     if (subtitle) {
-                        html += `<h6 class="text-primary mt-3 mb-2">${subtitle}</h6>`;
+                        html += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
                     }
                     
                     html += `
                         <div class="verse-line mb-2">
-                            <span class="verse-num badge bg-primary me-2">${chap}:${ver}</span>
+                            <span class="verse-num badge ${badgeClass} me-2">${chap}:${ver}</span>
                             <span class="verse-text">${text}</span>
                         </div>
                     `;
@@ -277,10 +286,16 @@ $(document).ready(function() {
             return;
         }
 
+        // 신약 여부 판단
+        const isNewTestament = currentBookInfo && currentBookInfo.num.startsWith('2-');
+        const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
+        const borderClass = isNewTestament ? 'border-danger' : 'border-primary';
+        const badgeClass = isNewTestament ? 'bg-danger' : 'bg-secondary';
+
         const lines = currentBibleData.split(/\r?\n/).filter(line => line.trim());
         const filteredLines = lines.filter(line => line.includes(keyword));
 
-        $('#bibleTitle').html(`<i class="bi bi-search"></i> "${keyword}" 검색 결과 (${filteredLines.length}개)`);
+        $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">"${keyword}" 검색 결과 (${filteredLines.length}개)</span>`);
 
         if (filteredLines.length === 0) {
             $('#bibleContent').html(`
@@ -312,9 +327,9 @@ $(document).ready(function() {
                 );
                 
                 html += `
-                    <div class="verse-line mb-3 p-3 border-start border-primary border-3">
+                    <div class="verse-line mb-3 p-3 border-start ${borderClass} border-3">
                         <div class="mb-1">
-                            <span class="badge bg-secondary">${currentBook} ${chap}:${ver}</span>
+                            <span class="badge ${badgeClass}">${currentBook} ${chap}:${ver}</span>
                         </div>
                         <div class="verse-text">${highlightedText}</div>
                     </div>

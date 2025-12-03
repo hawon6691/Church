@@ -74,19 +74,42 @@ $(document).ready(function() {
     let currentBookInfo = null;
 
     // 성경책 목록 초기화
-    function initBibleBooks() {
+    function initBibleBooks(filterText = '') {
         const $select = $('#bibleBook');
         $select.empty();
-        $select.append('<option value="">성경책을 선택하세요</option>');
+        
+        const filter = filterText.toLowerCase().trim();
+        let hasResults = false;
+        
+        if (!filter) {
+            $select.append('<option value="">성경책을 선택하세요</option>');
+        }
         
         bibleBooks.forEach((book, index) => {
-            // 신약 시작 전에 구분선 추가
-            if (index === 39) { // 말라기 다음, 마태복음 전
+            // 필터링
+            if (filter && !book.name.toLowerCase().includes(filter)) {
+                return;
+            }
+            
+            hasResults = true;
+            
+            // 신약 시작 전에 구분선 추가 (필터링 없을 때만)
+            if (!filter && index === 39) { // 말라기 다음, 마태복음 전
                 $select.append('<option disabled>━━━━━━━━━━━━━━━━━━━━</option>');
             }
             $select.append(`<option value="${book.num}" data-name="${book.name}" data-chapters="${book.chapters}">${book.name}</option>`);
         });
+        
+        if (!hasResults && filter) {
+            $select.append('<option disabled>검색 결과 없음</option>');
+        }
     }
+    
+    // 성경책 검색 기능
+    $('#bookSearch').on('input', function() {
+        const searchText = $(this).val();
+        initBibleBooks(searchText);
+    });
     
     // 성경책 선택 시 장 입력 필드 업데이트
     $('#bibleBook').on('change', function() {
@@ -139,12 +162,24 @@ $(document).ready(function() {
     
     // 장 입력 시 절 입력 필드 업데이트
     $('#chapterInput').on('input', function() {
-        const chapter = $(this).val();
-        if (chapter && currentBibleData) {
-            const maxVerse = getMaxVerseInChapter(chapter);
-            if (maxVerse > 0) {
-                $('#verseInput').attr('max', maxVerse);
-                $('#verseInput').attr('placeholder', `1-${maxVerse}`);
+        const chapter = $(this).val().trim();
+        
+        // 장 범위 입력 시 절 입력 비활성화
+        if (chapter.includes('-')) {
+            $('#verseInput').prop('disabled', true);
+            $('#verseInput').val('');
+            $('#verseInput').attr('placeholder', '장 범위 선택 시 비활성화');
+        } else {
+            $('#verseInput').prop('disabled', false);
+            
+            if (chapter && currentBibleData) {
+                const maxVerse = getMaxVerseInChapter(chapter);
+                if (maxVerse > 0) {
+                    $('#verseInput').attr('max', maxVerse);
+                    $('#verseInput').attr('placeholder', `1-${maxVerse} 또는 범위(예: 16-17)`);
+                }
+            } else {
+                $('#verseInput').attr('placeholder', '절 번호 또는 범위');
             }
         }
     });
@@ -194,13 +229,44 @@ $(document).ready(function() {
         let html = '';
         let filteredLines = lines;
 
-        // 장/절 필터링
+        // 장/절 필터링 (범위 지원)
         if (chapter) {
-            const chapterStr = String(chapter);
-            if (verse) {
-                // 특정 장절만 표시
-                const versePattern = new RegExp(`^[가-힣]+${chapterStr}:${verse}\\s`);
-                filteredLines = lines.filter(line => versePattern.test(line));
+            const chapterStr = String(chapter).trim();
+            
+            // 장 범위 처리 (예: "1-3")
+            if (chapterStr.includes('-')) {
+                const [startChap, endChap] = chapterStr.split('-').map(s => parseInt(s.trim()));
+                if (!isNaN(startChap) && !isNaN(endChap)) {
+                    filteredLines = lines.filter(line => {
+                        const match = line.match(/^[가-힣]+(\d+):/);
+                        if (match) {
+                            const chap = parseInt(match[1]);
+                            return chap >= startChap && chap <= endChap;
+                        }
+                        return false;
+                    });
+                }
+            } else if (verse) {
+                const verseStr = String(verse).trim();
+                
+                // 절 범위 처리 (예: "16-17")
+                if (verseStr.includes('-')) {
+                    const [startVerse, endVerse] = verseStr.split('-').map(s => parseInt(s.trim()));
+                    if (!isNaN(startVerse) && !isNaN(endVerse)) {
+                        filteredLines = lines.filter(line => {
+                            const match = line.match(/^[가-힣]+(\d+):(\d+)\s/);
+                            if (match && parseInt(match[1]) === parseInt(chapterStr)) {
+                                const ver = parseInt(match[2]);
+                                return ver >= startVerse && ver <= endVerse;
+                            }
+                            return false;
+                        });
+                    }
+                } else {
+                    // 특정 장절만 표시
+                    const versePattern = new RegExp(`^[가-힣]+${chapterStr}:${verseStr}\\s`);
+                    filteredLines = lines.filter(line => versePattern.test(line));
+                }
             } else {
                 // 특정 장 전체 표시
                 const chapterPattern = new RegExp(`^[가-힣]+${chapterStr}:`);
@@ -210,12 +276,22 @@ $(document).ready(function() {
         
         console.log('Filtered lines:', filteredLines.length);
 
-        // 제목 업데이트 (헤더는 흰색 유지)
+        // 제목 업데이트 (헤더는 흰색 유지, 범위 표시)
         let title = bookName;
         if (chapter && verse) {
-            title = `${bookName} ${chapter}장 ${verse}절`;
+            const verseStr = String(verse).trim();
+            if (verseStr.includes('-')) {
+                title = `${bookName} ${chapter}장 ${verse}절`;
+            } else {
+                title = `${bookName} ${chapter}장 ${verse}절`;
+            }
         } else if (chapter) {
-            title = `${bookName} ${chapter}장`;
+            const chapterStr = String(chapter).trim();
+            if (chapterStr.includes('-')) {
+                title = `${bookName} ${chapter}장`;
+            } else {
+                title = `${bookName} ${chapter}장`;
+            }
         }
         $('#bibleTitle').html(`<i class="bi bi-book text-white"></i> <span class="text-white">${title}</span>`);
 

@@ -72,6 +72,7 @@ $(document).ready(function() {
     let currentBibleData = null;
     let currentBook = '';
     let currentBookInfo = null;
+    let currentRawData = []; // 범위/다중 선택 시 검색용 원본 데이터
 
     // 성경책 목록 초기화
     function initBibleBooks(filterText = '') {
@@ -105,26 +106,184 @@ $(document).ready(function() {
         }
     }
     
-    // 성경책 검색 기능
+    // 성경책 검색 및 범위 입력 기능 (디바운싱 적용)
     $('#bookSearch').on('input', function() {
-        const searchText = $(this).val();
+        const searchText = $(this).val().trim();
+        
+        // 범위 입력 감지 (예: "창세기-출애굽기")
+        if (searchText.includes('-')) {
+            const parts = searchText.split('-');
+            if (parts.length === 2) {
+                const startBook = parts[0].trim();
+                const endBook = parts[1].trim();
+                
+                // 시작과 끝 책 찾기
+                const startIndex = bibleBooks.findIndex(b => b.name.includes(startBook));
+                const endIndex = bibleBooks.findIndex(b => b.name.includes(endBook));
+                
+                if (startIndex !== -1 && endIndex !== -1 && startIndex <= endIndex) {
+                    // 범위의 모든 책 선택
+                    loadBookRange(startIndex, endIndex);
+                    return;
+                }
+            }
+        }
+        
         initBibleBooks(searchText);
+    });
+    
+    // 책 범위 로드
+    function loadBookRange(startIndex, endIndex) {
+        const selectedBooks = bibleBooks.slice(startIndex, endIndex + 1);
+        
+        // 제목 업데이트
+        $('#bibleTitle').html(`<i class="bi bi-book text-white"></i> <span class="text-white">${selectedBooks[0].name} ~ ${selectedBooks[selectedBooks.length-1].name}</span>`);
+        
+        // 로딩 표시
+        $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">로딩 중...</p></div>');
+        
+        let allContent = '';
+        let loadedCount = 0;
+        currentRawData = []; // 검색용 데이터 초기화
+        
+        selectedBooks.forEach((book, index) => {
+            $.ajax({
+                url: `/tx/${book.num}${book.name}.txt`,
+                dataType: 'text',
+                success: function(data) {
+                    const lines = data.split(/\r?\n/).filter(line => line.trim());
+                    currentRawData.push(...lines); // 검색용 원본 데이터 저장
+                    
+                    // 책 제목 추가
+                    const isNewTestament = book.num.startsWith('2-');
+                    const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
+                    
+                    allContent += `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
+                    
+                    // 내용 추가
+                    let lastChapter = null;
+                    lines.forEach(line => {
+                        const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.*)$/);
+                        if (match) {
+                            const [, bookAbbr, chap, ver, rest] = match;
+                            
+                            // 소제목과 본문 분리
+                            let subtitle = '';
+                            let text = rest;
+                            const subtitleMatch = rest.match(/^<([^>]+)>\s*(.*)$/);
+                            if (subtitleMatch) {
+                                subtitle = subtitleMatch[1];
+                                text = subtitleMatch[2];
+                            }
+                            
+                            // 새 장 시작
+                            if (lastChapter !== chap) {
+                                allContent += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
+                                lastChapter = chap;
+                            }
+                            
+                            // 소제목
+                            if (subtitle) {
+                                allContent += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
+                            }
+                            
+                            const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
+                            allContent += `
+                                <div class="verse-line mb-2">
+                                    <span class="verse-num badge ${badgeClass} me-2">${chap}:${ver}</span>
+                                    <span class="verse-text">${text}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                },
+                complete: function() {
+                    loadedCount++;
+                    if (loadedCount === selectedBooks.length) {
+                        $('#bibleContent').html(allContent);
+                        // 검색을 위해 원본 데이터 문자열로 저장
+                        currentBibleData = currentRawData.join('\n');
+                        currentBookInfo = { num: 'range', name: `${selectedBooks[0].name}~${selectedBooks[selectedBooks.length-1].name}` };
+                    }
+                }
+            });
+        });
+    }
+
+    // 전체보기 버튼
+    $('#showAllBtn').on('click', function() {
+        // 선택 해제
+        $('#bibleBook').val('');
+        currentBibleData = null;
+        currentBookInfo = null;
+        
+        // 입력 필드 초기화
+        $('#chapterInput').val('').attr('max', '').attr('placeholder', '장 번호 또는 범위(예: 1-3)');
+        $('#verseInput').val('').attr('max', '').attr('placeholder', '절 번호 또는 범위(예: 16-17)').prop('disabled', false);
+        $('#bookSearch').val('');
+        initBibleBooks();
+        
+        // 제목 업데이트
+        $('#bibleTitle').html('<i class="bi bi-book text-white"></i> <span class="text-white">전체 성경 - 검색어를 입력하세요</span>');
+        
+        // 안내 메시지 표시
+        $('#bibleContent').html(`
+            <div class="text-center py-5">
+                <div class="mb-3" style="font-size: 4rem;">📖</div>
+                <h5 class="text-muted">전체 성경 검색 모드</h5>
+                <p class="text-muted">아래 검색창에 단어를 입력하고 Enter를 누르면<br>전체 66권 성경에서 검색합니다</p>
+            </div>
+        `);
+        
+        // 버튼 활성화 표시
+        $(this).addClass('active');
     });
     
     // 성경책 선택 시 장 입력 필드 업데이트
     $('#bibleBook').on('change', function() {
-        const bookNum = $(this).val();
-        if (bookNum) {
-            currentBookInfo = bibleBooks.find(b => b.num === bookNum);
-            const bookName = $(this).find('option:selected').data('name');
-            $('#chapterInput').attr('max', currentBookInfo.chapters);
-            $('#chapterInput').attr('placeholder', `1-${currentBookInfo.chapters}`);
-            $('#verseInput').val('');
-            $('#verseInput').attr('max', '');
-            $('#verseInput').attr('placeholder', '절 번호');
+        const selectedOptions = $(this).val();
+        
+        // 배열인 경우 (multiple select)
+        if (Array.isArray(selectedOptions) && selectedOptions.length > 0) {
+            // 전체보기 버튼 비활성화
+            $('#showAllBtn').removeClass('active');
             
-            // 성경 파일 로드
-            loadBibleText(bookNum, bookName);
+            if (selectedOptions.length === 1) {
+                // 단일 선택
+                const bookNum = selectedOptions[0];
+                currentBookInfo = bibleBooks.find(b => b.num === bookNum);
+                const bookName = $(this).find('option:selected').data('name');
+                $('#chapterInput').attr('max', currentBookInfo.chapters);
+                $('#chapterInput').attr('placeholder', `1-${currentBookInfo.chapters}`);
+                $('#verseInput').val('');
+                $('#verseInput').attr('max', '');
+                $('#verseInput').attr('placeholder', '절 번호');
+                
+                // 성경 파일 로드
+                loadBibleText(bookNum, bookName);
+            } else {
+                // 다중 선택 - 범위 확인
+                const indices = selectedOptions.map(num => bibleBooks.findIndex(b => b.num === num)).sort((a, b) => a - b);
+                const startIndex = indices[0];
+                const endIndex = indices[indices.length - 1];
+                
+                // 연속된 범위인지 확인
+                let isContinuous = true;
+                for (let i = startIndex; i <= endIndex; i++) {
+                    if (!indices.includes(i)) {
+                        isContinuous = false;
+                        break;
+                    }
+                }
+                
+                if (isContinuous) {
+                    loadBookRange(startIndex, endIndex);
+                } else {
+                    // 비연속 선택된 책들만 로드
+                    const selectedBooks = indices.map(i => bibleBooks[i]);
+                    loadMultipleBooks(selectedBooks);
+                }
+            }
         } else {
             currentBookInfo = null;
             currentBibleData = null;
@@ -141,6 +300,75 @@ $(document).ready(function() {
             `);
         }
     });
+    
+    // 다중 책 로드 (비연속)
+    function loadMultipleBooks(books) {
+        const bookNames = books.map(b => b.name).join(', ');
+        $('#bibleTitle').html(`<i class="bi bi-book text-white"></i> <span class="text-white">${bookNames}</span>`);
+        
+        $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">로딩 중...</p></div>');
+        
+        let allContent = '';
+        let loadedCount = 0;
+        currentRawData = []; // 검색용 데이터 초기화
+        
+        books.forEach(book => {
+            $.ajax({
+                url: `/tx/${book.num}${book.name}.txt`,
+                dataType: 'text',
+                success: function(data) {
+                    const lines = data.split(/\r?\n/).filter(line => line.trim());
+                    currentRawData.push(...lines); // 검색용 원본 데이터 저장
+                    
+                    const isNewTestament = book.num.startsWith('2-');
+                    const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
+                    const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
+                    
+                    allContent += `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
+                    
+                    let lastChapter = null;
+                    lines.forEach(line => {
+                        const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.*)$/);
+                        if (match) {
+                            const [, bookAbbr, chap, ver, rest] = match;
+                            
+                            let subtitle = '';
+                            let text = rest;
+                            const subtitleMatch = rest.match(/^<([^>]+)>\s*(.*)$/);
+                            if (subtitleMatch) {
+                                subtitle = subtitleMatch[1];
+                                text = subtitleMatch[2];
+                            }
+                            
+                            if (lastChapter !== chap) {
+                                allContent += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
+                                lastChapter = chap;
+                            }
+                            
+                            if (subtitle) {
+                                allContent += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
+                            }
+                            
+                            allContent += `
+                                <div class="verse-line mb-2">
+                                    <span class="verse-num badge ${badgeClass} me-2">${chap}:${ver}</span>
+                                    <span class="verse-text">${text}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                },
+                complete: function() {
+                    loadedCount++;
+                    if (loadedCount === books.length) {
+                        $('#bibleContent').html(allContent);
+                        currentBibleData = currentRawData.join('\n'); // 검색용 데이터
+                        currentBookInfo = { num: 'multiple', name: bookNames };
+                    }
+                }
+            });
+        });
+    }
 
     // 장별 최대 절 수 계산
     function getMaxVerseInChapter(chapter) {
@@ -188,19 +416,15 @@ $(document).ready(function() {
     function loadBibleText(bookNum, bookName) {
         const filePath = `/tx/${bookNum}${bookName}.txt`;
         
-        console.log('Loading:', filePath);
-        
         $.ajax({
             url: filePath,
             dataType: 'text',
             success: function(data) {
-                console.log('Data loaded, length:', data.length);
                 currentBibleData = data;
                 currentBook = bookName;
                 displayBibleContent(data, bookName);
             },
             error: function(xhr, status, error) {
-                console.error('Error loading:', filePath, status, error);
                 $('#bibleContent').html(`
                     <div class="alert alert-danger">
                         <i class="bi bi-exclamation-triangle"></i>
@@ -214,17 +438,12 @@ $(document).ready(function() {
 
     // 성경 본문 표시
     function displayBibleContent(data, bookName, chapter = null, verse = null) {
-        console.log('displayBibleContent called:', bookName, 'chapter:', chapter, 'verse:', verse);
-        console.log('Data length:', data ? data.length : 0);
-        
         // 신약 여부 판단 (bookNum이 2-로 시작하면 신약)
         const isNewTestament = currentBookInfo && currentBookInfo.num.startsWith('2-');
         const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
         const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
         
         const lines = data.split(/\r?\n/).filter(line => line.trim());
-        console.log('Total lines:', lines.length);
-        console.log('First 3 lines:', lines.slice(0, 3));
         
         let html = '';
         let filteredLines = lines;
@@ -355,10 +574,112 @@ $(document).ready(function() {
         $('#bibleContent').html(html);
     }
 
+    // 전체 성경 검색
+    function searchAllBible(keyword) {
+        if (!keyword.trim()) {
+            alert('검색어를 입력하세요');
+            return;
+        }
+
+        $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">전체 성경에서 "${keyword}" 검색중...</span>`);
+        $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">검색 중...</p></div>');
+
+        let allResults = [];
+        let loadedCount = 0;
+
+        // 모든 성경책 파일 로드 및 검색
+        bibleBooks.forEach(book => {
+            $.ajax({
+                url: `/tx/${book.num}${book.name}.txt`,
+                dataType: 'text',
+                success: function(data) {
+                    const lines = data.split(/\r?\n/).filter(line => line.trim());
+                    const matches = lines.filter(line => line.includes(keyword));
+                    
+                    matches.forEach(line => {
+                        const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.+)$/);
+                        if (match) {
+                            allResults.push({
+                                bookNum: book.num,
+                                bookName: book.name,
+                                line: line,
+                                book: match[1],
+                                chapter: match[2],
+                                verse: match[3],
+                                text: match[4]
+                            });
+                        }
+                    });
+                },
+                error: function() {
+                    console.error('Failed to load:', book.name);
+                },
+                complete: function() {
+                    loadedCount++;
+                    if (loadedCount === bibleBooks.length) {
+                        displayAllSearchResults(keyword, allResults);
+                    }
+                }
+            });
+        });
+    }
+
+    // 전체 검색 결과 표시
+    function displayAllSearchResults(keyword, results) {
+        $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">전체 성경 "${keyword}" 검색 결과 (${results.length}개)</span>`);
+
+        if (results.length === 0) {
+            $('#bibleContent').html(`
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    전체 성경에서 "${keyword}"에 대한 검색 결과가 없습니다.
+                </div>
+            `);
+            return;
+        }
+
+        let html = '';
+        results.forEach(result => {
+            const isNewTestament = result.bookNum.startsWith('2-');
+            const borderClass = isNewTestament ? 'border-danger' : 'border-primary';
+            const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
+
+            // 소제목 제거
+            let text = result.text;
+            const subtitleMatch = text.match(/^<[^>]+>\s*(.*)$/);
+            if (subtitleMatch) {
+                text = subtitleMatch[1];
+            }
+
+            // 검색어 하이라이트
+            const highlightedText = text.replace(
+                new RegExp(keyword, 'gi'),
+                `<mark class="bg-warning">${keyword}</mark>`
+            );
+
+            html += `
+                <div class="verse-line mb-3 p-3 border-start ${borderClass} border-3">
+                    <div class="mb-1">
+                        <span class="badge ${badgeClass}">${result.bookName} ${result.chapter}:${result.verse}</span>
+                    </div>
+                    <div class="verse-text">${highlightedText}</div>
+                </div>
+            `;
+        });
+
+        $('#bibleContent').html(html);
+    }
+
     // 텍스트 검색
     function searchText(keyword) {
-        if (!currentBibleData || !keyword.trim()) {
+        if (!keyword.trim()) {
             alert('검색어를 입력하세요');
+            return;
+        }
+
+        // 성경책이 선택되지 않았으면 전체 검색
+        if (!currentBibleData) {
+            searchAllBible(keyword);
             return;
         }
 

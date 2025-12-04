@@ -68,10 +68,14 @@
                             <div class="row g-3 align-items-end">
                                 <div class="col-md-4">
                                     <label class="form-label fw-bold">성경책</label>
-                                    <input type="text" class="form-control mb-2" id="bookSearch" placeholder="🔍 성경책 검색 (예: 창세기, 로마서)">
-                                    <select class="form-select" id="bibleBook" size="7" style="height: 175px; overflow-y: scroll;">
+                                    <div class="d-flex gap-2 mb-2">
+                                        <input type="text" class="form-control" id="bookSearch" placeholder="🔍 검색 또는 범위(창세기-출애굽기)">
+                                        <button class="btn btn-outline-primary btn-sm" id="showAllBtn" style="white-space: nowrap;">전체보기</button>
+                                    </div>
+                                    <select class="form-select" id="bibleBook" size="7" style="height: 175px; overflow-y: auto; overflow-x: hidden; white-space: normal; word-wrap: break-word;" multiple>
                                         <option value="">성경책을 선택하세요</option>
                                     </select>
+                                    <small class="text-muted">Ctrl+클릭으로 여러 책 선택 가능</small>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label fw-bold">장</label>

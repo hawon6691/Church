@@ -73,6 +73,10 @@ $(document).ready(function() {
     let currentBook = '';
     let currentBookInfo = null;
     let currentRawData = []; // 범위/다중 선택 시 검색용 원본 데이터
+    
+    // 캐싱 시스템
+    const bibleCache = {}; // 로드된 성경 파일 캐시
+    let searchTimeout = null; // 디바운싱용
 
     // 성경책 목록 초기화
     function initBibleBooks(filterText = '') {
@@ -142,32 +146,54 @@ $(document).ready(function() {
         // 로딩 표시
         $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">로딩 중...</p></div>');
         
-        let allContent = '';
-        let loadedCount = 0;
-        currentRawData = []; // 검색용 데이터 초기화
+        // 병렬 처리를 위한 Promise 배열
+        const loadPromises = selectedBooks.map((book, index) => {
+            const cacheKey = `${book.num}${book.name}`;
+            
+            if (bibleCache[cacheKey]) {
+                // 캐시된 데이터는 즉시 Promise로 반환
+                return Promise.resolve({ data: bibleCache[cacheKey], book, index });
+            } else {
+                // 새로운 데이터는 AJAX로 로드
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: `/tx/${book.num}${book.name}.txt`,
+                        dataType: 'text',
+                        success: function(data) {
+                            bibleCache[cacheKey] = data;
+                            resolve({ data, book, index });
+                        },
+                        error: function() {
+                            reject({ book, index });
+                        }
+                    });
+                });
+            }
+        });
         
-        selectedBooks.forEach((book, index) => {
-            $.ajax({
-                url: `/tx/${book.num}${book.name}.txt`,
-                dataType: 'text',
-                success: function(data) {
+        // 모든 파일 로드 완료 후 한 번에 처리
+        Promise.allSettled(loadPromises).then(results => {
+            const bookContents = [];
+            const rawDataParts = [];
+            
+            results.forEach(result => {
+                if (result.status === 'fulfilled') {
+                    const { data, book, index } = result.value;
                     const lines = data.split(/\r?\n/).filter(line => line.trim());
-                    currentRawData.push(...lines); // 검색용 원본 데이터 저장
+                    rawDataParts[index] = lines;
                     
-                    // 책 제목 추가
                     const isNewTestament = book.num.startsWith('2-');
                     const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
+                    const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
                     
-                    allContent += `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
+                    let html = `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
                     
-                    // 내용 추가
                     let lastChapter = null;
                     lines.forEach(line => {
                         const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.*)$/);
                         if (match) {
                             const [, bookAbbr, chap, ver, rest] = match;
                             
-                            // 소제목과 본문 분리
                             let subtitle = '';
                             let text = rest;
                             const subtitleMatch = rest.match(/^<([^>]+)>\s*(.*)$/);
@@ -176,19 +202,16 @@ $(document).ready(function() {
                                 text = subtitleMatch[2];
                             }
                             
-                            // 새 장 시작
                             if (lastChapter !== chap) {
-                                allContent += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
+                                html += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
                                 lastChapter = chap;
                             }
                             
-                            // 소제목
                             if (subtitle) {
-                                allContent += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
+                                html += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
                             }
                             
-                            const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
-                            allContent += `
+                            html += `
                                 <div class="verse-line mb-2">
                                     <span class="verse-num badge ${badgeClass} me-2">${chap}:${ver}</span>
                                     <span class="verse-text">${text}</span>
@@ -196,21 +219,26 @@ $(document).ready(function() {
                             `;
                         }
                     });
-                },
-                complete: function() {
-                    loadedCount++;
-                    if (loadedCount === selectedBooks.length) {
-                        $('#bibleContent').html(allContent);
-                        // 검색을 위해 원본 데이터 문자열로 저장
-                        currentBibleData = currentRawData.join('\n');
-                        currentBookInfo = { num: 'range', name: `${selectedBooks[0].name}~${selectedBooks[selectedBooks.length-1].name}` };
-                    }
+                    
+                    bookContents[index] = html;
+                } else {
+                    const { book, index } = result.reason;
+                    bookContents[index] = `<div class="alert alert-danger">불러오기 실패: ${book.name}</div>`;
                 }
             });
+            
+            // 한 번에 렌더링
+            $('#bibleContent').html(bookContents.join(''));
+            
+            // Raw Data 병합
+            currentRawData = [];
+            rawDataParts.forEach(parts => {
+                if (parts) currentRawData.push(...parts);
+            });
+            currentBibleData = currentRawData.join('\n');
+            currentBookInfo = { num: 'range', name: `${selectedBooks[0].name}~${selectedBooks[selectedBooks.length-1].name}` };
         });
-    }
-
-    // 전체보기 버튼
+    }    // 전체보기 버튼
     $('#showAllBtn').on('click', function() {
         // 선택 해제
         $('#bibleBook').val('');
@@ -308,23 +336,44 @@ $(document).ready(function() {
         
         $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">로딩 중...</p></div>');
         
-        let allContent = '';
-        let loadedCount = 0;
-        currentRawData = []; // 검색용 데이터 초기화
+        // 병렬 처리를 위한 Promise 배열
+        const loadPromises = books.map((book, index) => {
+            const cacheKey = `${book.num}${book.name}`;
+            
+            if (bibleCache[cacheKey]) {
+                return Promise.resolve({ data: bibleCache[cacheKey], book, index });
+            } else {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: `/tx/${book.num}${book.name}.txt`,
+                        dataType: 'text',
+                        success: function(data) {
+                            bibleCache[cacheKey] = data;
+                            resolve({ data, book, index });
+                        },
+                        error: function() {
+                            reject({ book, index });
+                        }
+                    });
+                });
+            }
+        });
         
-        books.forEach(book => {
-            $.ajax({
-                url: `/tx/${book.num}${book.name}.txt`,
-                dataType: 'text',
-                success: function(data) {
+        Promise.allSettled(loadPromises).then(results => {
+            const bookContents = [];
+            const rawDataParts = [];
+            
+            results.forEach(result => {
+                if (result.status === 'fulfilled') {
+                    const { data, book, index } = result.value;
                     const lines = data.split(/\r?\n/).filter(line => line.trim());
-                    currentRawData.push(...lines); // 검색용 원본 데이터 저장
+                    rawDataParts[index] = lines;
                     
                     const isNewTestament = book.num.startsWith('2-');
                     const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
                     const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
                     
-                    allContent += `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
+                    let html = `<h3 class="${colorClass} mt-5 mb-4 border-bottom pb-3">${book.name}</h3>`;
                     
                     let lastChapter = null;
                     lines.forEach(line => {
@@ -341,15 +390,15 @@ $(document).ready(function() {
                             }
                             
                             if (lastChapter !== chap) {
-                                allContent += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
+                                html += `<h5 class="${colorClass} mt-4 mb-3 border-bottom pb-2">${bookAbbr} ${chap}장</h5>`;
                                 lastChapter = chap;
                             }
                             
                             if (subtitle) {
-                                allContent += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
+                                html += `<h6 class="${colorClass} mt-3 mb-2">${subtitle}</h6>`;
                             }
                             
-                            allContent += `
+                            html += `
                                 <div class="verse-line mb-2">
                                     <span class="verse-num badge ${badgeClass} me-2">${chap}:${ver}</span>
                                     <span class="verse-text">${text}</span>
@@ -357,16 +406,22 @@ $(document).ready(function() {
                             `;
                         }
                     });
-                },
-                complete: function() {
-                    loadedCount++;
-                    if (loadedCount === books.length) {
-                        $('#bibleContent').html(allContent);
-                        currentBibleData = currentRawData.join('\n'); // 검색용 데이터
-                        currentBookInfo = { num: 'multiple', name: bookNames };
-                    }
+                    
+                    bookContents[index] = html;
+                } else {
+                    const { book, index } = result.reason;
+                    bookContents[index] = `<div class="alert alert-danger">불러오기 실패: ${book.name}</div>`;
                 }
             });
+            
+            $('#bibleContent').html(bookContents.join(''));
+            
+            currentRawData = [];
+            rawDataParts.forEach(parts => {
+                if (parts) currentRawData.push(...parts);
+            });
+            currentBibleData = currentRawData.join('\n');
+            currentBookInfo = { num: 'multiple', name: bookNames };
         });
     }
 
@@ -414,12 +469,23 @@ $(document).ready(function() {
 
     // 성경 텍스트 로드
     function loadBibleText(bookNum, bookName) {
+        const cacheKey = `${bookNum}${bookName}`;
+        
+        // 캐시에 있으면 즉시 반환
+        if (bibleCache[cacheKey]) {
+            currentBibleData = bibleCache[cacheKey];
+            currentBook = bookName;
+            displayBibleContent(bibleCache[cacheKey], bookName);
+            return;
+        }
+        
         const filePath = `/tx/${bookNum}${bookName}.txt`;
         
         $.ajax({
             url: filePath,
             dataType: 'text',
             success: function(data) {
+                bibleCache[cacheKey] = data; // 캐시에 저장
                 currentBibleData = data;
                 currentBook = bookName;
                 displayBibleContent(data, bookName);
@@ -581,20 +647,72 @@ $(document).ready(function() {
             return;
         }
 
+        // 장절 참조 패턴 인식
+        const versePattern1 = /^([가-힣]+)\s*(\d+)\s*[:：]\s*(\d+)$/;
+        const versePattern2 = /^([가-힣]+)\s+(\d+)장\s+(\d+)절$/;
+        let verseMatch = keyword.match(versePattern1) || keyword.match(versePattern2);
+        
+        if (verseMatch) {
+            const bookAbbr = verseMatch[1];
+            const chapter = verseMatch[2];
+            const verse = verseMatch[3];
+            
+            const foundBook = bibleBooks.find(b => 
+                b.name.includes(bookAbbr) || b.name.startsWith(bookAbbr)
+            );
+            
+            if (foundBook) {
+                currentBookInfo = foundBook;
+                $('#bibleBook').val(foundBook.num);
+                loadBibleText(foundBook.num, foundBook.name);
+                setTimeout(() => {
+                    if (currentBibleData) {
+                        displayBibleContent(currentBibleData, foundBook.name, chapter, verse);
+                    }
+                }, 500);
+                return;
+            }
+        }
+
         $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">전체 성경에서 "${keyword}" 검색중...</span>`);
         $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">검색 중...</p></div>');
 
-        let allResults = [];
-        let loadedCount = 0;
+        // 병렬 처리를 위한 Promise 배열
+        const searchPromises = bibleBooks.map(book => {
+            const cacheKey = `${book.num}${book.name}`;
+            
+            if (bibleCache[cacheKey]) {
+                return Promise.resolve({ data: bibleCache[cacheKey], book });
+            } else {
+                return new Promise((resolve) => {
+                    $.ajax({
+                        url: `/tx/${book.num}${book.name}.txt`,
+                        dataType: 'text',
+                        success: function(data) {
+                            bibleCache[cacheKey] = data;
+                            resolve({ data, book });
+                        },
+                        error: function() {
+                            resolve({ data: null, book });
+                        }
+                    });
+                });
+            }
+        });
 
-        // 모든 성경책 파일 로드 및 검색
-        bibleBooks.forEach(book => {
-            $.ajax({
-                url: `/tx/${book.num}${book.name}.txt`,
-                dataType: 'text',
-                success: function(data) {
+        Promise.allSettled(searchPromises).then(results => {
+            let allResults = [];
+            
+            results.forEach(result => {
+                if (result.status === 'fulfilled' && result.value.data) {
+                    const { data, book } = result.value;
                     const lines = data.split(/\r?\n/).filter(line => line.trim());
-                    const matches = lines.filter(line => line.includes(keyword));
+                    
+                    const matches = lines.filter(line => {
+                        if (line.includes(keyword)) return true;
+                        if (book.name.includes(keyword)) return true;
+                        return false;
+                    });
                     
                     matches.forEach(line => {
                         const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.+)$/);
@@ -610,17 +728,22 @@ $(document).ready(function() {
                             });
                         }
                     });
-                },
-                error: function() {
-                    console.error('Failed to load:', book.name);
-                },
-                complete: function() {
-                    loadedCount++;
-                    if (loadedCount === bibleBooks.length) {
-                        displayAllSearchResults(keyword, allResults);
-                    }
                 }
             });
+
+            // 결과 정렬
+            allResults.sort((a, b) => {
+                if (a.bookNum < b.bookNum) return -1;
+                if (a.bookNum > b.bookNum) return 1;
+                const chapA = parseInt(a.chapter);
+                const chapB = parseInt(b.chapter);
+                if (chapA !== chapB) return chapA - chapB;
+                const verA = parseInt(a.verse);
+                const verB = parseInt(b.verse);
+                return verA - verB;
+            });
+
+            displayAllSearchResults(keyword, allResults);
         });
     }
 
@@ -643,16 +766,29 @@ $(document).ready(function() {
             const isNewTestament = result.bookNum.startsWith('2-');
             const borderClass = isNewTestament ? 'border-danger' : 'border-primary';
             const badgeClass = isNewTestament ? 'bg-danger' : 'bg-primary';
+            const colorClass = isNewTestament ? 'text-danger' : 'text-primary';
 
-            // 소제목 제거
+            // 소제목과 본문 분리
+            let subtitle = '';
             let text = result.text;
-            const subtitleMatch = text.match(/^<[^>]+>\s*(.*)$/);
+            const subtitleMatch = text.match(/^<([^>]+)>\s*(.*)$/);
             if (subtitleMatch) {
-                text = subtitleMatch[1];
+                subtitle = subtitleMatch[1];
+                text = subtitleMatch[2];
             }
 
-            // 검색어 하이라이트
+            // 검색어 하이라이트 (소제목과 본문 모두)
+            const highlightedSubtitle = subtitle ? subtitle.replace(
+                new RegExp(keyword, 'gi'),
+                `<mark class="bg-warning">${keyword}</mark>`
+            ) : '';
+            
             const highlightedText = text.replace(
+                new RegExp(keyword, 'gi'),
+                `<mark class="bg-warning">${keyword}</mark>`
+            );
+            
+            const highlightedBookName = result.bookName.replace(
                 new RegExp(keyword, 'gi'),
                 `<mark class="bg-warning">${keyword}</mark>`
             );
@@ -660,8 +796,9 @@ $(document).ready(function() {
             html += `
                 <div class="verse-line mb-3 p-3 border-start ${borderClass} border-3">
                     <div class="mb-1">
-                        <span class="badge ${badgeClass}">${result.bookName} ${result.chapter}:${result.verse}</span>
+                        <span class="badge ${badgeClass}">${highlightedBookName} ${result.chapter}:${result.verse}</span>
                     </div>
+                    ${subtitle ? `<h6 class="${colorClass} mt-2 mb-2">${highlightedSubtitle}</h6>` : ''}
                     <div class="verse-text">${highlightedText}</div>
                 </div>
             `;
@@ -674,6 +811,123 @@ $(document).ready(function() {
     function searchText(keyword) {
         if (!keyword.trim()) {
             alert('검색어를 입력하세요');
+            return;
+        }
+
+        // 1. 책 범위 패턴: 창세기-출애굽기
+        const bookRangePattern = /^([가-힣]+)\s*[-~]\s*([가-힣]+)$/;
+        const bookRangeMatch = keyword.match(bookRangePattern);
+        
+        if (bookRangeMatch) {
+            const startBookName = bookRangeMatch[1];
+            const endBookName = bookRangeMatch[2];
+            
+            const startBook = bibleBooks.find(b => b.name.includes(startBookName) || b.name.startsWith(startBookName));
+            const endBook = bibleBooks.find(b => b.name.includes(endBookName) || b.name.startsWith(endBookName));
+            
+            if (startBook && endBook) {
+                const startIndex = bibleBooks.findIndex(b => b.num === startBook.num);
+                const endIndex = bibleBooks.findIndex(b => b.num === endBook.num);
+                
+                if (startIndex !== -1 && endIndex !== -1 && startIndex <= endIndex) {
+                    loadBookRange(startIndex, endIndex);
+                    return;
+                }
+            }
+        }
+
+        // 2. 장 범위 패턴: 창세기 1-3장, 창 1-3장
+        const chapterRangePattern1 = /^([가-힣]+)\s+(\d+)\s*[-~]\s*(\d+)장?$/; // 창세기 1-3장
+        const chapterRangePattern2 = /^([가-힣]+)\s*(\d+)\s*[-~]\s*(\d+)장?$/; // 창1-3장
+        
+        let chapterRangeMatch = keyword.match(chapterRangePattern1) || keyword.match(chapterRangePattern2);
+        
+        if (chapterRangeMatch) {
+            const bookAbbr = chapterRangeMatch[1];
+            const startChapter = chapterRangeMatch[2];
+            const endChapter = chapterRangeMatch[3];
+            
+            const foundBook = bibleBooks.find(b => 
+                b.name.includes(bookAbbr) || b.name.startsWith(bookAbbr)
+            );
+            
+            if (foundBook) {
+                currentBookInfo = foundBook;
+                $('#bibleBook').val(foundBook.num);
+                loadBibleText(foundBook.num, foundBook.name);
+                
+                setTimeout(() => {
+                    if (currentBibleData) {
+                        displayBibleContent(currentBibleData, foundBook.name, `${startChapter}-${endChapter}`, null);
+                    }
+                }, 500);
+                return;
+            }
+        }
+
+        // 3. 단일 장 패턴: 창세기 1장, 창 1장
+        const singleChapterPattern1 = /^([가-힣]+)\s+(\d+)장$/; // 창세기 1장
+        const singleChapterPattern2 = /^([가-힣]+)\s*(\d+)장$/; // 창1장
+        
+        let singleChapterMatch = keyword.match(singleChapterPattern1) || keyword.match(singleChapterPattern2);
+        
+        if (singleChapterMatch) {
+            const bookAbbr = singleChapterMatch[1];
+            const chapter = singleChapterMatch[2];
+            
+            const foundBook = bibleBooks.find(b => 
+                b.name.includes(bookAbbr) || b.name.startsWith(bookAbbr)
+            );
+            
+            if (foundBook) {
+                currentBookInfo = foundBook;
+                $('#bibleBook').val(foundBook.num);
+                loadBibleText(foundBook.num, foundBook.name);
+                
+                setTimeout(() => {
+                    if (currentBibleData) {
+                        displayBibleContent(currentBibleData, foundBook.name, chapter, null);
+                    }
+                }, 500);
+                return;
+            }
+        }
+
+        // 4. 장절 참조 패턴: 창1:1, 창 1:1, 창세기 1장 1절
+        const versePattern1 = /^([가-힣]+)\s*(\d+)\s*[:：]\s*(\d+)$/; // 창1:1, 창 1:1
+        const versePattern2 = /^([가-힣]+)\s+(\d+)장\s+(\d+)절$/; // 창세기 1장 1절
+        
+        let verseMatch = keyword.match(versePattern1) || keyword.match(versePattern2);
+        
+        if (verseMatch) {
+            const bookAbbr = verseMatch[1];
+            const chapter = verseMatch[2];
+            const verse = verseMatch[3];
+            
+            const foundBook = bibleBooks.find(b => 
+                b.name.includes(bookAbbr) || b.name.startsWith(bookAbbr)
+            );
+            
+            if (foundBook) {
+                currentBookInfo = foundBook;
+                $('#bibleBook').val(foundBook.num);
+                loadBibleText(foundBook.num, foundBook.name);
+                
+                setTimeout(() => {
+                    if (currentBibleData) {
+                        displayBibleContent(currentBibleData, foundBook.name, chapter, verse);
+                    }
+                }, 500);
+                return;
+            }
+        }
+        
+        // 5. 성경책 이름으로 검색
+        const foundBook = bibleBooks.find(b => b.name === keyword || b.name.includes(keyword));
+        if (foundBook) {
+            currentBookInfo = foundBook;
+            $('#bibleBook').val(foundBook.num);
+            loadBibleText(foundBook.num, foundBook.name);
             return;
         }
 
@@ -710,14 +964,21 @@ $(document).ready(function() {
             if (match) {
                 const [, book, chap, ver, rest] = match;
                 
-                // 소제목 제거하고 본문만 추출
+                // 소제목과 본문 분리
+                let subtitle = '';
                 let text = rest;
-                const subtitleMatch = rest.match(/^<[^>]+>\s*(.*)$/);
+                const subtitleMatch = rest.match(/^<([^>]+)>\s*(.*)$/);
                 if (subtitleMatch) {
-                    text = subtitleMatch[1];
+                    subtitle = subtitleMatch[1];
+                    text = subtitleMatch[2];
                 }
                 
-                // 검색어 하이라이트
+                // 검색어 하이라이트 (소제목과 본문 모두)
+                const highlightedSubtitle = subtitle ? subtitle.replace(
+                    new RegExp(keyword, 'gi'), 
+                    `<mark class="bg-warning">${keyword}</mark>`
+                ) : '';
+                
                 const highlightedText = text.replace(
                     new RegExp(keyword, 'gi'), 
                     `<mark class="bg-warning">${keyword}</mark>`
@@ -728,6 +989,7 @@ $(document).ready(function() {
                         <div class="mb-1">
                             <span class="badge ${badgeClass}">${currentBook} ${chap}:${ver}</span>
                         </div>
+                        ${subtitle ? `<h6 class="${colorClass} mt-2 mb-2">${highlightedSubtitle}</h6>` : ''}
                         <div class="verse-text">${highlightedText}</div>
                     </div>
                 `;

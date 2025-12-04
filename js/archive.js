@@ -6,6 +6,16 @@ $(document).ready(function() {
     const $archiveList = $('#archiveList');
     const $noResults = $('#noResults');
 
+    // 디바운스 함수 (최적화)
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+
     // 검색 및 필터링 함수
     function filterArchive() {
         const searchTerm = $searchInput.val().toLowerCase();
@@ -50,7 +60,7 @@ $(document).ready(function() {
     }
 
     // 이벤트 리스너 등록
-    $searchInput.on('input', filterArchive);
+    $searchInput.on('input', debounce(filterArchive, 300));
     $yearFilter.on('change', filterArchive);
     $typeFilter.on('change', filterArchive);
 

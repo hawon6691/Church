@@ -11,34 +11,49 @@ $(document).ready(function() {
         }
     });
 
-    // Navbar scroll effect
-    let lastScroll = 0;
-    $(window).scroll(function() {
-        const currentScroll = $(this).scrollTop();
-        
-        if (currentScroll > 100) {
-            $('.navbar').addClass('shadow-lg');
-        } else {
-            $('.navbar').removeClass('shadow-lg');
-        }
-        
-        lastScroll = currentScroll;
-    });
-
-    // Fade in animation on scroll
+    // 스크롤 이벤트 최적화 (Throttle)
+    let scrollTimeout;
     const fadeInElements = $('.fade-in');
-    if (fadeInElements.length) {
-        $(window).on('scroll', function() {
-            fadeInElements.each(function() {
-                const elementTop = $(this).offset().top;
-                const viewportBottom = $(window).scrollTop() + $(window).height();
+    
+    $(window).scroll(function() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(function() {
+                const currentScroll = $(window).scrollTop();
                 
-                if (viewportBottom > elementTop + 100) {
-                    $(this).addClass('visible');
+                // Navbar scroll effect
+                if (currentScroll > 100) {
+                    $('.navbar').addClass('shadow-lg');
+                } else {
+                    $('.navbar').removeClass('shadow-lg');
                 }
-            });
-        });
-    }
+                
+                // Fade in animation
+                if (fadeInElements.length) {
+                    const viewportBottom = currentScroll + $(window).height();
+                    fadeInElements.each(function() {
+                        const elementTop = $(this).offset().top;
+                        if (viewportBottom > elementTop + 100) {
+                            $(this).addClass('visible');
+                        }
+                    });
+                }
+                
+                // Back to top button
+                if (currentScroll > 300) {
+                    if (!$('#backToTop').length) {
+                        $('body').append('<button id="backToTop" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; display: none;"><i class="bi bi-arrow-up"></i>↑</button>');
+                        $('#backToTop').fadeIn();
+                    } else {
+                        $('#backToTop').fadeIn();
+                    }
+                } else {
+                    $('#backToTop').fadeOut();
+                }
+                
+                scrollTimeout = null;
+            }, 100); // 100ms 간격으로 실행
+        }
+    });
 
     // Hover effects for cards
     $('.hover-card').hover(
@@ -130,18 +145,7 @@ document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
 });
 
 // Back to top button functionality
-$(window).scroll(function() {
-    if ($(this).scrollTop() > 300) {
-        if (!$('#backToTop').length) {
-            $('body').append('<button id="backToTop" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; display: none;"><i class="bi bi-arrow-up"></i>↑</button>');
-            $('#backToTop').fadeIn();
-        } else {
-            $('#backToTop').fadeIn();
-        }
-    } else {
-        $('#backToTop').fadeOut();
-    }
-});
+// (스크롤 이벤트에 통합됨)
 
 $(document).on('click', '#backToTop', function() {
     $('html, body').animate({scrollTop: 0}, 800);

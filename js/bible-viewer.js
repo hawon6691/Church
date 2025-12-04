@@ -738,18 +738,14 @@ $(document).ready(function() {
     }
 
     // 이벤트 핸들러
-    $('#bibleBook').on('change', function() {
-        const bookNum = $(this).val();
-        const bookName = $(this).find('option:selected').text();
-        
-        if (bookNum) {
-            $('#chapterInput').val('');
-            $('#verseInput').val('');
-            loadBibleText(bookNum, bookName);
-        }
-    });
-
     $('#searchBtn').on('click', function() {
+        // 본문 검색어가 있으면 본문 검색 실행
+        const searchKeyword = $('#searchText').val().trim();
+        if (searchKeyword) {
+            searchText(searchKeyword);
+            return;
+        }
+        
         const bookNum = $('#bibleBook').val();
         const chapter = $('#chapterInput').val();
         const verse = $('#verseInput').val();

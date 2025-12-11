@@ -30,19 +30,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">교회소개</a>
+                        <a class="nav-link" href="about.html">교회 소개</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="worship.html">예배와 말씀</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="archive.html">성경</a>
+                        <a class="nav-link" href="bible.html">성경</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">교회소식</a>
+                        <a class="nav-link active" href="archive.html">자료실</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">온라인헌금</a>
+                        <a class="nav-link" href="news.html">교회 소식</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donation.html">온라인 헌금</a>
                     </li>
                 </ul>
             </div>
@@ -60,63 +63,49 @@
     <!-- Bible Reader Section -->
     <section class="py-5">
         <div class="container">
-            <!-- Bible Selection -->
             <div class="row mb-4">
                 <div class="col-lg-10 mx-auto">
                     <div class="card shadow">
                         <div class="card-body p-4">
-                            <div class="row g-3 align-items-end">
-                                <div class="col-md-4">
-                                    <label class="form-label fw-bold">성경책</label>
-                                    <div class="d-flex gap-2 mb-2">
-                                        <input type="text" class="form-control" id="bookSearch" placeholder="🔍 검색 또는 범위">
-                                        <button class="btn btn-outline-primary btn-sm" id="showAllBtn" style="white-space: nowrap;">전체보기</button>
-                                    </div>
-                                    <select class="form-select" id="bibleBook" size="7" style="height: 175px; overflow-y: auto; overflow-x: hidden; white-space: normal; word-wrap: break-word;" multiple>
-                                        <option value="">성경책을 선택하세요</option>
-                                    </select>
-                                    <small class="text-muted">Ctrl+클릭으로 여러 책 선택 가능</small>
+                            <h2 class="fw-bold mb-4">자료실 업로드</h2>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="youtubeShorts" class="form-label">YouTube Shorts 링크</label>
+                                    <input type="url" class="form-control" id="youtubeShorts" placeholder="https://youtube.com/shorts/...">
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label fw-bold">장</label>
-                                    <input type="text" class="form-control" id="chapterInput" placeholder="장 번호 또는 범위(예: 1-3)" min="1">
-                                    <small class="text-muted">범위 입력 가능</small>
+                                <div class="mb-3">
+                                    <label for="weeklyBulletin" class="form-label">주보 파일 업로드</label>
+                                    <input type="file" class="form-control" id="weeklyBulletin" accept=".pdf,.jpg,.png">
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label fw-bold">절</label>
-                                    <input type="text" class="form-control" id="verseInput" placeholder="절 번호 또는 범위(예: 16-17)" min="1">
-                                    <small class="text-muted">범위 입력 가능</small>
+                                <div class="mb-3">
+                                    <label for="praiseFile" class="form-label">찬양 파일 업로드</label>
+                                    <input type="file" class="form-control" id="praiseFile" accept=".mp3,.wav,.mp4">
                                 </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-primary w-100" id="searchBtn">
-                                        <i class="bi bi-search"></i> 검색
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="searchText" placeholder="성경 본문 검색 (예: 사랑, 믿음, 소망)">
-                                </div>
-                            </div>
+                                <button type="submit" class="btn btn-primary">업로드</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Bible Content Display -->
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-10 mx-auto">
-                    <div class="card shadow-lg border-0">
-                        <div class="card-header bg-secondary text-white p-3">
-                            <h4 class="mb-0 text-white" id="bibleTitle">성경을 선택하세요</h4>
-                        </div>
-                        <div class="card-body p-4" style="min-height: 500px; max-height: 800px; overflow-y: auto;">
-                            <div id="bibleContent" class="bible-text">
-                                <div class="text-center py-5">
-                                    <div class="mb-3" style="font-size: 4rem;">📖</div>
-                                    <h5 class="text-muted">위에서 성경책을 선택하세요</h5>
-                                    <p class="text-muted">장/절을 비워두면 전체 책을 볼 수 있습니다</p>
-                                </div>
+                    <div class="card border-0 shadow">
+                        <div class="card-body p-4 bg-light">
+                            <h5 class="fw-bold text-center mb-4">YouTube Shorts</h5>
+                            <div id="shortsList" class="mb-4">
+                                <!-- 유튜브 쇼츠 링크 리스트 -->
+                                <p class="text-muted">등록된 쇼츠가 없습니다.</p>
+                            </div>
+                            <h5 class="fw-bold text-center mb-4">주보</h5>
+                            <div id="bulletinList" class="mb-4">
+                                <!-- 주보 파일 리스트 -->
+                                <p class="text-muted">등록된 주보가 없습니다.</p>
+                            </div>
+                            <h5 class="fw-bold text-center mb-4">찬양</h5>
+                            <div id="praiseList">
+                                <!-- 찬양 파일 리스트 -->
+                                <p class="text-muted">등록된 찬양이 없습니다.</p>
                             </div>
                         </div>
                     </div>
@@ -150,8 +139,9 @@
                     <p>예수의 보혈이 흐르는 교회</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="mb-1"><strong>문의:</strong> 교회 전화번호</p>
-                    <p class="mb-1"><strong>이메일:</strong> church@example.com</p>
+                    <p class="mb-1"><strong>담임목사:</strong> 010-5895-0191</p>
+                    <p class="mb-1"><strong>교육목사:</strong> 010-8336-3011</p>
+                    <p class="mb-1"><strong>주소:</strong> 서울특별시 중랑구 용마산로 139나길 39-1 (신내동 278-79)</p>
                     <p>&copy; 2025 동서울열방교회. All rights reserved.</p>
                 </div>
             </div>

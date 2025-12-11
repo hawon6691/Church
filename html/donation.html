@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="복음을 영화롭게, 진리가 선포되는, 예수의 보혈이 흐르는 동서울열방교회">
+    <title>온라인헌금 | 동서울열방교회</title>
+    <link rel="website icon" type="jpg" href="/image/channels4_profile.jpg"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/archive.css">
+    <style>
+        .bank-info {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        /* Bootstrap hover effect for bank-info cards */
+        .bank-info {
+            transition: box-shadow 0.3s, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .bank-info.shadow {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+        .bank-info.shadow-lg {
+            box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+        }
+        .bank-info.hover-move {
+            transform: translateY(-12px);
+        }
+        .account-number {
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: #f7f7f7;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+            .church-name {
+                font-size: 0.95rem;
+                color: #555;
+            }
+        .donation-card {
+                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+                cursor: pointer;
+                margin-bottom: 1.5rem;
+                will-change: transform;
+                transform: translateY(0);
+        }
+        .donation-card:hover {
+                transform: translateY(-12px);
+                box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+        }
+        .card-title {
+            margin-bottom: 1rem;
+        }
+        .card-body.text-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .row.g-4 {
+            row-gap: 2rem;
+        }
+        .alert-heading {
+            margin-bottom: 0.5rem;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+        }
+        .navbar-nav .nav-link.active {
+            color: #764ba2 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                <img src="/image/channels4_profile.jpg" alt="교회 로고" class="me-2" style="height: 50px;">
+                <span class="fw-bold text-primary fs-4">동서울열방교회</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">교회 소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="worship.html">예배와 말씀</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bible.html">성경</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="archive.html">자료실</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">교회 소식</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="donation.html">온라인 헌금</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">온라인 헌금</h1>
+            <p class="lead">하나님께 드리는 헌금을 온라인으로 편리하게 하실 수 있습니다</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <!-- 온라인 헌금 안내 -->
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <h3 class="text-center fw-bold mb-4">
+                                <i class="bi bi-heart-fill text-danger"></i> 온라인 헌금 안내
+                            </h3>
+                            <div class="text-center mb-4">
+                                <p class="lead text-muted">
+                                    "각각 그 마음에 정한 대로 할 것이요 인색함으로나 억지로 하지 말지니<br>
+                                    하나님은 즐겨 내는 자를 사랑하시느니라"
+                                </p>
+                                <p class="fw-bold">고린도후서 9:7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 계좌 안내 -->
+            <div class="row mb-5">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="display-6 fw-bold mb-4 text-center">
+                        <i class="bi bi-bank text-primary"></i> 헌금 계좌 안내
+                    </h2>
+                    <div class="row g-4 justify-content-center">
+                        <!-- 온라인헌금 일반헌금 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="bank-info h-100 text-center shadow" onmouseover="this.classList.add('shadow-lg','hover-move')" onmouseout="this.classList.remove('shadow-lg','hover-move')">
+                                <h4 class="fw-bold mb-3">
+                                    <i class="bi bi-credit-card"></i> 일반헌금
+                                </h4>
+                                <p class="mb-3">신한은행</p>
+                                <div class="account-number" id="account1">
+                                    100-037-786476
+                                    <i class="bi bi-clipboard copy-btn ms-2" onclick="copyAccount('100-037-786476', 1)" title="복사하기"></i>
+                                          </div>
+                                          <p class="mb-0 church-name">대한예수교장로회 동서울열방교회</p>
+                                <div class="alert alert-light mt-3 text-dark" role="alert">
+                                    <small>
+                                        <i class="bi bi-info-circle"></i>
+                                        주정헌금, 감사헌금, 십일조 등 일반 헌금 계좌
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 선교헌금 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="bank-info h-100 text-center shadow" onmouseover="this.classList.add('shadow-lg','hover-move')" onmouseout="this.classList.remove('shadow-lg','hover-move')">
+                                <h4 class="fw-bold mb-3">
+                                    <i class="bi bi-globe" style="color: #764ba2;"></i> 선교헌금
+                                </h4>
+                                <p class="mb-3">국민은행</p>
+                                <div class="account-number" id="account2">
+                                    575701-01-452002
+                                    <i class="bi bi-clipboard copy-btn ms-2" onclick="copyAccount('575701-01-452002', 2)" title="복사하기"></i>
+                                          </div>
+                                          <p class="mb-0 church-name">대한예수교장로회 동서울열방교회</p>
+                                <div class="alert alert-light mt-3 text-dark" role="alert">
+                                    <small>
+                                        <i class="bi bi-info-circle"></i>
+                                        국내외 선교 사역을 위한 헌금 계좌
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 건축헌금 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="bank-info h-100 text-center shadow" onmouseover="this.classList.add('shadow-lg','hover-move')" onmouseout="this.classList.remove('shadow-lg','hover-move')">
+                                <h4 class="fw-bold mb-3">
+                                    <i class="bi bi-building"></i> 건축헌금
+                                </h4>
+                                <p class="mb-3">농협은행</p>
+                                <div class="account-number" id="account3">
+                                    301-0360-2253-41
+                                    <i class="bi bi-clipboard copy-btn ms-2" onclick="copyAccount('301-0360-2253-41', 3)" title="복사하기"></i>
+                                          </div>
+                                          <p class="mb-0 church-name">대한예수교장로회 동서울열방교회</p>
+                                <div class="alert alert-light mt-3 text-dark" role="alert">
+                                    <small>
+                                        <i class="bi bi-info-circle"></i>
+                                        교회 건축 및 시설 개보수를 위한 헌금 계좌
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 헌금 종류 안내 -->
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="display-6 fw-bold mb-4 text-center">
+                        <i class="bi bi-list-check text-primary"></i> 헌금 종류
+                    </h2>
+
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-calendar-week text-primary"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">주정헌금</h5>
+                                    <p class="card-text text-muted">매주일 예배시 드리는 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-percent text-success"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">십일조</h5>
+                                    <p class="card-text text-muted">소득의 십분의 일을 하나님께 드리는 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-gift text-danger"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">감사헌금</h5>
+                                    <p class="card-text text-muted">하나님의 은혜에 감사하며 드리는 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-building text-warning"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">건축헌금</h5>
+                                    <p class="card-text text-muted">교회 건축 및 시설을 위한 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-globe text-info"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">선교헌금</h5>
+                                    <p class="card-text text-muted">국내외 선교 사역을 위한 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card donation-card h-100 border-0 shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="mb-3" style="font-size: 3rem;">
+                                        <i class="bi bi-heart text-danger"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">기타헌금</h5>
+                                    <p class="card-text text-muted">특별한 목적을 위한 헌금</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 헌금 안내 문구 -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading fw-bold">
+                            <i class="bi bi-info-circle"></i> 헌금 시 유의사항
+                        </h5>
+                        <hr>
+                        <ul class="mb-0">
+                            <li>입금 시 입금자명에 본인 성함을 정확히 기입해 주시기 바랍니다.</li>
+                            <li>헌금 종류를 구분하여 해당 계좌로 입금해 주시기 바랍니다.</li>
+                            <li>특별한 용도의 헌금일 경우, 교회 사무실로 연락 주시기 바랍니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 문의 -->
+            <div class="row mt-4">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card bg-light border-0">
+                        <div class="card-body text-center p-4">
+                            <h5 class="fw-bold mb-3">
+                                <i class="bi bi-telephone"></i> 문의
+                            </h5>
+                            <p class="mb-1"><strong>담임목사:</strong> 010-5895-0191</p>
+                            <p class="mb-0"><strong>교육목사:</strong> 010-8336-3011</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">동서울열방교회</h5>
+                    <p class="mb-1">복음을 영화롭게, 진리가 선포되는</p>
+                    <p>예수의 보혈이 흐르는 교회</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-1"><strong>담임목사:</strong> 010-5895-0191</p>
+                    <p class="mb-1"><strong>교육목사:</strong> 010-8336-3011</p>
+                    <p class="mb-1"><strong>주소:</strong> 서울특별시 중랑구 용마산로 139나길 39-1 (신내동 278-79)</p>
+                    <p>&copy; 2025 동서울열방교회. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast for copy notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="copyToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">복사 완료</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                계좌번호가 클립보드에 복사되었습니다.
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/main.js"></script>
+    <script>
+        function copyAccount(accountNumber, id) {
+            // Create a temporary input element
+            const tempInput = document.createElement('input');
+            tempInput.value = accountNumber;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Show toast
+            const toastElement = document.getElementById('copyToast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    </script>
+</body>
+</html>

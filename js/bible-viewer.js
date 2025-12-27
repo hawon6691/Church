@@ -651,16 +651,16 @@ $(document).ready(function() {
         const versePattern1 = /^([가-힣]+)\s*(\d+)\s*[:：]\s*(\d+)$/;
         const versePattern2 = /^([가-힣]+)\s+(\d+)장\s+(\d+)절$/;
         let verseMatch = keyword.match(versePattern1) || keyword.match(versePattern2);
-        
+
         if (verseMatch) {
             const bookAbbr = verseMatch[1];
             const chapter = verseMatch[2];
             const verse = verseMatch[3];
-            
-            const foundBook = bibleBooks.find(b => 
+
+            const foundBook = bibleBooks.find(b =>
                 b.name.includes(bookAbbr) || b.name.startsWith(bookAbbr)
             );
-            
+
             if (foundBook) {
                 currentBookInfo = foundBook;
                 $('#bibleBook').val(foundBook.num);
@@ -677,10 +677,13 @@ $(document).ready(function() {
         $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">전체 성경에서 "${keyword}" 검색중...</span>`);
         $('#bibleContent').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">검색 중...</p></div>');
 
+        // 띄어쓰기 제거한 검색어
+        const normalizedKeyword = keyword.replace(/\s+/g, '');
+
         // 병렬 처리를 위한 Promise 배열
         const searchPromises = bibleBooks.map(book => {
             const cacheKey = `${book.num}${book.name}`;
-            
+
             if (bibleCache[cacheKey]) {
                 return Promise.resolve({ data: bibleCache[cacheKey], book });
             } else {
@@ -702,18 +705,18 @@ $(document).ready(function() {
 
         Promise.allSettled(searchPromises).then(results => {
             let allResults = [];
-            
+
             results.forEach(result => {
                 if (result.status === 'fulfilled' && result.value.data) {
                     const { data, book } = result.value;
                     const lines = data.split(/\r?\n/).filter(line => line.trim());
-                    
+
                     const matches = lines.filter(line => {
-                        if (line.includes(keyword)) return true;
-                        if (book.name.includes(keyword)) return true;
-                        return false;
+                        // 책 제목은 검색하지 않음 (본문과 소제목만 검색)
+                        const normalizedLine = line.replace(/\s+/g, '');
+                        return normalizedLine.includes(normalizedKeyword);
                     });
-                    
+
                     matches.forEach(line => {
                         const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.+)$/);
                         if (match) {
@@ -747,6 +750,52 @@ $(document).ready(function() {
         });
     }
 
+    // 띄어쓰기를 무시하고 검색어를 하이라이트하는 함수
+    function highlightKeyword(text, keyword) {
+        if (!keyword || !text) return text;
+
+        const normalizedKeyword = keyword.replace(/\s+/g, '');
+        const keywordChars = normalizedKeyword.split('');
+        let result = '';
+        let i = 0;
+
+        while (i < text.length) {
+            let matched = true;
+            let matchedText = '';
+            let tempIndex = i;
+            let charIndex = 0;
+
+            // 검색어의 각 글자가 순서대로 나타나는지 확인 (띄어쓰기 무시)
+            while (charIndex < keywordChars.length && tempIndex < text.length) {
+                if (text[tempIndex] === ' ') {
+                    matchedText += text[tempIndex];
+                    tempIndex++;
+                    continue;
+                }
+
+                if (text[tempIndex].toLowerCase() === keywordChars[charIndex].toLowerCase()) {
+                    matchedText += text[tempIndex];
+                    charIndex++;
+                    tempIndex++;
+                } else {
+                    matched = false;
+                    break;
+                }
+            }
+
+            // 모든 글자가 매칭되었으면 하이라이트
+            if (matched && charIndex === keywordChars.length) {
+                result += `<mark class="bg-warning">${matchedText}</mark>`;
+                i = tempIndex;
+            } else {
+                result += text[i];
+                i++;
+            }
+        }
+
+        return result;
+    }
+
     // 전체 검색 결과 표시
     function displayAllSearchResults(keyword, results) {
         $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">전체 성경 "${keyword}" 검색 결과 (${results.length}개)</span>`);
@@ -777,26 +826,14 @@ $(document).ready(function() {
                 text = subtitleMatch[2];
             }
 
-            // 검색어 하이라이트 (소제목과 본문 모두)
-            const highlightedSubtitle = subtitle ? subtitle.replace(
-                new RegExp(keyword, 'gi'),
-                `<mark class="bg-warning">${keyword}</mark>`
-            ) : '';
-            
-            const highlightedText = text.replace(
-                new RegExp(keyword, 'gi'),
-                `<mark class="bg-warning">${keyword}</mark>`
-            );
-            
-            const highlightedBookName = result.bookName.replace(
-                new RegExp(keyword, 'gi'),
-                `<mark class="bg-warning">${keyword}</mark>`
-            );
+            // 검색어 하이라이트 (띄어쓰기 무시)
+            const highlightedSubtitle = subtitle ? highlightKeyword(subtitle, keyword) : '';
+            const highlightedText = highlightKeyword(text, keyword);
 
             html += `
                 <div class="verse-line mb-3 p-3 border-start ${borderClass} border-3">
                     <div class="mb-1">
-                        <span class="badge ${badgeClass}">${highlightedBookName} ${result.chapter}:${result.verse}</span>
+                        <span class="badge ${badgeClass}">${result.bookName} ${result.chapter}:${result.verse}</span>
                     </div>
                     ${subtitle ? `<h6 class="${colorClass} mt-2 mb-2">${highlightedSubtitle}</h6>` : ''}
                     <div class="verse-text">${highlightedText}</div>
@@ -921,15 +958,6 @@ $(document).ready(function() {
                 return;
             }
         }
-        
-        // 5. 성경책 이름으로 검색
-        const foundBook = bibleBooks.find(b => b.name === keyword || b.name.includes(keyword));
-        if (foundBook) {
-            currentBookInfo = foundBook;
-            $('#bibleBook').val(foundBook.num);
-            loadBibleText(foundBook.num, foundBook.name);
-            return;
-        }
 
         // 성경책이 선택되지 않았으면 전체 검색
         if (!currentBibleData) {
@@ -943,8 +971,13 @@ $(document).ready(function() {
         const borderClass = isNewTestament ? 'border-danger' : 'border-primary';
         const badgeClass = isNewTestament ? 'bg-danger' : 'bg-secondary';
 
+        // 띄어쓰기 제거한 검색어
+        const normalizedKeyword = keyword.replace(/\s+/g, '');
         const lines = currentBibleData.split(/\r?\n/).filter(line => line.trim());
-        const filteredLines = lines.filter(line => line.includes(keyword));
+        const filteredLines = lines.filter(line => {
+            const normalizedLine = line.replace(/\s+/g, '');
+            return normalizedLine.includes(normalizedKeyword);
+        });
 
         $('#bibleTitle').html(`<i class="bi bi-search text-white"></i> <span class="text-white">"${keyword}" 검색 결과 (${filteredLines.length}개)</span>`);
 
@@ -963,7 +996,7 @@ $(document).ready(function() {
             const match = line.match(/^([가-힣]+)(\d+):(\d+)\s+(.+)$/);
             if (match) {
                 const [, book, chap, ver, rest] = match;
-                
+
                 // 소제목과 본문 분리
                 let subtitle = '';
                 let text = rest;
@@ -972,18 +1005,11 @@ $(document).ready(function() {
                     subtitle = subtitleMatch[1];
                     text = subtitleMatch[2];
                 }
-                
-                // 검색어 하이라이트 (소제목과 본문 모두)
-                const highlightedSubtitle = subtitle ? subtitle.replace(
-                    new RegExp(keyword, 'gi'), 
-                    `<mark class="bg-warning">${keyword}</mark>`
-                ) : '';
-                
-                const highlightedText = text.replace(
-                    new RegExp(keyword, 'gi'), 
-                    `<mark class="bg-warning">${keyword}</mark>`
-                );
-                
+
+                // 검색어 하이라이트 (띄어쓰기 무시)
+                const highlightedSubtitle = subtitle ? highlightKeyword(subtitle, keyword) : '';
+                const highlightedText = highlightKeyword(text, keyword);
+
                 html += `
                     <div class="verse-line mb-3 p-3 border-start ${borderClass} border-3">
                         <div class="mb-1">

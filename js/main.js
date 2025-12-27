@@ -41,7 +41,7 @@ $(document).ready(function() {
                 // Back to top button
                 if (currentScroll > 300) {
                     if (!$('#backToTop').length) {
-                        $('body').append('<button id="backToTop" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; display: none;"><i class="bi bi-arrow-up"></i>↑</button>');
+                        $('body').append('<button id="backToTop" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 50px; height: 50px; display: none;"><i class="bi bi-arrow-up"></i></button>');
                         $('#backToTop').fadeIn();
                     } else {
                         $('#backToTop').fadeIn();
@@ -86,7 +86,8 @@ if (document.querySelector('.heroSwiper')) {
         fadeEffect: {
             crossFade: true
         },
-        speed: 1000,
+        speed: 800,
+        allowTouchMove: true,
     });
 }
 

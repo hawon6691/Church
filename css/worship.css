@@ -1,103 +1,449 @@
 :root {
     --primary-color: #1a3c7d;
+    --primary-light: #2a4c8d;
+    --primary-dark: #0d1f3f;
     --secondary-color: #e94e1b;
-    --light-bg: #f7f7f7;
+    --secondary-light: #ff6b3d;
+    --accent-color: #667eea;
+    --light-bg: #f8f9fa;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-    font-family: 'Noto Sans KR', Arial, sans-serif;
-    background: var(--light-bg);
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 50%);
+    color: #2d3748;
+    line-height: 1.7;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Navbar Customization */
+.navbar {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar-brand {
+    transition: var(--transition-base);
+}
+
+.navbar-brand:hover {
+    transform: scale(1.02);
+}
+
 .navbar-brand span {
     color: var(--primary-color);
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
 }
 
 .nav-link {
-    color: var(--primary-color) !important;
+    color: #4a5568 !important;
     font-weight: 500;
-    padding: 0.5rem 1rem !important;
-    transition: color 0.3s ease;
+    padding: 0.5rem 1.2rem !important;
+    transition: var(--transition-base);
+    position: relative;
+    font-size: 0.95rem;
 }
 
-.nav-link:hover,
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 60%;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: translateY(-2px);
+}
+
 .nav-link.active {
-    color: var(--secondary-color) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600;
 }
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0 !important;
 }
 
-/* Sermon Swiper */
-.sermonSwiper {
-    padding: 20px 0 60px;
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 60, 125, 0.8) 0%, rgba(102, 126, 234, 0.6) 100%);
 }
 
-.sermonSwiper .swiper-slide {
-    height: auto;
+.page-header .container {
+    position: relative;
+    z-index: 1;
 }
 
-.sermonSwiper .swiper-button-next,
-.sermonSwiper .swiper-button-prev {
+.page-header h1 {
+    font-weight: 800;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
+}
+
+.page-header p {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.15rem;
+}
+
+/* Pastor Section */
+.pastor-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.pastor-image-wrapper img {
+    transition: var(--transition-base);
+    width: 100%;
+}
+
+.pastor-image-wrapper:hover img {
+    transform: scale(1.08);
+}
+
+.pastor-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26, 60, 125, 0.3), transparent);
+    opacity: 0;
+    transition: var(--transition-base);
+}
+
+.pastor-image-wrapper:hover::after {
+    opacity: 1;
+}
+
+.pastor-info {
+    padding: 2rem 0;
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.pastor-info h2 {
+    font-weight: 800;
     color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-.sermonSwiper .swiper-pagination-bullet {
-    background: var(--primary-color);
+.pastor-info h5 {
+    color: #718096;
+    font-weight: 500;
 }
 
-.sermonSwiper .swiper-pagination-bullet-active {
-    background: var(--secondary-color);
+.pastor-info p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4a5568;
 }
 
-/* Schedule Icon */
-.schedule-icon {
-    font-size: 3rem;
+/* Vision Section */
+.vision-icon {
+    font-size: 4rem;
     line-height: 1;
+    transition: var(--transition-base);
+}
+
+.card:hover .vision-icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-base);
+    background: white;
+}
+
+.card-body {
+    padding: 2.5rem 2rem;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    color: #4a5568;
+    line-height: 1.8;
 }
 
 /* Hover Card Effect */
 .hover-card {
-    transition: all 0.3s ease;
-    border: none;
+    transition: var(--transition-base);
 }
 
 .hover-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-12px);
+    box-shadow: var(--card-shadow-hover) !important;
 }
 
-/* Video Containers */
-.ratio iframe {
+/* Church Staff Cards */
+.news-card {
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition-base);
+}
+
+.news-card:hover {
+    border-left-color: var(--secondary-color);
+    transform: translateX(8px);
+}
+
+.news-card .card-title {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.news-card .card-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Button Styling */
+.btn {
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    transition: var(--transition-base);
     border: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
 }
 
-/* Call to Action Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light)) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(26, 60, 125, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(26, 60, 125, 0.4);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color)) !important;
+}
+
 .btn-light {
-    transition: all 0.3s ease;
+    background: white !important;
+    color: var(--primary-color) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-light:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.05rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #1a202c;
+    letter-spacing: -0.5px;
+}
+
+/* Override Bootstrap's text-muted for white text on page headers */
+.page-header .text-muted {
+    color: #ffffff !important;
+}
+
+.page-header p {
+    color: #ffffff !important;
+}
+
+/* Override Bootstrap's text-muted for better visibility on other sections */
+.text-muted {
+    color: #4a5568 !important;
+}
+
+.display-5 {
+    font-weight: 800;
+}
+
+.lead {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #4a5568;
+}
+
+/* Sections */
+section {
+    padding: 5rem 0;
+}
+
+section.bg-light {
+    background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.rounded {
+    border-radius: 16px !important;
+}
+
+.shadow,
+.shadow-lg {
+    box-shadow: var(--card-shadow) !important;
 }
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #2c3e50 0%, var(--primary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    color: white;
+    padding: 3rem 0;
+}
+
+footer h5 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+/* Back to Top Button */
+#backToTop {
+    box-shadow: 0 4px 20px rgba(26, 60, 125, 0.3);
+    transition: var(--transition-base);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+}
+
+#backToTop i {
+    font-size: 20px;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(26, 60, 125, 0.4);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .schedule-icon {
-        font-size: 2rem;
+    section {
+        padding: 3rem 0;
     }
 
-    .sermonSwiper {
-        padding: 10px 0 50px;
+    .page-header {
+        padding: 3rem 0 !important;
+    }
+
+    .display-5 {
+        font-size: 1.75rem;
+    }
+
+    .pastor-info {
+        padding: 1.5rem 0;
+    }
+
+    .btn {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-lg {
+        padding: 0.85rem 2rem;
+        font-size: 1rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .display-5 {
+        font-size: 1.5rem;
+    }
+
+    .vision-icon {
+        font-size: 3rem;
     }
 }

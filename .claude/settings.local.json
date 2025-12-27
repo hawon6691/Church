@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in worship.html bible.html archive.html donation.html)",
+      "Bash(do sed -i 's|/image/|image/|g; s|/css/|css/|g; s|/js/|js/|g; s|href=\"\"/index.html\"\"|href=\"\"index.html\"\"|g' \"$file\")",
+      "Bash(done)",
+      "Bash(do sed -i 's|distcss/|dist/css/|g; s|distjs/|dist/js/|g' \"$file\")",
+      "Bash(ls:*)"
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/notice/NoticePage.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=61d897fc"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import { CalendarDays, Search } from "/node_modules/.vite/deps/lucide-react.js?v=61d897fc";
+import { notices } from "/src/entities/notice/model/mock.ts";
+import { PageHeader } from "/src/shared/ui/PageHeader.tsx?t=1777792089662";
+import { Section } from "/src/shared/ui/Section.tsx?t=1777792089665";
+export function NoticePage() {
+  const sortedNotices = [...notices].sort((a, b) => Number(b.isPinned) - Number(a.isPinned));
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV(PageHeader, { title: "공지사항" }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+      lineNumber: 11,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { tone: "soft", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "mb-10 rounded-md border bg-white p-6 shadow-soft", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-4 lg:grid-cols-[1fr_180px_160px]", children: [
+        /* @__PURE__ */ jsxDEV("label", { className: "relative block", children: [
+          /* @__PURE__ */ jsxDEV("span", { className: "sr-only", children: "공지 검색" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 16,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("input", { className: "h-14 w-full rounded-md border px-5 pr-12 text-lg outline-none focus:ring-2 focus:ring-primary/20", placeholder: "검색어를 입력하세요" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 17,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(Search, { className: "absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground", size: 22 }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 18,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+          lineNumber: 15,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("select", { className: "h-14 rounded-md border px-4 text-lg outline-none", children: [
+          /* @__PURE__ */ jsxDEV("option", { children: "전체" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 21,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("option", { children: "중요" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 22,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("option", { children: "일반" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 23,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+          lineNumber: 20,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("button", { className: "h-14 rounded-md bg-primary text-lg font-extrabold text-white", type: "button", children: "검색" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+          lineNumber: 25,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+        lineNumber: 14,
+        columnNumber: 11
+      }, this) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+        lineNumber: 13,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: "overflow-hidden rounded-md border bg-white shadow-soft", children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "grid grid-cols-[110px_minmax(0,1fr)_180px] border-b bg-[#eef3fb] px-6 py-5 text-center text-lg font-extrabold text-primary", children: [
+          /* @__PURE__ */ jsxDEV("span", { children: "구분" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 33,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("span", { children: "제목" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 34,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("span", { children: "등록일" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 35,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+          lineNumber: 32,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "divide-y", children: sortedNotices.map(
+          (notice) => /* @__PURE__ */ jsxDEV("article", { className: "grid grid-cols-[110px_minmax(0,1fr)_180px] items-center px-6 py-7", children: [
+            /* @__PURE__ */ jsxDEV("span", { className: notice.isPinned ? "text-center font-extrabold text-secondary" : "text-center font-bold text-muted-foreground", children: notice.isPinned ? "중요" : "공지" }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+              lineNumber: 40,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { children: [
+              /* @__PURE__ */ jsxDEV("h2", { className: "mb-2 text-2xl font-extrabold", children: notice.title }, void 0, false, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+                lineNumber: 44,
+                columnNumber: 19
+              }, this),
+              /* @__PURE__ */ jsxDEV("p", { className: "m-0 line-clamp-2 text-lg leading-7 text-muted-foreground", children: notice.content }, void 0, false, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+                lineNumber: 45,
+                columnNumber: 19
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+              lineNumber: 43,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("span", { className: "inline-flex items-center justify-center gap-2 text-muted-foreground", children: [
+              /* @__PURE__ */ jsxDEV(CalendarDays, { size: 18 }, void 0, false, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+                lineNumber: 48,
+                columnNumber: 19
+              }, this),
+              notice.createdAt
+            ] }, void 0, true, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+              lineNumber: 47,
+              columnNumber: 17
+            }, this)
+          ] }, notice.id, true, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+            lineNumber: 39,
+            columnNumber: 13
+          }, this)
+        ) }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+          lineNumber: 37,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+        lineNumber: 31,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+      lineNumber: 12,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx",
+    lineNumber: 10,
+    columnNumber: 5
+  }, this);
+}
+_c = NoticePage;
+var _c;
+$RefreshReg$(_c, "NoticePage");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/00_work/00_work/03_church/Church/src/pages/notice/NoticePage.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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QTtBQUFBLGVBWFlILE9BQU9JLElBQXJCO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBWUE7QUFBQSxRQUNELEtBZkg7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQWdCQTtBQUFBLFdBdEJGO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUF1QkE7QUFBQSxTQTFDRjtBQUFBO0FBQUE7QUFBQTtBQUFBLFdBMkNBO0FBQUEsT0E3Q0Y7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQThDQTtBQUVKO0FBQUNDLEtBcERlYjtBQUFVLElBQUFhO0FBQUEsYUFBQUEsSUFBQSIsIm5hbWVzIjpbIkNhbGVuZGFyRGF5cyIsIlNlYXJjaCIsIm5vdGljZXMiLCJQYWdlSGVhZGVyIiwiU2VjdGlvbiIsIk5vdGljZVBhZ2UiLCJzb3J0ZWROb3RpY2VzIiwic29ydCIsImEiLCJiIiwiTnVtYmVyIiwiaXNQaW5uZWQiLCJtYXAiLCJub3RpY2UiLCJ0aXRsZSIsImNvbnRlbnQiLCJjcmVhdGVkQXQiLCJpZCIsIl9jIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIk5vdGljZVBhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENhbGVuZGFyRGF5cywgU2VhcmNoIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHsgbm90aWNlcyB9IGZyb20gXCJAZW50aXRpZXMvbm90aWNlL21vZGVsL21vY2tcIjtcbmltcG9ydCB7IFBhZ2VIZWFkZXIgfSBmcm9tIFwiQHNoYXJlZC91aS9QYWdlSGVhZGVyXCI7XG5pbXBvcnQgeyBTZWN0aW9uIH0gZnJvbSBcIkBzaGFyZWQvdWkvU2VjdGlvblwiO1xuXG5leHBvcnQgZnVuY3Rpb24gTm90aWNlUGFnZSgpIHtcbiAgY29uc3Qgc29ydGVkTm90aWNlcyA9IFsuLi5ub3RpY2VzXS5zb3J0KChhLCBiKSA9PiBOdW1iZXIoYi5pc1Bpbm5lZCkgLSBOdW1iZXIoYS5pc1Bpbm5lZCkpO1xuXG4gIHJldHVybiAoXG4gICAgPD5cbiAgICAgIDxQYWdlSGVhZGVyIHRpdGxlPVwi6rO17KeA7IKs7ZWtXCIgLz5cbiAgICAgIDxTZWN0aW9uIHRvbmU9XCJzb2Z0XCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItMTAgcm91bmRlZC1tZCBib3JkZXIgYmctd2hpdGUgcC02IHNoYWRvdy1zb2Z0XCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC00IGxnOmdyaWQtY29scy1bMWZyXzE4MHB4XzE2MHB4XVwiPlxuICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cInJlbGF0aXZlIGJsb2NrXCI+XG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInNyLW9ubHlcIj7qs7Xsp4Ag6rKA7IOJPC9zcGFuPlxuICAgICAgICAgICAgICA8aW5wdXQgY2xhc3NOYW1lPVwiaC0xNCB3LWZ1bGwgcm91bmRlZC1tZCBib3JkZXIgcHgtNSBwci0xMiB0ZXh0LWxnIG91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzIwXCIgcGxhY2Vob2xkZXI9XCLqsoDsg4nslrTrpbwg7J6F66Cl7ZWY7IS47JqUXCIgLz5cbiAgICAgICAgICAgICAgPFNlYXJjaCBjbGFzc05hbWU9XCJhYnNvbHV0ZSByaWdodC00IHRvcC0xLzIgLXRyYW5zbGF0ZS15LTEvMiB0ZXh0LW11dGVkLWZvcmVncm91bmRcIiBzaXplPXsyMn0gLz5cbiAgICAgICAgICAgIDwvbGFiZWw+XG4gICAgICAgICAgICA8c2VsZWN0IGNsYXNzTmFtZT1cImgtMTQgcm91bmRlZC1tZCBib3JkZXIgcHgtNCB0ZXh0LWxnIG91dGxpbmUtbm9uZVwiPlxuICAgICAgICAgICAgICA8b3B0aW9uPuyghOyytDwvb3B0aW9uPlxuICAgICAgICAgICAgICA8b3B0aW9uPuykkeyalDwvb3B0aW9uPlxuICAgICAgICAgICAgICA8b3B0aW9uPuydvOuwmDwvb3B0aW9uPlxuICAgICAgICAgICAgPC9zZWxlY3Q+XG4gICAgICAgICAgICA8YnV0dG9uIGNsYXNzTmFtZT1cImgtMTQgcm91bmRlZC1tZCBiZy1wcmltYXJ5IHRleHQtbGcgZm9udC1leHRyYWJvbGQgdGV4dC13aGl0ZVwiIHR5cGU9XCJidXR0b25cIj5cbiAgICAgICAgICAgICAg6rKA7IOJXG4gICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJvdmVyZmxvdy1oaWRkZW4gcm91bmRlZC1tZCBib3JkZXIgYmctd2hpdGUgc2hhZG93LXNvZnRcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLVsxMTBweF9taW5tYXgoMCwxZnIpXzE4MHB4XSBib3JkZXItYiBiZy1bI2VlZjNmYl0gcHgtNiBweS01IHRleHQtY2VudGVyIHRleHQtbGcgZm9udC1leHRyYWJvbGQgdGV4dC1wcmltYXJ5XCI+XG4gICAgICAgICAgICA8c3Bhbj7qtazrtoQ8L3NwYW4+XG4gICAgICAgICAgICA8c3Bhbj7soJzrqqk8L3NwYW4+XG4gICAgICAgICAgICA8c3Bhbj7rk7HroZ3snbw8L3NwYW4+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJkaXZpZGUteVwiPlxuICAgICAgICAgICAge3NvcnRlZE5vdGljZXMubWFwKChub3RpY2UpID0+IChcbiAgICAgICAgICAgICAgPGFydGljbGUga2V5PXtub3RpY2UuaWR9IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLVsxMTBweF9taW5tYXgoMCwxZnIpXzE4MHB4XSBpdGVtcy1jZW50ZXIgcHgtNiBweS03XCI+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPXtub3RpY2UuaXNQaW5uZWQgPyBcInRleHQtY2VudGVyIGZvbnQtZXh0cmFib2xkIHRleHQtc2Vjb25kYXJ5XCIgOiBcInRleHQtY2VudGVyIGZvbnQtYm9sZCB0ZXh0LW11dGVkLWZvcmVncm91bmRcIn0+XG4gICAgICAgICAgICAgICAgICB7bm90aWNlLmlzUGlubmVkID8gXCLspJHsmpRcIiA6IFwi6rO17KeAXCJ9XG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwibWItMiB0ZXh0LTJ4bCBmb250LWV4dHJhYm9sZFwiPntub3RpY2UudGl0bGV9PC9oMj5cbiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm0tMCBsaW5lLWNsYW1wLTIgdGV4dC1sZyBsZWFkaW5nLTcgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+e25vdGljZS5jb250ZW50fTwvcD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTIgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+XG4gICAgICAgICAgICAgICAgICA8Q2FsZW5kYXJEYXlzIHNpemU9ezE4fSAvPlxuICAgICAgICAgICAgICAgICAge25vdGljZS5jcmVhdGVkQXR9XG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICA8L2FydGljbGU+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L1NlY3Rpb24+XG4gICAgPC8+XG4gICk7XG59XG4iXSwiZmlsZSI6IkM6LzAwX3dvcmsvMDBfd29yay8wM19jaHVyY2gvQ2h1cmNoL3NyYy9wYWdlcy9ub3RpY2UvTm90aWNlUGFnZS50c3gifQ==

@@ -1,0 +1,303 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/admin/AdminPage.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=61d897fc"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+var _s = $RefreshSig$();
+import { FileText, Megaphone, Save, Upload } from "/node_modules/.vite/deps/lucide-react.js?v=61d897fc";
+import __vite__cjsImport2_react from "/node_modules/.vite/deps/react.js?v=61d897fc"; const useState = __vite__cjsImport2_react["useState"];
+import { archiveItems } from "/src/entities/archive/model/mock.ts";
+import { notices } from "/src/entities/notice/model/mock.ts";
+import { LoginForm } from "/src/features/auth/ui/LoginForm.tsx?t=1777792470799";
+import { Button } from "/src/shared/ui/button.tsx?t=1777792089682";
+import { Input } from "/src/shared/ui/input.tsx";
+import { Label } from "/src/shared/ui/label.tsx";
+import { PageHeader } from "/src/shared/ui/PageHeader.tsx?t=1777792089662";
+import { Section } from "/src/shared/ui/Section.tsx?t=1777792089665";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "/src/shared/ui/select.tsx";
+import { Textarea } from "/src/shared/ui/textarea.tsx";
+export function AdminPage() {
+  _s();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  function handleMockSubmit(event) {
+    event.preventDefault();
+  }
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV(PageHeader, { title: isLoggedIn ? "관리자" : "로그인" }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+      lineNumber: 23,
+      columnNumber: 7
+    }, this),
+    !isLoggedIn ? /* @__PURE__ */ jsxDEV(Section, { tone: "soft", className: "min-h-[640px]", children: /* @__PURE__ */ jsxDEV(LoginForm, { onLogin: () => setIsLoggedIn(true) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+      lineNumber: 26,
+      columnNumber: 11
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+      lineNumber: 25,
+      columnNumber: 7
+    }, this) : /* @__PURE__ */ jsxDEV(Fragment, { children: [
+      /* @__PURE__ */ jsxDEV(Section, { tone: "soft", title: "관리 대시보드", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-6 md:grid-cols-2", children: [
+        { label: "등록 자료", value: archiveItems.length, Icon: FileText },
+        { label: "공지사항", value: notices.length, Icon: Megaphone }
+      ].map(
+        ({ label, value, Icon }) => /* @__PURE__ */ jsxDEV("article", { className: "rounded-md border bg-white p-8 shadow-soft", children: [
+          /* @__PURE__ */ jsxDEV(Icon, { className: "mb-5 text-primary", size: 34 }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 37,
+            columnNumber: 19
+          }, this),
+          /* @__PURE__ */ jsxDEV("strong", { className: "block text-[56px] leading-none", children: value }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 38,
+            columnNumber: 19
+          }, this),
+          /* @__PURE__ */ jsxDEV("span", { className: "mt-3 block text-lg font-bold text-muted-foreground", children: label }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 39,
+            columnNumber: 19
+          }, this)
+        ] }, label, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 36,
+          columnNumber: 13
+        }, this)
+      ) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 31,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 30,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV(Section, { title: "자료 등록", className: "bg-white", children: /* @__PURE__ */ jsxDEV("form", { className: "grid gap-6 rounded-md border bg-white p-8 shadow-soft", onSubmit: handleMockSubmit, children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-6 md:grid-cols-2", children: [
+          /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+            /* @__PURE__ */ jsxDEV(Label, { htmlFor: "archive-title", children: "제목" }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+              lineNumber: 49,
+              columnNumber: 19
+            }, this),
+            /* @__PURE__ */ jsxDEV(Input, { id: "archive-title", className: "h-14", placeholder: "자료 제목" }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+              lineNumber: 50,
+              columnNumber: 19
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 48,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+            /* @__PURE__ */ jsxDEV(Label, { children: "자료 유형" }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+              lineNumber: 53,
+              columnNumber: 19
+            }, this),
+            /* @__PURE__ */ jsxDEV(Select, { defaultValue: "manuscript", children: [
+              /* @__PURE__ */ jsxDEV(SelectTrigger, { className: "h-14", children: /* @__PURE__ */ jsxDEV(SelectValue, { placeholder: "자료 유형" }, void 0, false, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                lineNumber: 56,
+                columnNumber: 23
+              }, this) }, void 0, false, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                lineNumber: 55,
+                columnNumber: 21
+              }, this),
+              /* @__PURE__ */ jsxDEV(SelectContent, { children: [
+                /* @__PURE__ */ jsxDEV(SelectItem, { value: "manuscript", children: "설교 원고" }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                  lineNumber: 59,
+                  columnNumber: 23
+                }, this),
+                /* @__PURE__ */ jsxDEV(SelectItem, { value: "ppt", children: "PPT" }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                  lineNumber: 60,
+                  columnNumber: 23
+                }, this),
+                /* @__PURE__ */ jsxDEV(SelectItem, { value: "audio", children: "음원" }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                  lineNumber: 61,
+                  columnNumber: 23
+                }, this),
+                /* @__PURE__ */ jsxDEV(SelectItem, { value: "document", children: "문서" }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                  lineNumber: 62,
+                  columnNumber: 23
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+                lineNumber: 58,
+                columnNumber: 21
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+              lineNumber: 54,
+              columnNumber: 19
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 52,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 47,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "archive-description", children: "설명" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 68,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(Textarea, { id: "archive-description", placeholder: "자료 설명" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 69,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 67,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "archive-file", children: "파일" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 72,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(Input, { id: "archive-file", type: "file" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 73,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 71,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV(Button, { className: "justify-self-start", type: "submit", children: [
+          /* @__PURE__ */ jsxDEV(Upload, { size: 18 }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 76,
+            columnNumber: 17
+          }, this),
+          "자료 저장"
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 75,
+          columnNumber: 15
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 46,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 45,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV(Section, { title: "공지 등록", tone: "soft", children: /* @__PURE__ */ jsxDEV("form", { className: "grid gap-6 rounded-md border bg-white p-8 shadow-soft", onSubmit: handleMockSubmit, children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "notice-title", children: "제목" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 85,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(Input, { id: "notice-title", placeholder: "공지 제목" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 86,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 84,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "notice-content", children: "내용" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 89,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(Textarea, { id: "notice-content", placeholder: "공지 내용" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 90,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 88,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV("label", { className: "inline-flex items-center gap-2 font-bold", children: [
+          /* @__PURE__ */ jsxDEV("input", { className: "h-4 w-4 accent-primary", type: "checkbox" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 93,
+            columnNumber: 17
+          }, this),
+          "중요 공지로 표시"
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 92,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV(Button, { className: "justify-self-start", type: "submit", children: [
+          /* @__PURE__ */ jsxDEV(Save, { size: 18 }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+            lineNumber: 97,
+            columnNumber: 17
+          }, this),
+          "공지 저장"
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+          lineNumber: 96,
+          columnNumber: 15
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 83,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+        lineNumber: 82,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+      lineNumber: 29,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx",
+    lineNumber: 22,
+    columnNumber: 5
+  }, this);
+}
+_s(AdminPage, "g0MSgNVZk+vKiEFnDJ9VPEfswFA=");
+_c = AdminPage;
+var _c;
+$RefreshReg$(_c, "AdminPage");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/00_work/00_work/03_church/Church/src/pages/admin/AdminPage.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBc0JNLFNBTUUsVUFORjs7QUF0Qk4sU0FBU0EsVUFBVUMsV0FBV0MsTUFBTUMsY0FBYztBQUNsRCxTQUFvQkMsZ0JBQWdCO0FBQ3BDLFNBQVNDLG9CQUFvQjtBQUM3QixTQUFTQyxlQUFlO0FBQ3hCLFNBQVNDLGlCQUFpQjtBQUMxQixTQUFTQyxjQUFjO0FBQ3ZCLFNBQVNDLGFBQWE7QUFDdEIsU0FBU0MsYUFBYTtBQUN0QixTQUFTQyxrQkFBa0I7QUFDM0IsU0FBU0MsZUFBZTtBQUN4QixTQUFTQyxRQUFRQyxlQUFlQyxZQUFZQyxlQUFlQyxtQkFBbUI7QUFDOUUsU0FBU0MsZ0JBQWdCO0FBRWxCLGdCQUFTQyxZQUFZO0FBQUFDLEtBQUE7QUFDMUIsUUFBTSxDQUFDQyxZQUFZQyxhQUFhLElBQUlsQixTQUFTLEtBQUs7QUFFbEQsV0FBU21CLGlCQUFpQkMsT0FBbUM7QUFDM0RBLFVBQU1DLGVBQWU7QUFBQSxFQUN2QjtBQUVBLFNBQ0UsbUNBQ0U7QUFBQSwyQkFBQyxjQUFXLE9BQU9KLGFBQWEsUUFBUSxTQUF4QztBQUFBO0FBQUE7QUFBQTtBQUFBLFdBQThDO0FBQUEsSUFDN0MsQ0FBQ0EsYUFDQSx1QkFBQyxXQUFRLE1BQUssUUFBTyxXQUFVLGlCQUM3QixpQ0FBQyxhQUFVLFNBQVMsTUFBTUMsY0FBYyxJQUFJLEtBQTVDO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FBOEMsS0FEaEQ7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQUVBLElBRUEsbUNBQ0U7QUFBQSw2QkFBQyxXQUFRLE1BQUssUUFBTyxPQUFNLFdBQ3pCLGlDQUFDLFNBQUksV0FBVSw2QkFDWjtBQUFBLFFBQ0MsRUFBRUksT0FBTyxTQUFTQyxPQUFPdEIsYUFBYXVCLFFBQVFDLE1BQU03QixTQUFTO0FBQUEsUUFDN0QsRUFBRTBCLE9BQU8sUUFBUUMsT0FBT3JCLFFBQVFzQixRQUFRQyxNQUFNNUIsVUFBVTtBQUFBLE1BQUMsRUFDekQ2QjtBQUFBQSxRQUFJLENBQUMsRUFBRUosT0FBT0MsT0FBT0UsS0FBSyxNQUMxQix1QkFBQyxhQUFvQixXQUFVLDhDQUM3QjtBQUFBLGlDQUFDLFFBQUssV0FBVSxxQkFBb0IsTUFBTSxNQUExQztBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUE2QztBQUFBLFVBQzdDLHVCQUFDLFlBQU8sV0FBVSxrQ0FBa0NGLG1CQUFwRDtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUEwRDtBQUFBLFVBQzFELHVCQUFDLFVBQUssV0FBVSxzREFBc0RELG1CQUF0RTtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUE0RTtBQUFBLGFBSGhFQSxPQUFkO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFJQTtBQUFBLE1BQ0QsS0FWSDtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBV0EsS0FaRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBYUE7QUFBQSxNQUVBLHVCQUFDLFdBQVEsT0FBTSxTQUFRLFdBQVUsWUFDL0IsaUNBQUMsVUFBSyxXQUFVLHlEQUF3RCxVQUFVSCxrQkFDaEY7QUFBQSwrQkFBQyxTQUFJLFdBQVUsNkJBQ2I7QUFBQSxpQ0FBQyxTQUFJLFdBQVUsY0FDYjtBQUFBLG1DQUFDLFNBQU0sU0FBUSxpQkFBZ0Isa0JBQS9CO0FBQUE7QUFBQTtBQUFBO0FBQUEsbUJBQWlDO0FBQUEsWUFDakMsdUJBQUMsU0FBTSxJQUFHLGlCQUFnQixXQUFVLFFBQU8sYUFBWSxXQUF2RDtBQUFBO0FBQUE7QUFBQTtBQUFBLG1CQUE4RDtBQUFBLGVBRmhFO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBR0E7QUFBQSxVQUNBLHVCQUFDLFNBQUksV0FBVSxjQUNiO0FBQUEsbUNBQUMsU0FBTSxxQkFBUDtBQUFBO0FBQUE7QUFBQTtBQUFBLG1CQUFZO0FBQUEsWUFDWix1QkFBQyxVQUFPLGNBQWEsY0FDbkI7QUFBQSxxQ0FBQyxpQkFBYyxXQUFVLFFBQ3ZCLGlDQUFDLGVBQVksYUFBWSxXQUF6QjtBQUFBO0FBQUE7QUFBQTtBQUFBLHFCQUFnQyxLQURsQztBQUFBO0FBQUE7QUFBQTtBQUFBLHFCQUVBO0FBQUEsY0FDQSx1QkFBQyxpQkFDQztBQUFBLHVDQUFDLGNBQVcsT0FBTSxjQUFhLHFCQUEvQjtBQUFBO0FBQUE7QUFBQTtBQUFBLHVCQUFvQztBQUFBLGdCQUNwQyx1QkFBQyxjQUFXLE9BQU0sT0FBTSxtQkFBeEI7QUFBQTtBQUFBO0FBQUE7QUFBQSx1QkFBMkI7QUFBQSxnQkFDM0IsdUJBQUMsY0FBVyxPQUFNLFNBQVEsa0JBQTFCO0FBQUE7QUFBQTtBQUFBO0FBQUEsdUJBQTRCO0FBQUEsZ0JBQzVCLHVCQUFDLGNBQVcsT0FBTSxZQUFXLGtCQUE3QjtBQUFBO0FBQUE7QUFBQTtBQUFBLHVCQUErQjtBQUFBLG1CQUpqQztBQUFBO0FBQUE7QUFBQTtBQUFBLHFCQUtBO0FBQUEsaUJBVEY7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFVQTtBQUFBLGVBWkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFhQTtBQUFBLGFBbEJGO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFtQkE7QUFBQSxRQUNBLHVCQUFDLFNBQUksV0FBVSxjQUNiO0FBQUEsaUNBQUMsU0FBTSxTQUFRLHVCQUFzQixrQkFBckM7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBdUM7QUFBQSxVQUN2Qyx1QkFBQyxZQUFTLElBQUcsdUJBQXNCLGFBQVksV0FBL0M7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBc0Q7QUFBQSxhQUZ4RDtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBR0E7QUFBQSxRQUNBLHVCQUFDLFNBQUksV0FBVSxjQUNiO0FBQUEsaUNBQUMsU0FBTSxTQUFRLGdCQUFlLGtCQUE5QjtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUFnQztBQUFBLFVBQ2hDLHVCQUFDLFNBQU0sSUFBRyxnQkFBZSxNQUFLLFVBQTlCO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBQW9DO0FBQUEsYUFGdEM7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUdBO0FBQUEsUUFDQSx1QkFBQyxVQUFPLFdBQVUsc0JBQXFCLE1BQUssVUFDMUM7QUFBQSxpQ0FBQyxVQUFPLE1BQU0sTUFBZDtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUFpQjtBQUFBO0FBQUEsYUFEbkI7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUdBO0FBQUEsV0FoQ0Y7QUFBQTtBQUFBO0FBQUE7QUFBQSxhQWlDQSxLQWxDRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBbUNBO0FBQUEsTUFFQSx1QkFBQyxXQUFRLE9BQU0sU0FBUSxNQUFLLFFBQzFCLGlDQUFDLFVBQUssV0FBVSx5REFBd0QsVUFBVUEsa0JBQ2hGO0FBQUEsK0JBQUMsU0FBSSxXQUFVLGNBQ2I7QUFBQSxpQ0FBQyxTQUFNLFNBQVEsZ0JBQWUsa0JBQTlCO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBQWdDO0FBQUEsVUFDaEMsdUJBQUMsU0FBTSxJQUFHLGdCQUFlLGFBQVksV0FBckM7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBNEM7QUFBQSxhQUY5QztBQUFBO0FBQUE7QUFBQTtBQUFBLGVBR0E7QUFBQSxRQUNBLHVCQUFDLFNBQUksV0FBVSxjQUNiO0FBQUEsaUNBQUMsU0FBTSxTQUFRLGtCQUFpQixrQkFBaEM7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBa0M7QUFBQSxVQUNsQyx1QkFBQyxZQUFTLElBQUcsa0JBQWlCLGFBQVksV0FBMUM7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBaUQ7QUFBQSxhQUZuRDtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBR0E7QUFBQSxRQUNBLHVCQUFDLFdBQU0sV0FBVSw0Q0FDZjtBQUFBLGlDQUFDLFdBQU0sV0FBVSwwQkFBeUIsTUFBSyxjQUEvQztBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUF5RDtBQUFBO0FBQUEsYUFEM0Q7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUdBO0FBQUEsUUFDQSx1QkFBQyxVQUFPLFdBQVUsc0JBQXFCLE1BQUssVUFDMUM7QUFBQSxpQ0FBQyxRQUFLLE1BQU0sTUFBWjtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUFlO0FBQUE7QUFBQSxhQURqQjtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBR0E7QUFBQSxXQWhCRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBaUJBLEtBbEJGO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUFtQkE7QUFBQSxTQXhFRjtBQUFBO0FBQUE7QUFBQTtBQUFBLFdBeUVBO0FBQUEsT0FoRko7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQWtGQTtBQUVKO0FBQUNILEdBNUZlRCxXQUFTO0FBQUEsS0FBVEE7QUFBUyxJQUFBWTtBQUFBLGFBQUFBLElBQUEiLCJuYW1lcyI6WyJGaWxlVGV4dCIsIk1lZ2FwaG9uZSIsIlNhdmUiLCJVcGxvYWQiLCJ1c2VTdGF0ZSIsImFyY2hpdmVJdGVtcyIsIm5vdGljZXMiLCJMb2dpbkZvcm0iLCJCdXR0b24iLCJJbnB1dCIsIkxhYmVsIiwiUGFnZUhlYWRlciIsIlNlY3Rpb24iLCJTZWxlY3QiLCJTZWxlY3RDb250ZW50IiwiU2VsZWN0SXRlbSIsIlNlbGVjdFRyaWdnZXIiLCJTZWxlY3RWYWx1ZSIsIlRleHRhcmVhIiwiQWRtaW5QYWdlIiwiX3MiLCJpc0xvZ2dlZEluIiwic2V0SXNMb2dnZWRJbiIsImhhbmRsZU1vY2tTdWJtaXQiLCJldmVudCIsInByZXZlbnREZWZhdWx0IiwibGFiZWwiLCJ2YWx1ZSIsImxlbmd0aCIsIkljb24iLCJtYXAiLCJfYyJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJBZG1pblBhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEZpbGVUZXh0LCBNZWdhcGhvbmUsIFNhdmUsIFVwbG9hZCB9IGZyb20gXCJsdWNpZGUtcmVhY3RcIjtcbmltcG9ydCB7IEZvcm1FdmVudCwgdXNlU3RhdGUgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IGFyY2hpdmVJdGVtcyB9IGZyb20gXCJAZW50aXRpZXMvYXJjaGl2ZS9tb2RlbC9tb2NrXCI7XG5pbXBvcnQgeyBub3RpY2VzIH0gZnJvbSBcIkBlbnRpdGllcy9ub3RpY2UvbW9kZWwvbW9ja1wiO1xuaW1wb3J0IHsgTG9naW5Gb3JtIH0gZnJvbSBcIkBmZWF0dXJlcy9hdXRoL3VpL0xvZ2luRm9ybVwiO1xuaW1wb3J0IHsgQnV0dG9uIH0gZnJvbSBcIkBzaGFyZWQvdWkvYnV0dG9uXCI7XG5pbXBvcnQgeyBJbnB1dCB9IGZyb20gXCJAc2hhcmVkL3VpL2lucHV0XCI7XG5pbXBvcnQgeyBMYWJlbCB9IGZyb20gXCJAc2hhcmVkL3VpL2xhYmVsXCI7XG5pbXBvcnQgeyBQYWdlSGVhZGVyIH0gZnJvbSBcIkBzaGFyZWQvdWkvUGFnZUhlYWRlclwiO1xuaW1wb3J0IHsgU2VjdGlvbiB9IGZyb20gXCJAc2hhcmVkL3VpL1NlY3Rpb25cIjtcbmltcG9ydCB7IFNlbGVjdCwgU2VsZWN0Q29udGVudCwgU2VsZWN0SXRlbSwgU2VsZWN0VHJpZ2dlciwgU2VsZWN0VmFsdWUgfSBmcm9tIFwiQHNoYXJlZC91aS9zZWxlY3RcIjtcbmltcG9ydCB7IFRleHRhcmVhIH0gZnJvbSBcIkBzaGFyZWQvdWkvdGV4dGFyZWFcIjtcblxuZXhwb3J0IGZ1bmN0aW9uIEFkbWluUGFnZSgpIHtcbiAgY29uc3QgW2lzTG9nZ2VkSW4sIHNldElzTG9nZ2VkSW5dID0gdXNlU3RhdGUoZmFsc2UpO1xuXG4gIGZ1bmN0aW9uIGhhbmRsZU1vY2tTdWJtaXQoZXZlbnQ6IEZvcm1FdmVudDxIVE1MRm9ybUVsZW1lbnQ+KSB7XG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgfVxuXG4gIHJldHVybiAoXG4gICAgPD5cbiAgICAgIDxQYWdlSGVhZGVyIHRpdGxlPXtpc0xvZ2dlZEluID8gXCLqtIDrpqzsnpBcIiA6IFwi66Gc6re47J24XCJ9IC8+XG4gICAgICB7IWlzTG9nZ2VkSW4gPyAoXG4gICAgICAgIDxTZWN0aW9uIHRvbmU9XCJzb2Z0XCIgY2xhc3NOYW1lPVwibWluLWgtWzY0MHB4XVwiPlxuICAgICAgICAgIDxMb2dpbkZvcm0gb25Mb2dpbj17KCkgPT4gc2V0SXNMb2dnZWRJbih0cnVlKX0gLz5cbiAgICAgICAgPC9TZWN0aW9uPlxuICAgICAgKSA6IChcbiAgICAgICAgPD5cbiAgICAgICAgICA8U2VjdGlvbiB0b25lPVwic29mdFwiIHRpdGxlPVwi6rSA66asIOuMgOyLnOuztOuTnFwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC02IG1kOmdyaWQtY29scy0yXCI+XG4gICAgICAgICAgICAgIHtbXG4gICAgICAgICAgICAgICAgeyBsYWJlbDogXCLrk7HroZ0g7J6Q66OMXCIsIHZhbHVlOiBhcmNoaXZlSXRlbXMubGVuZ3RoLCBJY29uOiBGaWxlVGV4dCB9LFxuICAgICAgICAgICAgICAgIHsgbGFiZWw6IFwi6rO17KeA7IKs7ZWtXCIsIHZhbHVlOiBub3RpY2VzLmxlbmd0aCwgSWNvbjogTWVnYXBob25lIH1cbiAgICAgICAgICAgICAgXS5tYXAoKHsgbGFiZWwsIHZhbHVlLCBJY29uIH0pID0+IChcbiAgICAgICAgICAgICAgICA8YXJ0aWNsZSBrZXk9e2xhYmVsfSBjbGFzc05hbWU9XCJyb3VuZGVkLW1kIGJvcmRlciBiZy13aGl0ZSBwLTggc2hhZG93LXNvZnRcIj5cbiAgICAgICAgICAgICAgICAgIDxJY29uIGNsYXNzTmFtZT1cIm1iLTUgdGV4dC1wcmltYXJ5XCIgc2l6ZT17MzR9IC8+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nIGNsYXNzTmFtZT1cImJsb2NrIHRleHQtWzU2cHhdIGxlYWRpbmctbm9uZVwiPnt2YWx1ZX08L3N0cm9uZz5cbiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cIm10LTMgYmxvY2sgdGV4dC1sZyBmb250LWJvbGQgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+e2xhYmVsfTwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2FydGljbGU+XG4gICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9TZWN0aW9uPlxuXG4gICAgICAgICAgPFNlY3Rpb24gdGl0bGU9XCLsnpDro4wg65Ox66GdXCIgY2xhc3NOYW1lPVwiYmctd2hpdGVcIj5cbiAgICAgICAgICAgIDxmb3JtIGNsYXNzTmFtZT1cImdyaWQgZ2FwLTYgcm91bmRlZC1tZCBib3JkZXIgYmctd2hpdGUgcC04IHNoYWRvdy1zb2Z0XCIgb25TdWJtaXQ9e2hhbmRsZU1vY2tTdWJtaXR9PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTYgbWQ6Z3JpZC1jb2xzLTJcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTJcIj5cbiAgICAgICAgICAgICAgICAgIDxMYWJlbCBodG1sRm9yPVwiYXJjaGl2ZS10aXRsZVwiPuygnOuqqTwvTGFiZWw+XG4gICAgICAgICAgICAgICAgICA8SW5wdXQgaWQ9XCJhcmNoaXZlLXRpdGxlXCIgY2xhc3NOYW1lPVwiaC0xNFwiIHBsYWNlaG9sZGVyPVwi7J6Q66OMIOygnOuqqVwiIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgICA8TGFiZWw+7J6Q66OMIOycoO2YlTwvTGFiZWw+XG4gICAgICAgICAgICAgICAgICA8U2VsZWN0IGRlZmF1bHRWYWx1ZT1cIm1hbnVzY3JpcHRcIj5cbiAgICAgICAgICAgICAgICAgICAgPFNlbGVjdFRyaWdnZXIgY2xhc3NOYW1lPVwiaC0xNFwiPlxuICAgICAgICAgICAgICAgICAgICAgIDxTZWxlY3RWYWx1ZSBwbGFjZWhvbGRlcj1cIuyekOujjCDsnKDtmJVcIiAvPlxuICAgICAgICAgICAgICAgICAgICA8L1NlbGVjdFRyaWdnZXI+XG4gICAgICAgICAgICAgICAgICAgIDxTZWxlY3RDb250ZW50PlxuICAgICAgICAgICAgICAgICAgICAgIDxTZWxlY3RJdGVtIHZhbHVlPVwibWFudXNjcmlwdFwiPuyEpOq1kCDsm5Dqs6A8L1NlbGVjdEl0ZW0+XG4gICAgICAgICAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0gdmFsdWU9XCJwcHRcIj5QUFQ8L1NlbGVjdEl0ZW0+XG4gICAgICAgICAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0gdmFsdWU9XCJhdWRpb1wiPuydjOybkDwvU2VsZWN0SXRlbT5cbiAgICAgICAgICAgICAgICAgICAgICA8U2VsZWN0SXRlbSB2YWx1ZT1cImRvY3VtZW50XCI+66y47IScPC9TZWxlY3RJdGVtPlxuICAgICAgICAgICAgICAgICAgICA8L1NlbGVjdENvbnRlbnQ+XG4gICAgICAgICAgICAgICAgICA8L1NlbGVjdD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtMlwiPlxuICAgICAgICAgICAgICAgIDxMYWJlbCBodG1sRm9yPVwiYXJjaGl2ZS1kZXNjcmlwdGlvblwiPuyEpOuqhTwvTGFiZWw+XG4gICAgICAgICAgICAgICAgPFRleHRhcmVhIGlkPVwiYXJjaGl2ZS1kZXNjcmlwdGlvblwiIHBsYWNlaG9sZGVyPVwi7J6Q66OMIOyEpOuqhVwiIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTJcIj5cbiAgICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImFyY2hpdmUtZmlsZVwiPu2MjOydvDwvTGFiZWw+XG4gICAgICAgICAgICAgICAgPElucHV0IGlkPVwiYXJjaGl2ZS1maWxlXCIgdHlwZT1cImZpbGVcIiAvPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPEJ1dHRvbiBjbGFzc05hbWU9XCJqdXN0aWZ5LXNlbGYtc3RhcnRcIiB0eXBlPVwic3VibWl0XCI+XG4gICAgICAgICAgICAgICAgPFVwbG9hZCBzaXplPXsxOH0gLz5cbiAgICAgICAgICAgICAgICDsnpDro4wg7KCA7J6lXG4gICAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgICAgPC9mb3JtPlxuICAgICAgICAgIDwvU2VjdGlvbj5cblxuICAgICAgICAgIDxTZWN0aW9uIHRpdGxlPVwi6rO17KeAIOuTseuhnVwiIHRvbmU9XCJzb2Z0XCI+XG4gICAgICAgICAgICA8Zm9ybSBjbGFzc05hbWU9XCJncmlkIGdhcC02IHJvdW5kZWQtbWQgYm9yZGVyIGJnLXdoaXRlIHAtOCBzaGFkb3ctc29mdFwiIG9uU3VibWl0PXtoYW5kbGVNb2NrU3VibWl0fT5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgPExhYmVsIGh0bWxGb3I9XCJub3RpY2UtdGl0bGVcIj7soJzrqqk8L0xhYmVsPlxuICAgICAgICAgICAgICAgIDxJbnB1dCBpZD1cIm5vdGljZS10aXRsZVwiIHBsYWNlaG9sZGVyPVwi6rO17KeAIOygnOuqqVwiIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTJcIj5cbiAgICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cIm5vdGljZS1jb250ZW50XCI+64K07JqpPC9MYWJlbD5cbiAgICAgICAgICAgICAgICA8VGV4dGFyZWEgaWQ9XCJub3RpY2UtY29udGVudFwiIHBsYWNlaG9sZGVyPVwi6rO17KeAIOuCtOyaqVwiIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIGZvbnQtYm9sZFwiPlxuICAgICAgICAgICAgICAgIDxpbnB1dCBjbGFzc05hbWU9XCJoLTQgdy00IGFjY2VudC1wcmltYXJ5XCIgdHlwZT1cImNoZWNrYm94XCIgLz5cbiAgICAgICAgICAgICAgICDspJHsmpQg6rO17KeA66GcIO2RnOyLnFxuICAgICAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgICAgICA8QnV0dG9uIGNsYXNzTmFtZT1cImp1c3RpZnktc2VsZi1zdGFydFwiIHR5cGU9XCJzdWJtaXRcIj5cbiAgICAgICAgICAgICAgICA8U2F2ZSBzaXplPXsxOH0gLz5cbiAgICAgICAgICAgICAgICDqs7Xsp4Ag7KCA7J6lXG4gICAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgICAgPC9mb3JtPlxuICAgICAgICAgIDwvU2VjdGlvbj5cbiAgICAgICAgPC8+XG4gICAgICApfVxuICAgIDwvPlxuICApO1xufVxuIl0sImZpbGUiOiJDOi8wMF93b3JrLzAwX3dvcmsvMDNfY2h1cmNoL0NodXJjaC9zcmMvcGFnZXMvYWRtaW4vQWRtaW5QYWdlLnRzeCJ9

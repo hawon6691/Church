@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
@@ -27,5 +29,11 @@
     }
   ],
   "trailingSlash": false,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!assets/|image/|tx/|robots.txt|google214993eca0b4dfce.html|naverfae3ceb1fa572bf216144193e19e3c74.html).*)",
+      "destination": "/index.html"
+    }
+  ]
 }

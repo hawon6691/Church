@@ -1,0 +1,196 @@
+@import "tailwindcss" source(none);
+@source "../../";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --shadow-soft: 0 8px 24px rgb(16 42 92 / 8%);
+  --shadow-lifted: 0 16px 40px rgb(16 42 92 / 12%);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #202124;
+  --card: #ffffff;
+  --card-foreground: #172033;
+  --popover: #ffffff;
+  --popover-foreground: #172033;
+  --primary: #0647a5;
+  --primary-foreground: #ffffff;
+  --secondary: #e94e1b;
+  --secondary-foreground: #ffffff;
+  --muted: #f4f6f9;
+  --muted-foreground: #8d95a3;
+  --accent: #eef4ff;
+  --accent-foreground: #0647a5;
+  --destructive: #dc2626;
+  --border: #d8dee8;
+  --input: #d8dee8;
+  --ring: #0647a5;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-background font-sans text-foreground antialiased;
+    overflow-x: hidden;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+}
+
+@layer utilities {
+  .hero-sketch-bg::before,
+  .hero-sketch-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-sketch-bg::before {
+    opacity: 0.18;
+    background-image:
+      repeating-linear-gradient(152deg, transparent 0 12px, rgb(0 0 0 / 45%) 13px 14px, transparent 15px 26px),
+      repeating-linear-gradient(18deg, transparent 0 18px, rgb(255 255 255 / 24%) 19px 20px, transparent 21px 38px);
+    mix-blend-mode: multiply;
+  }
+
+  .hero-sketch-bg::after {
+    background:
+      radial-gradient(ellipse at 12% 66%, rgb(0 0 0 / 36%) 0 1px, transparent 2px) 0 0 / 8px 8px,
+      radial-gradient(ellipse at 86% 18%, rgb(0 0 0 / 32%) 0 1px, transparent 2px) 0 0 / 7px 7px;
+    opacity: 0.06;
+  }
+
+  .sketch-cross {
+    background-image:
+      linear-gradient(105deg, transparent 0 40%, rgb(255 255 255 / 10%) 40.4% 40.8%, transparent 41.2%),
+      linear-gradient(28deg, transparent 0 58%, rgb(0 0 0 / 12%) 58.4% 58.8%, transparent 59.2%),
+      repeating-linear-gradient(164deg, transparent 0 18px, rgb(0 0 0 / 20%) 19px 20px, transparent 21px 42px);
+  }
+
+  .reference-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid var(--primary);
+    background: white;
+  }
+
+  .reference-table th,
+  .reference-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 1.45rem 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .reference-table th {
+    color: var(--primary);
+    font-weight: 800;
+  }
+
+  .reference-table td:nth-child(2),
+  .reference-table .time-cell {
+    background: #eaf0fa;
+    font-weight: 800;
+  }
+
+  .flip-card {
+    position: relative;
+    display: block;
+    perspective: 1200px;
+    overflow: visible;
+  }
+
+  .flip-card-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 700ms ease;
+  }
+
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus-visible .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-face,
+  .flip-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .marquee-tags {
+    animation: marquee-left 24s linear infinite;
+  }
+
+  .marquee-tags:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-tags {
+    animation: none;
+  }
+}

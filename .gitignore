@@ -44,6 +44,9 @@ coverage/
 # Build outputs
 dist/
 build/
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
 
 # System files
 Thumbs.db

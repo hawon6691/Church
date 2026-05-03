@@ -1,0 +1,328 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/worship/WorshipPage.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=61d897fc"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import { BookOpen, CalendarDays, ChevronDown, FileText, Heart, List, MessageCircle, PlayCircle, Share2, Volume2 } from "/node_modules/.vite/deps/lucide-react.js?v=61d897fc";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=61d897fc";
+import { sermonCards } from "/src/entities/home/model/content.ts?t=1777792259413";
+import { nextGenerationRows, regularWorshipRows } from "/src/entities/worship/model/mock.ts?t=1777792309347";
+import { siteConfig } from "/src/shared/config/site.ts";
+import { Button } from "/src/shared/ui/button.tsx?t=1777792089682";
+import { PageHeader } from "/src/shared/ui/PageHeader.tsx?t=1777792089662";
+import { Section } from "/src/shared/ui/Section.tsx?t=1777792089665";
+const toolbarItems = [
+  { label: "목록", Icon: List },
+  { label: "일정", Icon: CalendarDays },
+  { label: "상담", Icon: MessageCircle },
+  { label: "좋아요", Icon: Heart },
+  { label: "공유", Icon: Share2 },
+  { label: "음량", Icon: Volume2 },
+  { label: "영상", Icon: PlayCircle }
+];
+const sermonSlides = [
+  "복음을 영화롭게, 진리가 결론되게",
+  "복음을 깊이 깨달으면 기도가 됩니다",
+  "어둠 속의 도약",
+  "성경은 무엇을 말하는가?"
+];
+function ScheduleTable({ rows }) {
+  return /* @__PURE__ */ jsxDEV("table", { className: "reference-table", children: /* @__PURE__ */ jsxDEV("tbody", { children: rows.map(
+    (row) => /* @__PURE__ */ jsxDEV("tr", { children: [
+      /* @__PURE__ */ jsxDEV("th", { scope: "row", children: row.name }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 33,
+        columnNumber: 13
+      }, this),
+      /* @__PURE__ */ jsxDEV("td", { className: "time-cell whitespace-pre-line", children: row.time }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 34,
+        columnNumber: 13
+      }, this),
+      /* @__PURE__ */ jsxDEV("td", { className: "whitespace-pre-line", children: row.place }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 35,
+        columnNumber: 13
+      }, this)
+    ] }, row.name, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 32,
+      columnNumber: 9
+    }, this)
+  ) }, void 0, false, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+    lineNumber: 30,
+    columnNumber: 7
+  }, this) }, void 0, false, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+    lineNumber: 29,
+    columnNumber: 5
+  }, this);
+}
+_c = ScheduleTable;
+export function WorshipPage() {
+  const featured = sermonCards[0];
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV(PageHeader, { title: "주일예배" }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 48,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("aside", { className: "fixed right-0 top-[190px] z-20 hidden w-20 overflow-hidden rounded-l-md bg-[#b9c8ec] py-8 text-white xl:block", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-9", children: toolbarItems.map(
+      ({ label, Icon }) => /* @__PURE__ */ jsxDEV("button", { className: "grid place-items-center", type: "button", "aria-label": label, title: label, children: /* @__PURE__ */ jsxDEV(Icon, { size: 22 }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 53,
+        columnNumber: 15
+      }, this) }, label, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 52,
+        columnNumber: 11
+      }, this)
+    ) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 50,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 49,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { className: "bg-white pt-10", contentClassName: "max-w-[1610px]", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "mx-auto max-w-[1470px]", children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "relative aspect-video overflow-hidden bg-slate-950", children: /* @__PURE__ */ jsxDEV(
+          "iframe",
+          {
+            className: "absolute inset-0 h-full w-full",
+            src: siteConfig.youtubePlaylist,
+            title: "주일 예배 설교 재생목록",
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+            allowFullScreen: true
+          },
+          void 0,
+          false,
+          {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 62,
+            columnNumber: 13
+          },
+          this
+        ) }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 61,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "mt-12", children: [
+          /* @__PURE__ */ jsxDEV("h2", { className: "mb-3 text-[30px] font-extrabold", children: featured.title }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 71,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { className: "mb-5 text-xl font-bold text-muted-foreground", children: featured.subtitle }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 72,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { className: "text-xl text-slate-700", children: featured.meta }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 73,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 70,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 60,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: "mt-14 overflow-hidden", children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "grid gap-7 md:grid-cols-4", children: sermonSlides.map(
+          (title, index) => /* @__PURE__ */ jsxDEV(
+            Link,
+            {
+              to: "/worship",
+              className: index === 0 ? "rounded-md bg-primary p-8 text-white shadow-soft" : "rounded-md border bg-white p-8 shadow-soft",
+              children: [
+                /* @__PURE__ */ jsxDEV("h3", { className: index === 0 ? "mb-5 line-clamp-2 text-2xl font-extrabold text-secondary" : "mb-5 line-clamp-2 text-2xl font-extrabold", children: title }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+                  lineNumber: 85,
+                  columnNumber: 17
+                }, this),
+                /* @__PURE__ */ jsxDEV("p", { className: index === 0 ? "mb-9 text-lg font-bold text-white/85" : "mb-9 text-lg font-bold text-muted-foreground", children: [
+                  "로마서 5:5~11",
+                  /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
+                    fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+                    lineNumber: 90,
+                    columnNumber: 19
+                  }, this),
+                  "서유웅 담임목사 · 주후 2026.04.19"
+                ] }, void 0, true, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+                  lineNumber: 88,
+                  columnNumber: 17
+                }, this),
+                /* @__PURE__ */ jsxDEV("span", { className: index === 0 ? "block h-2 rounded-full bg-white" : "block h-2 rounded-full bg-muted" }, void 0, false, {
+                  fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+                  lineNumber: 93,
+                  columnNumber: 17
+                }, this)
+              ]
+            },
+            title,
+            true,
+            {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+              lineNumber: 80,
+              columnNumber: 13
+            },
+            this
+          )
+        ) }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 78,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "mt-9 flex justify-center gap-4", children: [
+          /* @__PURE__ */ jsxDEV(Button, { variant: "outline", size: "icon", "aria-label": "이전 설교", children: "←" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 98,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV(Button, { size: "icon", "aria-label": "다음 설교", children: "→" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+            lineNumber: 99,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 97,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 77,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 59,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { className: "bg-white pt-2", contentClassName: "max-w-[1610px]", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-8", children: [
+      { title: "설교 본문", Icon: BookOpen },
+      { title: "관련 찬양", Icon: PlayCircle },
+      { title: "대외방송 안내", Icon: Volume2 },
+      { title: "설교 노트", Icon: FileText }
+    ].map(
+      ({ title, Icon }) => /* @__PURE__ */ jsxDEV(
+        "button",
+        {
+          className: "flex min-h-24 items-center gap-6 rounded-md border bg-white px-10 text-left text-[30px] font-extrabold shadow-soft",
+          type: "button",
+          children: [
+            /* @__PURE__ */ jsxDEV(ChevronDown, { className: "text-primary", size: 30 }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+              lineNumber: 117,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV(Icon, { className: "text-primary", size: 28 }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+              lineNumber: 118,
+              columnNumber: 15
+            }, this),
+            title
+          ]
+        },
+        title,
+        true,
+        {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 112,
+          columnNumber: 11
+        },
+        this
+      )
+    ) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 105,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 104,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { title: "예배시간", tone: "soft", contentClassName: "max-w-[1610px]", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-10 lg:grid-cols-2", children: [
+      /* @__PURE__ */ jsxDEV("div", { children: [
+        /* @__PURE__ */ jsxDEV("h3", { className: "mb-8 text-[32px] font-extrabold", children: "정기예배" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 128,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV(ScheduleTable, { rows: regularWorshipRows }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 129,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 127,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { children: [
+        /* @__PURE__ */ jsxDEV("h3", { className: "mb-8 text-[32px] font-extrabold", children: "다음세대 예배" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 132,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV(ScheduleTable, { rows: nextGenerationRows }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+          lineNumber: 133,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+        lineNumber: 131,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 126,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+      lineNumber: 125,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx",
+    lineNumber: 47,
+    columnNumber: 5
+  }, this);
+}
+_c2 = WorshipPage;
+var _c, _c2;
+$RefreshReg$(_c, "ScheduleTable");
+$RefreshReg$(_c2, "WorshipPage");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/00_work/00_work/03_church/Church/src/pages/worship/WorshipPage.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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QUEsV0FpQkEsS0FsQkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQW1CQTtBQUFBLElBRUEsdUJBQUMsV0FBUSxPQUFNLFFBQU8sTUFBSyxRQUFPLGtCQUFpQixrQkFDakQsaUNBQUMsU0FBSSxXQUFVLDhCQUNiO0FBQUEsNkJBQUMsU0FDQztBQUFBLCtCQUFDLFFBQUcsV0FBVSxtQ0FBa0Msb0JBQWhEO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFBb0Q7QUFBQSxRQUNwRCx1QkFBQyxpQkFBYyxNQUFNcEIsc0JBQXJCO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFBd0M7QUFBQSxXQUYxQztBQUFBO0FBQUE7QUFBQTtBQUFBLGFBR0E7QUFBQSxNQUNBLHVCQUFDLFNBQ0M7QUFBQSwrQkFBQyxRQUFHLFdBQVUsbUNBQWtDLHVCQUFoRDtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBQXVEO0FBQUEsUUFDdkQsdUJBQUMsaUJBQWMsTUFBTUQsc0JBQXJCO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFBd0M7QUFBQSxXQUYxQztBQUFBO0FBQUE7QUFBQTtBQUFBLGFBR0E7QUFBQSxTQVJGO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FTQSxLQVZGO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FXQTtBQUFBLE9BekZGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0EwRkE7QUFFSjtBQUFDeUIsTUFoR2VQO0FBQVcsSUFBQUQsSUFBQVE7QUFBQSxhQUFBUixJQUFBO0FBQUEsYUFBQVEsS0FBQSIsIm5hbWVzIjpbIkJvb2tPcGVuIiwiQ2FsZW5kYXJEYXlzIiwiQ2hldnJvbkRvd24iLCJGaWxlVGV4dCIsIkhlYXJ0IiwiTGlzdCIsIk1lc3NhZ2VDaXJjbGUiLCJQbGF5Q2lyY2xlIiwiU2hhcmUyIiwiVm9sdW1lMiIsIkxpbmsiLCJzZXJtb25DYXJkcyIsIm5leHRHZW5lcmF0aW9uUm93cyIsInJlZ3VsYXJXb3JzaGlwUm93cyIsInNpdGVDb25maWciLCJCdXR0b24iLCJQYWdlSGVhZGVyIiwiU2VjdGlvbiIsInRvb2xiYXJJdGVtcyIsImxhYmVsIiwiSWNvbiIsInNlcm1vblNsaWRlcyIsIlNjaGVkdWxlVGFibGUiLCJyb3dzIiwibWFwIiwicm93IiwibmFtZSIsInRpbWUiLCJwbGFjZSIsIl9jIiwiV29yc2hpcFBhZ2UiLCJmZWF0dXJlZCIsInlvdXR1YmVQbGF5bGlzdCIsInRpdGxlIiwic3VidGl0bGUiLCJtZXRhIiwiaW5kZXgiLCJfYzIiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiV29yc2hpcFBhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEJvb2tPcGVuLCBDYWxlbmRhckRheXMsIENoZXZyb25Eb3duLCBGaWxlVGV4dCwgSGVhcnQsIExpc3QsIE1lc3NhZ2VDaXJjbGUsIFBsYXlDaXJjbGUsIFNoYXJlMiwgVm9sdW1lMiB9IGZyb20gXCJsdWNpZGUtcmVhY3RcIjtcbmltcG9ydCB7IExpbmsgfSBmcm9tIFwicmVhY3Qtcm91dGVyLWRvbVwiO1xuaW1wb3J0IHsgc2VybW9uQ2FyZHMgfSBmcm9tIFwiQGVudGl0aWVzL2hvbWUvbW9kZWwvY29udGVudFwiO1xuaW1wb3J0IHsgbmV4dEdlbmVyYXRpb25Sb3dzLCByZWd1bGFyV29yc2hpcFJvd3MgfSBmcm9tIFwiQGVudGl0aWVzL3dvcnNoaXAvbW9kZWwvbW9ja1wiO1xuaW1wb3J0IHsgc2l0ZUNvbmZpZyB9IGZyb20gXCJAc2hhcmVkL2NvbmZpZy9zaXRlXCI7XG5pbXBvcnQgeyBCdXR0b24gfSBmcm9tIFwiQHNoYXJlZC91aS9idXR0b25cIjtcbmltcG9ydCB7IFBhZ2VIZWFkZXIgfSBmcm9tIFwiQHNoYXJlZC91aS9QYWdlSGVhZGVyXCI7XG5pbXBvcnQgeyBTZWN0aW9uIH0gZnJvbSBcIkBzaGFyZWQvdWkvU2VjdGlvblwiO1xuXG5jb25zdCB0b29sYmFySXRlbXMgPSBbXG4gIHsgbGFiZWw6IFwi66qp66GdXCIsIEljb246IExpc3QgfSxcbiAgeyBsYWJlbDogXCLsnbzsoJVcIiwgSWNvbjogQ2FsZW5kYXJEYXlzIH0sXG4gIHsgbGFiZWw6IFwi7IOB64u0XCIsIEljb246IE1lc3NhZ2VDaXJjbGUgfSxcbiAgeyBsYWJlbDogXCLsoovslYTsmpRcIiwgSWNvbjogSGVhcnQgfSxcbiAgeyBsYWJlbDogXCLqs7XsnKBcIiwgSWNvbjogU2hhcmUyIH0sXG4gIHsgbGFiZWw6IFwi7J2M65+JXCIsIEljb246IFZvbHVtZTIgfSxcbiAgeyBsYWJlbDogXCLsmIHsg4FcIiwgSWNvbjogUGxheUNpcmNsZSB9XG5dO1xuXG5jb25zdCBzZXJtb25TbGlkZXMgPSBbXG4gIFwi67O17J2M7J2EIOyYge2ZlOuhreqyjCwg7KeE66as6rCAIOqysOuhoOuQmOqyjFwiLFxuICBcIuuzteydjOydhCDquYrsnbQg6rmo64us7Jy866m0IOq4sOuPhOqwgCDrkKnri4jri6RcIixcbiAgXCLslrTrkaAg7IaN7J2YIOuPhOyVvVwiLFxuICBcIuyEseqyveydgCDrrLTsl4fsnYQg66eQ7ZWY64qU6rCAP1wiXG5dO1xuXG5mdW5jdGlvbiBTY2hlZHVsZVRhYmxlKHsgcm93cyB9OiB7IHJvd3M6IHR5cGVvZiByZWd1bGFyV29yc2hpcFJvd3MgfSkge1xuICByZXR1cm4gKFxuICAgIDx0YWJsZSBjbGFzc05hbWU9XCJyZWZlcmVuY2UtdGFibGVcIj5cbiAgICAgIDx0Ym9keT5cbiAgICAgICAge3Jvd3MubWFwKChyb3cpID0+IChcbiAgICAgICAgICA8dHIga2V5PXtyb3cubmFtZX0+XG4gICAgICAgICAgICA8dGggc2NvcGU9XCJyb3dcIj57cm93Lm5hbWV9PC90aD5cbiAgICAgICAgICAgIDx0ZCBjbGFzc05hbWU9XCJ0aW1lLWNlbGwgd2hpdGVzcGFjZS1wcmUtbGluZVwiPntyb3cudGltZX08L3RkPlxuICAgICAgICAgICAgPHRkIGNsYXNzTmFtZT1cIndoaXRlc3BhY2UtcHJlLWxpbmVcIj57cm93LnBsYWNlfTwvdGQ+XG4gICAgICAgICAgPC90cj5cbiAgICAgICAgKSl9XG4gICAgICA8L3Rib2R5PlxuICAgIDwvdGFibGU+XG4gICk7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBXb3JzaGlwUGFnZSgpIHtcbiAgY29uc3QgZmVhdHVyZWQgPSBzZXJtb25DYXJkc1swXTtcblxuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICA8UGFnZUhlYWRlciB0aXRsZT1cIuyjvOydvOyYiOuwsFwiIC8+XG4gICAgICA8YXNpZGUgY2xhc3NOYW1lPVwiZml4ZWQgcmlnaHQtMCB0b3AtWzE5MHB4XSB6LTIwIGhpZGRlbiB3LTIwIG92ZXJmbG93LWhpZGRlbiByb3VuZGVkLWwtbWQgYmctWyNiOWM4ZWNdIHB5LTggdGV4dC13aGl0ZSB4bDpibG9ja1wiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTlcIj5cbiAgICAgICAgICB7dG9vbGJhckl0ZW1zLm1hcCgoeyBsYWJlbCwgSWNvbiB9KSA9PiAoXG4gICAgICAgICAgICA8YnV0dG9uIGtleT17bGFiZWx9IGNsYXNzTmFtZT1cImdyaWQgcGxhY2UtaXRlbXMtY2VudGVyXCIgdHlwZT1cImJ1dHRvblwiIGFyaWEtbGFiZWw9e2xhYmVsfSB0aXRsZT17bGFiZWx9PlxuICAgICAgICAgICAgICA8SWNvbiBzaXplPXsyMn0gLz5cbiAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICkpfVxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvYXNpZGU+XG5cbiAgICAgIDxTZWN0aW9uIGNsYXNzTmFtZT1cImJnLXdoaXRlIHB0LTEwXCIgY29udGVudENsYXNzTmFtZT1cIm1heC13LVsxNjEwcHhdXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXgtYXV0byBtYXgtdy1bMTQ3MHB4XVwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmUgYXNwZWN0LXZpZGVvIG92ZXJmbG93LWhpZGRlbiBiZy1zbGF0ZS05NTBcIj5cbiAgICAgICAgICAgIDxpZnJhbWVcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBoLWZ1bGwgdy1mdWxsXCJcbiAgICAgICAgICAgICAgc3JjPXtzaXRlQ29uZmlnLnlvdXR1YmVQbGF5bGlzdH1cbiAgICAgICAgICAgICAgdGl0bGU9XCLso7zsnbwg7JiI67CwIOyEpOq1kCDsnqzsg53rqqnroZ1cIlxuICAgICAgICAgICAgICBhbGxvdz1cImFjY2VsZXJvbWV0ZXI7IGF1dG9wbGF5OyBjbGlwYm9hcmQtd3JpdGU7IGVuY3J5cHRlZC1tZWRpYTsgZ3lyb3Njb3BlOyBwaWN0dXJlLWluLXBpY3R1cmVcIlxuICAgICAgICAgICAgICBhbGxvd0Z1bGxTY3JlZW5cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC0xMlwiPlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cIm1iLTMgdGV4dC1bMzBweF0gZm9udC1leHRyYWJvbGRcIj57ZmVhdHVyZWQudGl0bGV9PC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm1iLTUgdGV4dC14bCBmb250LWJvbGQgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+e2ZlYXR1cmVkLnN1YnRpdGxlfTwvcD5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQteGwgdGV4dC1zbGF0ZS03MDBcIj57ZmVhdHVyZWQubWV0YX08L3A+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtMTQgb3ZlcmZsb3ctaGlkZGVuXCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC03IG1kOmdyaWQtY29scy00XCI+XG4gICAgICAgICAgICB7c2VybW9uU2xpZGVzLm1hcCgodGl0bGUsIGluZGV4KSA9PiAoXG4gICAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgICAga2V5PXt0aXRsZX1cbiAgICAgICAgICAgICAgICB0bz1cIi93b3JzaGlwXCJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9e2luZGV4ID09PSAwID8gXCJyb3VuZGVkLW1kIGJnLXByaW1hcnkgcC04IHRleHQtd2hpdGUgc2hhZG93LXNvZnRcIiA6IFwicm91bmRlZC1tZCBib3JkZXIgYmctd2hpdGUgcC04IHNoYWRvdy1zb2Z0XCJ9XG4gICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPXtpbmRleCA9PT0gMCA/IFwibWItNSBsaW5lLWNsYW1wLTIgdGV4dC0yeGwgZm9udC1leHRyYWJvbGQgdGV4dC1zZWNvbmRhcnlcIiA6IFwibWItNSBsaW5lLWNsYW1wLTIgdGV4dC0yeGwgZm9udC1leHRyYWJvbGRcIn0+XG4gICAgICAgICAgICAgICAgICB7dGl0bGV9XG4gICAgICAgICAgICAgICAgPC9oMz5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9e2luZGV4ID09PSAwID8gXCJtYi05IHRleHQtbGcgZm9udC1ib2xkIHRleHQtd2hpdGUvODVcIiA6IFwibWItOSB0ZXh0LWxnIGZvbnQtYm9sZCB0ZXh0LW11dGVkLWZvcmVncm91bmRcIn0+XG4gICAgICAgICAgICAgICAgICDroZzrp4jshJwgNTo1fjExXG4gICAgICAgICAgICAgICAgICA8YnIgLz5cbiAgICAgICAgICAgICAgICAgIOyEnOycoOybhSDri7TsnoTrqqnsgqwgwrcg7KO87ZuEIDIwMjYuMDQuMTlcbiAgICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPXtpbmRleCA9PT0gMCA/IFwiYmxvY2sgaC0yIHJvdW5kZWQtZnVsbCBiZy13aGl0ZVwiIDogXCJibG9jayBoLTIgcm91bmRlZC1mdWxsIGJnLW11dGVkXCJ9IC8+XG4gICAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICAgICkpfVxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtOSBmbGV4IGp1c3RpZnktY2VudGVyIGdhcC00XCI+XG4gICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJvdXRsaW5lXCIgc2l6ZT1cImljb25cIiBhcmlhLWxhYmVsPVwi7J207KCEIOyEpOq1kFwiPuKGkDwvQnV0dG9uPlxuICAgICAgICAgICAgPEJ1dHRvbiBzaXplPVwiaWNvblwiIGFyaWEtbGFiZWw9XCLri6TsnYwg7ISk6rWQXCI+4oaSPC9CdXR0b24+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9TZWN0aW9uPlxuXG4gICAgICA8U2VjdGlvbiBjbGFzc05hbWU9XCJiZy13aGl0ZSBwdC0yXCIgY29udGVudENsYXNzTmFtZT1cIm1heC13LVsxNjEwcHhdXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtOFwiPlxuICAgICAgICAgIHtbXG4gICAgICAgICAgICB7IHRpdGxlOiBcIuyEpOq1kCDrs7jrrLhcIiwgSWNvbjogQm9va09wZW4gfSxcbiAgICAgICAgICAgIHsgdGl0bGU6IFwi6rSA66CoIOywrOyWkVwiLCBJY29uOiBQbGF5Q2lyY2xlIH0sXG4gICAgICAgICAgICB7IHRpdGxlOiBcIuuMgOyZuOuwqeyGoSDslYjrgrRcIiwgSWNvbjogVm9sdW1lMiB9LFxuICAgICAgICAgICAgeyB0aXRsZTogXCLshKTqtZAg64W47Yq4XCIsIEljb246IEZpbGVUZXh0IH1cbiAgICAgICAgICBdLm1hcCgoeyB0aXRsZSwgSWNvbiB9KSA9PiAoXG4gICAgICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgICAgIGtleT17dGl0bGV9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggbWluLWgtMjQgaXRlbXMtY2VudGVyIGdhcC02IHJvdW5kZWQtbWQgYm9yZGVyIGJnLXdoaXRlIHB4LTEwIHRleHQtbGVmdCB0ZXh0LVszMHB4XSBmb250LWV4dHJhYm9sZCBzaGFkb3ctc29mdFwiXG4gICAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICA8Q2hldnJvbkRvd24gY2xhc3NOYW1lPVwidGV4dC1wcmltYXJ5XCIgc2l6ZT17MzB9IC8+XG4gICAgICAgICAgICAgIDxJY29uIGNsYXNzTmFtZT1cInRleHQtcHJpbWFyeVwiIHNpemU9ezI4fSAvPlxuICAgICAgICAgICAgICB7dGl0bGV9XG4gICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICApKX1cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L1NlY3Rpb24+XG5cbiAgICAgIDxTZWN0aW9uIHRpdGxlPVwi7JiI67Cw7Iuc6rCEXCIgdG9uZT1cInNvZnRcIiBjb250ZW50Q2xhc3NOYW1lPVwibWF4LXctWzE2MTBweF1cIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC0xMCBsZzpncmlkLWNvbHMtMlwiPlxuICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwibWItOCB0ZXh0LVszMnB4XSBmb250LWV4dHJhYm9sZFwiPuygleq4sOyYiOuwsDwvaDM+XG4gICAgICAgICAgICA8U2NoZWR1bGVUYWJsZSByb3dzPXtyZWd1bGFyV29yc2hpcFJvd3N9IC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJtYi04IHRleHQtWzMycHhdIGZvbnQtZXh0cmFib2xkXCI+64uk7J2M7IS464yAIOyYiOuwsDwvaDM+XG4gICAgICAgICAgICA8U2NoZWR1bGVUYWJsZSByb3dzPXtuZXh0R2VuZXJhdGlvblJvd3N9IC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9TZWN0aW9uPlxuICAgIDwvPlxuICApO1xufVxuIl0sImZpbGUiOiJDOi8wMF93b3JrLzAwX3dvcmsvMDNfY2h1cmNoL0NodXJjaC9zcmMvcGFnZXMvd29yc2hpcC9Xb3JzaGlwUGFnZS50c3gifQ==

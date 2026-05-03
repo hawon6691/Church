@@ -1,0 +1,234 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/features/bible-search/ui/BibleReader.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=61d897fc"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+var _s = $RefreshSig$();
+import { Search } from "/node_modules/.vite/deps/lucide-react.js?v=61d897fc";
+import __vite__cjsImport2_react from "/node_modules/.vite/deps/react.js?v=61d897fc"; const useMemo = __vite__cjsImport2_react["useMemo"]; const useState = __vite__cjsImport2_react["useState"];
+import { bibleBooks, bibleVerses } from "/src/entities/bible/model/mock.ts";
+import { Card, CardContent, CardHeader, CardTitle } from "/src/shared/ui/card.tsx?t=1777792089679";
+import { Input } from "/src/shared/ui/input.tsx";
+import { Label } from "/src/shared/ui/label.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "/src/shared/ui/select.tsx";
+export function BibleReader() {
+  _s();
+  const [book, setBook] = useState("요한복음");
+  const [chapter, setChapter] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const verses = useMemo(() => {
+    const normalizedKeyword = keyword.trim();
+    const chapterNumber = Number(chapter);
+    return bibleVerses.filter((verse) => {
+      const matchesBook = verse.book === book;
+      const matchesChapter = !chapter || verse.chapter === chapterNumber;
+      const matchesKeyword = !normalizedKeyword || verse.text.includes(normalizedKeyword);
+      return matchesBook && matchesChapter && matchesKeyword;
+    });
+  }, [book, chapter, keyword]);
+  return /* @__PURE__ */ jsxDEV("div", { className: "grid gap-6", children: [
+    /* @__PURE__ */ jsxDEV(Card, { className: "border bg-white shadow-soft", children: /* @__PURE__ */ jsxDEV(CardContent, { className: "grid gap-4 p-7 md:grid-cols-[minmax(180px,0.7fr)_minmax(120px,0.35fr)_minmax(0,1fr)] md:items-end", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+        /* @__PURE__ */ jsxDEV(Label, { children: "성경책" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 32,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV(Select, { value: book, onValueChange: setBook, children: [
+          /* @__PURE__ */ jsxDEV(SelectTrigger, { children: /* @__PURE__ */ jsxDEV(SelectValue, { placeholder: "성경책 선택" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 35,
+            columnNumber: 17
+          }, this) }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 34,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(SelectContent, { children: bibleBooks.map(
+            (item) => /* @__PURE__ */ jsxDEV(SelectItem, { value: item.name, children: item.name }, item.id, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+              lineNumber: 39,
+              columnNumber: 17
+            }, this)
+          ) }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 37,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 33,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 31,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+        /* @__PURE__ */ jsxDEV(Label, { htmlFor: "bible-chapter", children: "장" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 47,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV(
+          Input,
+          {
+            id: "bible-chapter",
+            inputMode: "numeric",
+            value: chapter,
+            onChange: (event) => setChapter(event.target.value),
+            placeholder: "예: 5"
+          },
+          void 0,
+          false,
+          {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 48,
+            columnNumber: 13
+          },
+          this
+        )
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 46,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: "grid gap-2", children: [
+        /* @__PURE__ */ jsxDEV(Label, { htmlFor: "bible-keyword", children: "본문 검색" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 57,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "relative", children: [
+          /* @__PURE__ */ jsxDEV(Search, { className: "absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 59,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(
+            Input,
+            {
+              id: "bible-keyword",
+              className: "pl-10",
+              value: keyword,
+              onChange: (event) => setKeyword(event.target.value),
+              placeholder: "사랑, 복음, 믿음"
+            },
+            void 0,
+            false,
+            {
+              fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+              lineNumber: 60,
+              columnNumber: 15
+            },
+            this
+          )
+        ] }, void 0, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 58,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 56,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+      lineNumber: 30,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+      lineNumber: 29,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Card, { className: "overflow-hidden border bg-white shadow-soft", children: [
+      /* @__PURE__ */ jsxDEV(CardHeader, { className: "bg-primary text-primary-foreground", children: [
+        /* @__PURE__ */ jsxDEV(CardTitle, { children: book }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 74,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { className: "text-sm text-primary-foreground/85", children: "성경 데이터 API 연결 전까지 대표 구절로 동작합니다." }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 75,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 73,
+        columnNumber: 9
+      }, this),
+      verses.length > 0 ? /* @__PURE__ */ jsxDEV(CardContent, { className: "grid max-h-[620px] min-h-72 gap-5 overflow-auto p-7", children: verses.map(
+        (verse) => /* @__PURE__ */ jsxDEV("p", { className: "m-0 grid gap-2 leading-8", children: [
+          /* @__PURE__ */ jsxDEV("strong", { className: "text-primary", children: [
+            verse.book,
+            " ",
+            verse.chapter,
+            ":",
+            verse.verse
+          ] }, void 0, true, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 81,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV("span", { children: verse.text }, void 0, false, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+            lineNumber: 84,
+            columnNumber: 17
+          }, this)
+        ] }, `${verse.book}-${verse.chapter}-${verse.verse}`, true, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+          lineNumber: 80,
+          columnNumber: 11
+        }, this)
+      ) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 78,
+        columnNumber: 9
+      }, this) : /* @__PURE__ */ jsxDEV(CardContent, { className: "p-7", children: /* @__PURE__ */ jsxDEV("div", { className: "rounded-lg border border-dashed p-10 text-center text-muted-foreground", children: "조건에 맞는 성경 본문이 없습니다." }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 90,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+        lineNumber: 89,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+      lineNumber: 72,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx",
+    lineNumber: 28,
+    columnNumber: 5
+  }, this);
+}
+_s(BibleReader, "9v+BUcKhlBNIK65Ofqpj/I95/a4=");
+_c = BibleReader;
+var _c;
+$RefreshReg$(_c, "BibleReader");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/00_work/00_work/03_church/Church/src/features/bible-search/ui/BibleReader.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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QTFGO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFLQTtBQUFBLE1BQ0QsS0FSSDtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBU0EsSUFFQSx1QkFBQyxlQUFZLFdBQVUsT0FDckIsaUNBQUMsU0FBSSxXQUFVLDBFQUF3RSxtQ0FBdkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxhQUVBLEtBSEY7QUFBQTtBQUFBO0FBQUE7QUFBQSxhQUlBO0FBQUEsU0FyQko7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQXVCQTtBQUFBLE9BbkVGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0FvRUE7QUFFSjtBQUFDYixHQXpGZUQsYUFBVztBQUFBLEtBQVhBO0FBQVcsSUFBQTRCO0FBQUEsYUFBQUEsSUFBQSIsIm5hbWVzIjpbIlNlYXJjaCIsInVzZU1lbW8iLCJ1c2VTdGF0ZSIsImJpYmxlQm9va3MiLCJiaWJsZVZlcnNlcyIsIkNhcmQiLCJDYXJkQ29udGVudCIsIkNhcmRIZWFkZXIiLCJDYXJkVGl0bGUiLCJJbnB1dCIsIkxhYmVsIiwiU2VsZWN0IiwiU2VsZWN0Q29udGVudCIsIlNlbGVjdEl0ZW0iLCJTZWxlY3RUcmlnZ2VyIiwiU2VsZWN0VmFsdWUiLCJCaWJsZVJlYWRlciIsIl9zIiwiYm9vayIsInNldEJvb2siLCJjaGFwdGVyIiwic2V0Q2hhcHRlciIsImtleXdvcmQiLCJzZXRLZXl3b3JkIiwidmVyc2VzIiwibm9ybWFsaXplZEtleXdvcmQiLCJ0cmltIiwiY2hhcHRlck51bWJlciIsIk51bWJlciIsImZpbHRlciIsInZlcnNlIiwibWF0Y2hlc0Jvb2siLCJtYXRjaGVzQ2hhcHRlciIsIm1hdGNoZXNLZXl3b3JkIiwidGV4dCIsImluY2x1ZGVzIiwibWFwIiwiaXRlbSIsIm5hbWUiLCJpZCIsImV2ZW50IiwidGFyZ2V0IiwidmFsdWUiLCJsZW5ndGgiLCJfYyJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJCaWJsZVJlYWRlci50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgU2VhcmNoIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHsgdXNlTWVtbywgdXNlU3RhdGUgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IGJpYmxlQm9va3MsIGJpYmxlVmVyc2VzIH0gZnJvbSBcIkBlbnRpdGllcy9iaWJsZS9tb2RlbC9tb2NrXCI7XG5pbXBvcnQgeyBDYXJkLCBDYXJkQ29udGVudCwgQ2FyZEhlYWRlciwgQ2FyZFRpdGxlIH0gZnJvbSBcIkBzaGFyZWQvdWkvY2FyZFwiO1xuaW1wb3J0IHsgSW5wdXQgfSBmcm9tIFwiQHNoYXJlZC91aS9pbnB1dFwiO1xuaW1wb3J0IHsgTGFiZWwgfSBmcm9tIFwiQHNoYXJlZC91aS9sYWJlbFwiO1xuaW1wb3J0IHsgU2VsZWN0LCBTZWxlY3RDb250ZW50LCBTZWxlY3RJdGVtLCBTZWxlY3RUcmlnZ2VyLCBTZWxlY3RWYWx1ZSB9IGZyb20gXCJAc2hhcmVkL3VpL3NlbGVjdFwiO1xuXG5leHBvcnQgZnVuY3Rpb24gQmlibGVSZWFkZXIoKSB7XG4gIGNvbnN0IFtib29rLCBzZXRCb29rXSA9IHVzZVN0YXRlKFwi7JqU7ZWc67O17J2MXCIpO1xuICBjb25zdCBbY2hhcHRlciwgc2V0Q2hhcHRlcl0gPSB1c2VTdGF0ZShcIlwiKTtcbiAgY29uc3QgW2tleXdvcmQsIHNldEtleXdvcmRdID0gdXNlU3RhdGUoXCJcIik7XG5cbiAgY29uc3QgdmVyc2VzID0gdXNlTWVtbygoKSA9PiB7XG4gICAgY29uc3Qgbm9ybWFsaXplZEtleXdvcmQgPSBrZXl3b3JkLnRyaW0oKTtcbiAgICBjb25zdCBjaGFwdGVyTnVtYmVyID0gTnVtYmVyKGNoYXB0ZXIpO1xuXG4gICAgcmV0dXJuIGJpYmxlVmVyc2VzLmZpbHRlcigodmVyc2UpID0+IHtcbiAgICAgIGNvbnN0IG1hdGNoZXNCb29rID0gdmVyc2UuYm9vayA9PT0gYm9vaztcbiAgICAgIGNvbnN0IG1hdGNoZXNDaGFwdGVyID0gIWNoYXB0ZXIgfHwgdmVyc2UuY2hhcHRlciA9PT0gY2hhcHRlck51bWJlcjtcbiAgICAgIGNvbnN0IG1hdGNoZXNLZXl3b3JkID0gIW5vcm1hbGl6ZWRLZXl3b3JkIHx8IHZlcnNlLnRleHQuaW5jbHVkZXMobm9ybWFsaXplZEtleXdvcmQpO1xuXG4gICAgICByZXR1cm4gbWF0Y2hlc0Jvb2sgJiYgbWF0Y2hlc0NoYXB0ZXIgJiYgbWF0Y2hlc0tleXdvcmQ7XG4gICAgfSk7XG4gIH0sIFtib29rLCBjaGFwdGVyLCBrZXl3b3JkXSk7XG5cbiAgcmV0dXJuIChcbiAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTZcIj5cbiAgICAgIDxDYXJkIGNsYXNzTmFtZT1cImJvcmRlciBiZy13aGl0ZSBzaGFkb3ctc29mdFwiPlxuICAgICAgICA8Q2FyZENvbnRlbnQgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtNCBwLTcgbWQ6Z3JpZC1jb2xzLVttaW5tYXgoMTgwcHgsMC43ZnIpX21pbm1heCgxMjBweCwwLjM1ZnIpX21pbm1heCgwLDFmcildIG1kOml0ZW1zLWVuZFwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtMlwiPlxuICAgICAgICAgICAgPExhYmVsPuyEseqyveyxhTwvTGFiZWw+XG4gICAgICAgICAgICA8U2VsZWN0IHZhbHVlPXtib29rfSBvblZhbHVlQ2hhbmdlPXtzZXRCb29rfT5cbiAgICAgICAgICAgICAgPFNlbGVjdFRyaWdnZXI+XG4gICAgICAgICAgICAgICAgPFNlbGVjdFZhbHVlIHBsYWNlaG9sZGVyPVwi7ISx6rK97LGFIOyEoO2DnVwiIC8+XG4gICAgICAgICAgICAgIDwvU2VsZWN0VHJpZ2dlcj5cbiAgICAgICAgICAgICAgPFNlbGVjdENvbnRlbnQ+XG4gICAgICAgICAgICB7YmlibGVCb29rcy5tYXAoKGl0ZW0pID0+IChcbiAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0ga2V5PXtpdGVtLmlkfSB2YWx1ZT17aXRlbS5uYW1lfT5cbiAgICAgICAgICAgICAgICB7aXRlbS5uYW1lfVxuICAgICAgICAgICAgICA8L1NlbGVjdEl0ZW0+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICAgICAgPC9TZWxlY3RDb250ZW50PlxuICAgICAgICAgICAgPC9TZWxlY3Q+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdhcC0yXCI+XG4gICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImJpYmxlLWNoYXB0ZXJcIj7snqU8L0xhYmVsPlxuICAgICAgICAgICAgPElucHV0XG4gICAgICAgICAgICAgIGlkPVwiYmlibGUtY2hhcHRlclwiXG4gICAgICAgICAgICAgIGlucHV0TW9kZT1cIm51bWVyaWNcIlxuICAgICAgICAgICAgICB2YWx1ZT17Y2hhcHRlcn1cbiAgICAgICAgICAgICAgb25DaGFuZ2U9eyhldmVudCkgPT4gc2V0Q2hhcHRlcihldmVudC50YXJnZXQudmFsdWUpfVxuICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cIuyYiDogNVwiXG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtMlwiPlxuICAgICAgICAgICAgPExhYmVsIGh0bWxGb3I9XCJiaWJsZS1rZXl3b3JkXCI+67O466y4IOqygOyDiTwvTGFiZWw+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlXCI+XG4gICAgICAgICAgICAgIDxTZWFyY2ggY2xhc3NOYW1lPVwiYWJzb2x1dGUgbGVmdC0zIHRvcC0xLzIgaC00IHctNCAtdHJhbnNsYXRlLXktMS8yIHRleHQtbXV0ZWQtZm9yZWdyb3VuZFwiIC8+XG4gICAgICAgICAgICAgIDxJbnB1dFxuICAgICAgICAgICAgICBpZD1cImJpYmxlLWtleXdvcmRcIlxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJwbC0xMFwiXG4gICAgICAgICAgICAgIHZhbHVlPXtrZXl3b3JkfVxuICAgICAgICAgICAgICBvbkNoYW5nZT17KGV2ZW50KSA9PiBzZXRLZXl3b3JkKGV2ZW50LnRhcmdldC52YWx1ZSl9XG4gICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwi7IKs656RLCDrs7XsnYwsIOuvv+ydjFwiXG4gICAgICAgICAgICAvPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvQ2FyZENvbnRlbnQ+XG4gICAgICA8L0NhcmQ+XG5cbiAgICAgIDxDYXJkIGNsYXNzTmFtZT1cIm92ZXJmbG93LWhpZGRlbiBib3JkZXIgYmctd2hpdGUgc2hhZG93LXNvZnRcIj5cbiAgICAgICAgPENhcmRIZWFkZXIgY2xhc3NOYW1lPVwiYmctcHJpbWFyeSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZFwiPlxuICAgICAgICAgIDxDYXJkVGl0bGU+e2Jvb2t9PC9DYXJkVGl0bGU+XG4gICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZC84NVwiPuyEseqyvSDrjbDsnbTthLAgQVBJIOyXsOqysCDsoITquYzsp4Ag64yA7ZGcIOq1rOygiOuhnCDrj5nsnpHtlanri4jri6QuPC9wPlxuICAgICAgICA8L0NhcmRIZWFkZXI+XG4gICAgICAgIHt2ZXJzZXMubGVuZ3RoID4gMCA/IChcbiAgICAgICAgICA8Q2FyZENvbnRlbnQgY2xhc3NOYW1lPVwiZ3JpZCBtYXgtaC1bNjIwcHhdIG1pbi1oLTcyIGdhcC01IG92ZXJmbG93LWF1dG8gcC03XCI+XG4gICAgICAgICAgICB7dmVyc2VzLm1hcCgodmVyc2UpID0+IChcbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibS0wIGdyaWQgZ2FwLTIgbGVhZGluZy04XCIga2V5PXtgJHt2ZXJzZS5ib29rfS0ke3ZlcnNlLmNoYXB0ZXJ9LSR7dmVyc2UudmVyc2V9YH0+XG4gICAgICAgICAgICAgICAgPHN0cm9uZyBjbGFzc05hbWU9XCJ0ZXh0LXByaW1hcnlcIj5cbiAgICAgICAgICAgICAgICAgIHt2ZXJzZS5ib29rfSB7dmVyc2UuY2hhcHRlcn06e3ZlcnNlLnZlcnNlfVxuICAgICAgICAgICAgICAgIDwvc3Ryb25nPlxuICAgICAgICAgICAgICAgIDxzcGFuPnt2ZXJzZS50ZXh0fTwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgKSl9XG4gICAgICAgICAgPC9DYXJkQ29udGVudD5cbiAgICAgICAgKSA6IChcbiAgICAgICAgICA8Q2FyZENvbnRlbnQgY2xhc3NOYW1lPVwicC03XCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1kYXNoZWQgcC0xMCB0ZXh0LWNlbnRlciB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj5cbiAgICAgICAgICAgICAg7KGw6rG07JeQIOunnuuKlCDshLHqsr0g67O466y47J20IOyXhuyKteuLiOuLpC5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvQ2FyZENvbnRlbnQ+XG4gICAgICAgICl9XG4gICAgICA8L0NhcmQ+XG4gICAgPC9kaXY+XG4gICk7XG59XG4iXSwiZmlsZSI6IkM6LzAwX3dvcmsvMDBfd29yay8wM19jaHVyY2gvQ2h1cmNoL3NyYy9mZWF0dXJlcy9iaWJsZS1zZWFyY2gvdWkvQmlibGVSZWFkZXIudHN4In0=

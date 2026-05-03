@@ -1,0 +1,177 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/donation/DonationPage.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=61d897fc"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import { CreditCard, Info, Phone } from "/node_modules/.vite/deps/lucide-react.js?v=61d897fc";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=61d897fc";
+import { siteConfig } from "/src/shared/config/site.ts";
+import { Button } from "/src/shared/ui/button.tsx?t=1777792089682";
+import { PageHeader } from "/src/shared/ui/PageHeader.tsx?t=1777792089662";
+import { Section } from "/src/shared/ui/Section.tsx?t=1777792089665";
+export function DonationPage() {
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV(PageHeader, { title: "온라인 헌금" }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+      lineNumber: 11,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { tone: "soft", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-8 lg:grid-cols-[0.9fr_1.1fr]", children: [
+      /* @__PURE__ */ jsxDEV("article", { className: "rounded-md bg-primary p-10 text-white shadow-soft", children: [
+        /* @__PURE__ */ jsxDEV(CreditCard, { className: "mb-8", size: 44 }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 15,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("h2", { className: "mb-5 text-[34px] font-extrabold", children: "헌금 안내" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 16,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { className: "text-xl leading-9 text-white/85", children: "온라인 헌금은 교회가 안내하는 계좌로 드리며, 입금자명과 헌금 구분을 확인할 수 있도록 기재해 주세요." }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 17,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+        lineNumber: 14,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("article", { className: "rounded-md border bg-white p-10 shadow-soft", children: [
+        /* @__PURE__ */ jsxDEV("h2", { className: "mb-7 text-[32px] font-extrabold", children: "계좌 정보" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 22,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("dl", { className: "grid gap-0 overflow-hidden rounded-md border", children: [
+          ["은행", "교회 확인 후 입력 예정"],
+          ["예금주", siteConfig.name],
+          ["문의", siteConfig.pastorPhone]
+        ].map(
+          ([label, value]) => /* @__PURE__ */ jsxDEV("div", { className: "grid grid-cols-[160px_minmax(0,1fr)] border-b last:border-b-0", children: [
+            /* @__PURE__ */ jsxDEV("dt", { className: "bg-[#eef3fb] p-5 text-center font-extrabold text-primary", children: label }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+              lineNumber: 30,
+              columnNumber: 19
+            }, this),
+            /* @__PURE__ */ jsxDEV("dd", { className: "m-0 p-5 text-lg", children: value }, void 0, false, {
+              fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+              lineNumber: 31,
+              columnNumber: 19
+            }, this)
+          ] }, label, true, {
+            fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+            lineNumber: 29,
+            columnNumber: 15
+          }, this)
+        ) }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 23,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+        lineNumber: 21,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+      lineNumber: 13,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+      lineNumber: 12,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Section, { title: "확인 사항", className: "bg-white", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-6 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsxDEV("article", { className: "rounded-md border bg-white p-8 shadow-soft", children: [
+        /* @__PURE__ */ jsxDEV(Info, { className: "mb-6 text-primary", size: 34 }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 42,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("h2", { className: "mb-4 text-2xl font-extrabold", children: "입금자명" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 43,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { className: "m-0 text-lg leading-8 text-muted-foreground", children: "헌금 종류와 이름을 교회 안내 방식에 맞춰 입력합니다." }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 44,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+        lineNumber: 41,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("article", { className: "rounded-md border bg-white p-8 shadow-soft", children: [
+        /* @__PURE__ */ jsxDEV(Phone, { className: "mb-6 text-primary", size: 34 }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 47,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("h2", { className: "mb-4 text-2xl font-extrabold", children: "문의" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 48,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { className: "mb-6 text-lg leading-8 text-muted-foreground", children: "확인이 필요하시면 교회로 문의해 주세요." }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 49,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV(Button, { asChild: true, variant: "outline", children: /* @__PURE__ */ jsxDEV(Link, { to: "/about", children: "연락처 보기" }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 51,
+          columnNumber: 15
+        }, this) }, void 0, false, {
+          fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+          lineNumber: 50,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+        lineNumber: 46,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+      lineNumber: 40,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+      lineNumber: 39,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx",
+    lineNumber: 10,
+    columnNumber: 5
+  }, this);
+}
+_c = DonationPage;
+var _c;
+$RefreshReg$(_c, "DonationPage");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/00_work/00_work/03_church/Church/src/pages/donation/DonationPage.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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QkFBbEI7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUF3QixLQUQxQjtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBRUE7QUFBQSxXQU5GO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUFPQTtBQUFBLFNBYkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQWNBLEtBZkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQWdCQTtBQUFBLE9BN0NGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0E4Q0E7QUFFSjtBQUFDRSxLQWxEZU47QUFBWSxJQUFBTTtBQUFBLGFBQUFBLElBQUEiLCJuYW1lcyI6WyJDcmVkaXRDYXJkIiwiSW5mbyIsIlBob25lIiwiTGluayIsInNpdGVDb25maWciLCJCdXR0b24iLCJQYWdlSGVhZGVyIiwiU2VjdGlvbiIsIkRvbmF0aW9uUGFnZSIsIm5hbWUiLCJwYXN0b3JQaG9uZSIsIm1hcCIsImxhYmVsIiwidmFsdWUiLCJfYyJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJEb25hdGlvblBhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENyZWRpdENhcmQsIEluZm8sIFBob25lIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHsgTGluayB9IGZyb20gXCJyZWFjdC1yb3V0ZXItZG9tXCI7XG5pbXBvcnQgeyBzaXRlQ29uZmlnIH0gZnJvbSBcIkBzaGFyZWQvY29uZmlnL3NpdGVcIjtcbmltcG9ydCB7IEJ1dHRvbiB9IGZyb20gXCJAc2hhcmVkL3VpL2J1dHRvblwiO1xuaW1wb3J0IHsgUGFnZUhlYWRlciB9IGZyb20gXCJAc2hhcmVkL3VpL1BhZ2VIZWFkZXJcIjtcbmltcG9ydCB7IFNlY3Rpb24gfSBmcm9tIFwiQHNoYXJlZC91aS9TZWN0aW9uXCI7XG5cbmV4cG9ydCBmdW5jdGlvbiBEb25hdGlvblBhZ2UoKSB7XG4gIHJldHVybiAoXG4gICAgPD5cbiAgICAgIDxQYWdlSGVhZGVyIHRpdGxlPVwi7Jio65287J24IO2XjOq4iFwiIC8+XG4gICAgICA8U2VjdGlvbiB0b25lPVwic29mdFwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTggbGc6Z3JpZC1jb2xzLVswLjlmcl8xLjFmcl1cIj5cbiAgICAgICAgICA8YXJ0aWNsZSBjbGFzc05hbWU9XCJyb3VuZGVkLW1kIGJnLXByaW1hcnkgcC0xMCB0ZXh0LXdoaXRlIHNoYWRvdy1zb2Z0XCI+XG4gICAgICAgICAgICA8Q3JlZGl0Q2FyZCBjbGFzc05hbWU9XCJtYi04XCIgc2l6ZT17NDR9IC8+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwibWItNSB0ZXh0LVszNHB4XSBmb250LWV4dHJhYm9sZFwiPu2XjOq4iCDslYjrgrQ8L2gyPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14bCBsZWFkaW5nLTkgdGV4dC13aGl0ZS84NVwiPlxuICAgICAgICAgICAgICDsmKjrnbzsnbgg7ZeM6riI7J2AIOq1kO2ajOqwgCDslYjrgrTtlZjripQg6rOE7KKM66GcIOuTnOumrOupsCwg7J6F6riI7J6Q66qF6rO8IO2XjOq4iCDqtazrtoTsnYQg7ZmV7J247ZWgIOyImCDsnojrj4TroZ0g6riw7J6s7ZW0IOyjvOyEuOyalC5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2FydGljbGU+XG4gICAgICAgICAgPGFydGljbGUgY2xhc3NOYW1lPVwicm91bmRlZC1tZCBib3JkZXIgYmctd2hpdGUgcC0xMCBzaGFkb3ctc29mdFwiPlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cIm1iLTcgdGV4dC1bMzJweF0gZm9udC1leHRyYWJvbGRcIj7qs4Tsoowg7KCV67O0PC9oMj5cbiAgICAgICAgICAgIDxkbCBjbGFzc05hbWU9XCJncmlkIGdhcC0wIG92ZXJmbG93LWhpZGRlbiByb3VuZGVkLW1kIGJvcmRlclwiPlxuICAgICAgICAgICAgICB7W1xuICAgICAgICAgICAgICAgIFtcIuydgO2WiVwiLCBcIuq1kO2ajCDtmZXsnbgg7ZuEIOyeheugpSDsmIjsoJVcIl0sXG4gICAgICAgICAgICAgICAgW1wi7JiI6riI7KO8XCIsIHNpdGVDb25maWcubmFtZV0sXG4gICAgICAgICAgICAgICAgW1wi66y47J2YXCIsIHNpdGVDb25maWcucGFzdG9yUGhvbmVdXG4gICAgICAgICAgICAgIF0ubWFwKChbbGFiZWwsIHZhbHVlXSkgPT4gKFxuICAgICAgICAgICAgICAgIDxkaXYga2V5PXtsYWJlbH0gY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtWzE2MHB4X21pbm1heCgwLDFmcildIGJvcmRlci1iIGxhc3Q6Ym9yZGVyLWItMFwiPlxuICAgICAgICAgICAgICAgICAgPGR0IGNsYXNzTmFtZT1cImJnLVsjZWVmM2ZiXSBwLTUgdGV4dC1jZW50ZXIgZm9udC1leHRyYWJvbGQgdGV4dC1wcmltYXJ5XCI+e2xhYmVsfTwvZHQ+XG4gICAgICAgICAgICAgICAgICA8ZGQgY2xhc3NOYW1lPVwibS0wIHAtNSB0ZXh0LWxnXCI+e3ZhbHVlfTwvZGQ+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgPC9kbD5cbiAgICAgICAgICA8L2FydGljbGU+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9TZWN0aW9uPlxuXG4gICAgICA8U2VjdGlvbiB0aXRsZT1cIu2ZleyduCDsgqztla1cIiBjbGFzc05hbWU9XCJiZy13aGl0ZVwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTYgbWQ6Z3JpZC1jb2xzLTJcIj5cbiAgICAgICAgICA8YXJ0aWNsZSBjbGFzc05hbWU9XCJyb3VuZGVkLW1kIGJvcmRlciBiZy13aGl0ZSBwLTggc2hhZG93LXNvZnRcIj5cbiAgICAgICAgICAgIDxJbmZvIGNsYXNzTmFtZT1cIm1iLTYgdGV4dC1wcmltYXJ5XCIgc2l6ZT17MzR9IC8+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwibWItNCB0ZXh0LTJ4bCBmb250LWV4dHJhYm9sZFwiPuyeheq4iOyekOuqhTwvaDI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtLTAgdGV4dC1sZyBsZWFkaW5nLTggdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+7ZeM6riIIOyiheulmOyZgCDsnbTrpoTsnYQg6rWQ7ZqMIOyViOuCtCDrsKnsi53sl5Ag66ee7LawIOyeheugpe2VqeuLiOuLpC48L3A+XG4gICAgICAgICAgPC9hcnRpY2xlPlxuICAgICAgICAgIDxhcnRpY2xlIGNsYXNzTmFtZT1cInJvdW5kZWQtbWQgYm9yZGVyIGJnLXdoaXRlIHAtOCBzaGFkb3ctc29mdFwiPlxuICAgICAgICAgICAgPFBob25lIGNsYXNzTmFtZT1cIm1iLTYgdGV4dC1wcmltYXJ5XCIgc2l6ZT17MzR9IC8+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwibWItNCB0ZXh0LTJ4bCBmb250LWV4dHJhYm9sZFwiPuusuOydmDwvaDI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtYi02IHRleHQtbGcgbGVhZGluZy04IHRleHQtbXV0ZWQtZm9yZWdyb3VuZFwiPu2ZleyduOydtCDtlYTsmpTtlZjsi5zrqbQg6rWQ7ZqM66GcIOusuOydmO2VtCDso7zshLjsmpQuPC9wPlxuICAgICAgICAgICAgPEJ1dHRvbiBhc0NoaWxkIHZhcmlhbnQ9XCJvdXRsaW5lXCI+XG4gICAgICAgICAgICAgIDxMaW5rIHRvPVwiL2Fib3V0XCI+7Jew65297LKYIOuztOq4sDwvTGluaz5cbiAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgIDwvYXJ0aWNsZT5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L1NlY3Rpb24+XG4gICAgPC8+XG4gICk7XG59XG4iXSwiZmlsZSI6IkM6LzAwX3dvcmsvMDBfd29yay8wM19jaHVyY2gvQ2h1cmNoL3NyYy9wYWdlcy9kb25hdGlvbi9Eb25hdGlvblBhZ2UudHN4In0=

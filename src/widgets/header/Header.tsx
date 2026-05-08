@@ -9,8 +9,8 @@ import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger 
 
 const mobileNavItems = [
   { to: "/about/confession", label: "교회소개" },
-  { to: "/worship", label: "설교ㆍ찬양" },
-  { to: "/notice", label: "목양ㆍ사역" },
+  { to: "/worship/sermon", label: "설교ㆍ찬양" },
+  { to: "/ministry/new-family-guide", label: "목양ㆍ사역" },
   { to: "/archive", label: "교육ㆍ훈련" },
   { to: "/bible", label: "성경" },
   { to: "/donation", label: "온라인 헌금" }
@@ -19,6 +19,7 @@ const mobileNavItems = [
 type MegaSection = {
   heading: string;
   links: AboutMenuLink[];
+  columns?: AboutMenuLink[][];
 };
 
 type MegaMenu = {
@@ -30,6 +31,63 @@ type MegaMenu = {
 };
 
 const makeLinks = (labels: string[], to = "/about"): AboutMenuLink[] => labels.map((label) => ({ label, to }));
+
+const makeMappedLinks = (items: Array<[string, string]>): AboutMenuLink[] =>
+  items.map(([label, to]) => ({ label, to }));
+
+const sermonLinks = makeMappedLinks([
+  ["주일예배", "/worship/sermon?flag=sun"],
+  ["주일예배(초청)", "/worship/sermon?flag=chocung"],
+  ["수요저녁기도회", "/worship/sermon?flag=wed"],
+  ["쥬빌리통일구국기도회", "/worship/sermon?flag=jubilee"],
+  ["사랑글로벌기도회", "/worship/sermon?flag=global"],
+  ["새벽기도회", "/worship/sermon?flag=dawn"],
+  ["토요비전새벽예배", "/worship/sermon?flag=tovision"],
+  ["특별새벽부흥회", "/worship/sermon?flag=special-dawn"],
+  ["포에버", "/worship/sermon?flag=forever"],
+  ["기드온", "/worship/sermon?flag=gideon"],
+  ["청년부", "/worship/sermon?flag=chung"],
+  ["대학부", "/worship/sermon?flag=college"],
+  ["고등3부", "/worship/sermon?flag=high3"]
+]);
+
+const nextGenSermonLinks = makeMappedLinks([
+  ["고등1ㆍ2부", "/worship/sermon?flag=high12"],
+  ["다니엘 중등부", "/worship/sermon?flag=daniel"],
+  ["다윗 중등부", "/worship/sermon?flag=david"],
+  ["소년부", "/worship/sermon?flag=boys"],
+  ["초등부", "/worship/sermon?flag=elementary"],
+  ["유년부", "/worship/sermon?flag=lower-elementary"],
+  ["유치부", "/worship/sermon?flag=kindergarten"],
+  ["유아부", "/worship/sermon?flag=toddler"],
+  ["영아부", "/worship/sermon?flag=infant"],
+  ["사랑1부", "/worship/sermon?flag=sarang1"],
+  ["사랑2부", "/worship/sermon?flag=sarang2"],
+  ["사랑3부", "/worship/sermon?flag=sarang3"],
+  ["사랑4부", "/worship/sermon?flag=sarang4"]
+]);
+
+const ministryNewFamilyLinks = makeMappedLinks([
+  ["새가족 등록 안내", "/ministry/new-family-guide"],
+  ["새가족 등록", "/ministry/new-family-register"],
+  ["새가족 등록자", "/ministry/new-family-list"],
+  ["새가족 모임 안내", "/ministry/new-family-meeting"],
+  ["새가족 모임 수료자", "/ministry/new-family-graduates"],
+  ["학습ㆍ세례 안내", "/ministry/baptism"]
+]);
+
+const ministryNurtureLinks = makeMappedLinks([
+  ["목양편성도ㆍ교역자", "/ministry/pastoral-map"],
+  ["다락방 소개ㆍ신청", "/ministry/small-group"],
+  ["순장 모임 소개", "/ministry/leader-meeting"],
+  ["교회 양육과정", "/ministry/training-course"]
+]);
+
+const ministryDepartmentLinks = makeMappedLinks([
+  ["부서 홈페이지", "/ministry/department-home"],
+  ["사역소개", "/ministry/ministry-intro"],
+  ["간행물", "/ministry/publications"]
+]);
 
 const megaMenus: MegaMenu[] = [
   {
@@ -43,24 +101,63 @@ const megaMenus: MegaMenu[] = [
     left: [
       {
         heading: "설교",
-        links: makeLinks(["주일예배", "청소년-청년부", "어린이부"], "/worship")
-      },
-      { heading: "예배", links: makeLinks(["수요저녁기도회", "새벽기도회", "기도온"], "/worship") }
+        links: [],
+        columns: [sermonLinks, nextGenSermonLinks]
+      }
     ],
     right: [
-      { heading: "찬양", links: makeLinks(["은혜를 담은 찬양", "찬양대 찬양", "예배헌금 특송", "마음을 여는 찬양", "수요저녁기도회", "쥬빌리통일구국기도회", "토요비전새벽예배", "특별새벽부흥회"], "/worship") },
-      { heading: "뉴스ㆍ행사", links: makeLinks(["SRC NEWSROOM", "행사ㆍ집회ㆍ공연", "예배 생방송"], "/notice") }
+      {
+        heading: "찬양",
+        links: [],
+        columns: [
+          makeMappedLinks([
+            ["은혜를 담은 찬양", "/worship/praise?flag=A"],
+            ["찬양대 찬양", "/worship/praise?flag=B"],
+            ["예배헌금 특송", "/worship/praise?flag=C"],
+            ["마음을 여는 찬양", "/worship/praise?flag=D"]
+          ]),
+          makeMappedLinks([
+            ["수요저녁기도회", "/worship/praise?flag=E"],
+            ["쥬빌리통일구국기도회", "/worship/praise?flag=F"],
+            ["토요비전새벽예배", "/worship/praise?flag=G"],
+            ["특별새벽부흥회", "/worship/praise?flag=H"]
+          ])
+        ]
+      },
+      {
+        heading: "뉴스ㆍ행사",
+        links: [],
+        columns: [
+          makeMappedLinks([
+            ["SRC NEWSROOM", "/worship/newsroom"],
+            ["행사ㆍ집회ㆍ공연", "/worship/events"]
+          ]),
+          makeMappedLinks([["예배 생방송", "/worship/live"]])
+        ]
+      }
     ]
   },
   {
     label: "목양ㆍ사역",
     highlight: true,
     left: [
-      { heading: "새가족", links: makeLinks(["새가족 등록 안내", "새가족 등록", "새가족 등록자", "새가족 모임 안내", "새가족 모임 수료자", "학습ㆍ세례 안내"], "/notice") },
-      { heading: "양육", links: makeLinks(["목양편성도ㆍ교역자", "다락방 소개ㆍ신청", "순장 모임 소개", "교회 양육과정"], "/notice") }
+      {
+        heading: "새가족",
+        links: [],
+        columns: [ministryNewFamilyLinks.slice(0, 3), ministryNewFamilyLinks.slice(3)]
+      },
+      {
+        heading: "양육",
+        links: [],
+        columns: [ministryNurtureLinks.slice(0, 2), ministryNurtureLinks.slice(2)]
+      }
     ],
     right: [
-      { heading: "부서안내", links: makeLinks(["부서 홈페이지", "사역소개", "간행물"], "/notice") }
+      {
+        heading: "부서안내",
+        links: [],
+        columns: [ministryDepartmentLinks.slice(0, 2), ministryDepartmentLinks.slice(2)]
+      }
     ]
   },
   {
@@ -78,20 +175,26 @@ const megaMenus: MegaMenu[] = [
 ];
 
 function MegaColumn({ sections }: { sections: MegaSection[] }) {
+  const hasMultiColumnSection = sections.some((section) => section.columns);
+
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className={cn("grid gap-14", !hasMultiColumnSection && "md:grid-cols-2")}>
       {sections.map((section, index) => (
         <div key={`${section.heading}-${index}`}>
-          {section.heading ? <h3 className="mb-3 text-lg font-extrabold tracking-normal text-blue-500">{section.heading}</h3> : null}
-          <ul className="m-0 grid list-none gap-2.5 p-0">
-            {section.links.map((link) => (
-              <li key={link.label}>
-                <Link className="text-[15px] font-bold leading-tight text-slate-700 hover:text-primary" to={link.to}>
-                  {link.label}
-                </Link>
-              </li>
+          {section.heading ? <h3 className="mb-7 text-[24px] font-extrabold tracking-normal text-blue-500">{section.heading}</h3> : null}
+          <div className={cn("grid gap-x-24 gap-y-3", section.columns && "sm:grid-cols-2")}>
+            {(section.columns ?? [section.links]).map((column, columnIndex) => (
+              <ul className="m-0 grid list-none content-start gap-4 p-0" key={`${section.heading}-${columnIndex}`}>
+                {column.map((link) => (
+                  <li key={link.label}>
+                    <Link className="whitespace-nowrap text-[18px] font-bold leading-tight text-slate-700 hover:text-primary" to={link.to}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </div>
@@ -102,15 +205,15 @@ function AboutMegaGroup({ group }: { group: AboutMenuGroup }) {
   const columns = group.columns ?? (group.links ? [group.links] : []);
 
   return (
-    <section className="grid gap-8 lg:grid-cols-[180px_1fr]">
-      <h3 className="text-[24px] font-extrabold tracking-normal text-primary">{group.heading}</h3>
-      <div className="grid gap-x-12 gap-y-3 sm:grid-cols-2">
+    <section>
+      <h3 className="mb-8 text-[25px] font-extrabold tracking-normal text-blue-500">{group.heading}</h3>
+      <div className="grid gap-x-28 gap-y-2 sm:grid-cols-2">
         {columns.map((column, index) => (
           <ul className="m-0 grid list-none content-start gap-5 p-0" key={`${group.heading}-${index}`}>
             {column.map((link) => (
               <li key={link.label}>
                 <Link
-                  className="text-[20px] font-extrabold leading-tight text-slate-700 transition hover:text-primary"
+                  className="whitespace-nowrap text-[20px] font-bold leading-tight text-slate-700 transition hover:text-primary"
                   to={link.to}
                 >
                   {link.label}
@@ -128,8 +231,8 @@ function AboutMegaMenu({ groups }: { groups: AboutMenuGroup[] }) {
   const [guide, people, info] = groups;
 
   return (
-    <div className="pointer-events-auto mx-auto grid max-w-[1610px] gap-12 rounded-b-md border-t bg-white px-12 py-12 shadow-[0_24px_60px_rgb(15_23_42/12%)] xl:grid-cols-[1.18fr_0.82fr] xl:px-20 xl:py-16">
-      <div className="grid gap-12">
+    <div className="pointer-events-auto mx-auto grid max-w-[1510px] gap-12 rounded-b-md border-t bg-white px-20 py-14 shadow-[0_24px_60px_rgb(15_23_42/12%)] xl:grid-cols-2">
+      <div className="grid gap-14">
         {guide ? <AboutMegaGroup group={guide} /> : null}
         {people ? <AboutMegaGroup group={people} /> : null}
       </div>
@@ -149,21 +252,21 @@ export function Header() {
       className="sticky top-0 z-30 border-b bg-white/98 backdrop-blur"
       onMouseLeave={() => setOpenMenuIndex(null)}
     >
-      <div className="mx-auto flex h-[104px] w-full max-w-[1610px] items-center justify-between gap-5 px-6 md:px-10">
+      <div className="mx-auto flex h-[92px] w-full max-w-[1610px] items-center justify-between gap-5 px-6 md:px-10">
         <NavLink className="inline-flex min-w-0 items-center gap-2 whitespace-nowrap text-primary md:gap-3" to="/">
           <img
-            className="h-10 w-10 shrink-0 rounded-full object-cover md:h-12 md:w-12"
+            className="h-9 w-9 shrink-0 rounded-full object-cover md:h-11 md:w-11"
             src={siteConfig.logoUrl}
             alt="동서울열방교회 로고"
           />
-          <span className="text-[22px] font-extrabold tracking-normal sm:text-[26px] md:text-[30px]">{siteConfig.name}</span>
+          <span className="text-[21px] font-extrabold tracking-normal sm:text-[25px] md:text-[28px]">{siteConfig.name}</span>
         </NavLink>
 
         <nav className="hidden items-center gap-12 xl:flex" aria-label="주요 메뉴">
           {megaMenus.map((menu, index) => (
             <button
               className={cn(
-                "inline-flex min-h-10 items-center gap-2 text-[25px] font-extrabold tracking-normal text-slate-700 transition hover:text-primary",
+                "inline-flex min-h-10 items-center gap-2 text-[23px] font-extrabold tracking-normal text-slate-700 transition hover:text-primary",
                 openMenuIndex === index && "text-primary"
               )}
               key={menu.label}
@@ -247,7 +350,7 @@ export function Header() {
           openMenu.aboutGroups ? (
             <AboutMegaMenu groups={openMenu.aboutGroups} />
           ) : (
-            <div className="pointer-events-auto mx-auto grid max-w-[1610px] gap-10 rounded-b-md border-t bg-white px-24 py-9 shadow-[0_24px_60px_rgb(15_23_42/12%)] lg:grid-cols-2">
+            <div className="pointer-events-auto mx-auto grid max-w-[1610px] gap-12 rounded-md border-t bg-white px-24 py-16 shadow-[0_24px_60px_rgb(15_23_42/12%)] lg:grid-cols-[1.08fr_0.92fr] xl:px-44">
               <MegaColumn sections={openMenu.left ?? []} />
               <div className="border-l border-border pl-12">
                 <MegaColumn sections={openMenu.right ?? []} />

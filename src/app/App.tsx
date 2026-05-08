@@ -3,6 +3,7 @@ import { Layout } from "@widgets/layout/Layout";
 import { HomePage } from "@pages/home/HomePage";
 import { AboutPage } from "@pages/about/AboutPage";
 import { WorshipPage } from "@pages/worship/WorshipPage";
+import { MinistryPage } from "@pages/ministry/MinistryPage";
 import { ArchivePage } from "@pages/archive/ArchivePage";
 import { NoticePage } from "@pages/notice/NoticePage";
 import { BiblePage } from "@pages/bible/BiblePage";
@@ -18,6 +19,9 @@ export function App() {
         <Route path="about" element={<AboutPage />} />
         <Route path="about/:section" element={<AboutPage />} />
         <Route path="worship" element={<WorshipPage />} />
+        <Route path="worship/:section" element={<WorshipPage />} />
+        <Route path="ministry" element={<MinistryPage />} />
+        <Route path="ministry/:section" element={<MinistryPage />} />
         <Route path="archive" element={<ArchivePage />} />
         <Route path="notice" element={<NoticePage />} />
         <Route path="bible" element={<BiblePage />} />
